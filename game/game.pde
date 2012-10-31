@@ -133,6 +133,16 @@ void draw() {
 
   //println(currentLevel); //Debug.
 
+//A debugging problem arises. An onscreen message prevents the arrow keys from enabling movement, but what if movement is already enabled via the previous screen and the player keeps holding the key down? We address that here.
+  if (msg >= 1) { //If there's a message on screen...
+    if (notKirby.R == true) { //and rightward movement is enabled...
+      notKirby.R = false; //...disable it.
+    }
+    if (notKirby.L == true) { //Just so, if leftward movement is enabled...
+      notKirby.L = false; //...disable it.
+//This is necessary for debugging; otherwise the player could move right through screens without going through the text boxes as long as he never stopped holding a directional key.
+    }
+  }
 
   //Start of instructions___________________________________________________________________________//
 
