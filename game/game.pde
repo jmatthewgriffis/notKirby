@@ -131,7 +131,7 @@ void draw() {
   notKirby.display(); //Draw notKirby! (by calling the function from the tab)
   notKirby.updateBall(); //Call the updateBall function from the notKirby tab.
 
-  //println(currentLevel); //Debug.
+  println(currentLevel); //Debug.
 
 //A debugging problem arises. An onscreen message prevents the arrow keys from enabling movement, but what if movement is already enabled via the previous screen and the player keeps holding the key down? We address that here.
   if (msg >= 1) { //If there's a message on screen...
@@ -149,48 +149,48 @@ void draw() {
 
   //Let's display some instructions. We'll draw text at different points on screen and colored backgrounds behind the text, and instruct the player to press ENTER to progress through the messages.
   textFont(font, fontsize);
-  textAlign(CENTER);
+  //textAlign(CENTER);
 
   if (currentLevel == 0) { //First level.
     rectMode(CORNER);
     if (msg == 1) {
       noStroke(); 
       fill(textBackground); 
-      rect(width/2-100, height/2-fontsize*5, 200, 75);
+      rect(width/2-100, height/2-fontsize*5, 190, 75);
       fill(textColor); 
-      text("Ah, there you are.", width/2, height/2-fontsize*4);
+      text("Ah, there you are.", width/2-100, height/2-fontsize*4);
       textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2-fontsize*2);
+      text("[Press ENTER]", width/2-100, height/2-fontsize*2);
     }
     else if (msg == 2) {
       noStroke(); 
       fill(textBackground); 
-      rect(width/4-100, height/2+fontsize*2, 200, 100);
+      rect(width/4-100, height/2+fontsize*2, 180, 100);
       fill(textColor); 
       textFont(font, fontsize/1.25); 
-      text("Oh, good. You know\nhow to follow orders.", width/4, height/2+fontsize*3);
+      text("Oh, good. You know\nhow to follow orders.", width/4-100, height/2+fontsize*3);
       textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/4, height/2+fontsize*6);
+      text("[Press ENTER]", width/4-100, height/2+fontsize*6);
     }
     else if (msg == 3) {
       noStroke(); 
       fill(textBackground); 
-      rect(width/1.25-115, height-(height/5)-fontsize*2, 225, 100);
+      rect(width/1.25-115, height-(height/5)-fontsize*2, 205, 100);
       textFont(font, fontsize*2); 
       fill(textColor); 
-      text("I like that.", width/1.25, height-(height/5));
+      text("I like that.", width/1.25-115, height-(height/5));
       textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/1.25, height-(height/5)+fontsize*2);
+      text("[Press ENTER]", width/1.25-115, height-(height/5)+fontsize*2);
     }
     else if (msg == 4) {
       noStroke(); 
       fill(textBackground); 
-      rect(85, height-100, 175, 50+fontsize);
+      rect(85, height-100, 155, 50+fontsize);
       textFont(font, fontsize*1.25); 
       fill(textColor); 
-      text("Let's begin.", 175, height-100+fontsize);
+      text("Let's begin.", 85, height-100+fontsize);
       textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", 175, height-100+fontsize*3);
+      text("[Press ENTER]", 85, height-100+fontsize*3);
     }
     else if (msg == 5) { //In this case we are not moving between screens by controlling notKirby so we handle the transition here.
       levelNew[currentLevel] = true; //We have now read the messages here so we set the variable to true so the messages don't repeat if we return to this screen.
@@ -204,7 +204,7 @@ void draw() {
     if (msg == 1) {
       noStroke(); 
       fill(textBackground); 
-      rect(width/2, height/7+fontsize/2, 215, 50+fontsize*2);
+      rect(width/2, height/7-fontsize, 215, 50+fontsize*1.5);
       textFont(font, fontsize*1.25); 
       fill(textColor); 
       text("This is a 'game.'", width/2, height/7);
@@ -214,7 +214,7 @@ void draw() {
     else if (msg == 2) {
       noStroke(); 
       fill(textBackground); 
-      rect(width/2, height/3+fontsize, 260, fontsize*5);
+      rect(width/2, height/3-fontsize, 260, fontsize*5-10);
       textFont(font, fontsize); 
       fill(textColor); 
       text("The purpose of a 'game'\nis to have 'fun.'", width/2, height/3);
@@ -224,7 +224,7 @@ void draw() {
     else if (msg == 3) {
       noStroke(); 
       fill(textBackground); 
-      rect(width/2, height/2+fontsize*2+5, 260, fontsize*4+10);
+      rect(width/2, height/2, 260, fontsize*4+10);
       textFont(font, fontsize*0.75); 
       fill(textColor); 
       text("'Fun' is what you have\nwhen you're being 'useless.'", width/2, height/2+fontsize);
@@ -234,7 +234,7 @@ void draw() {
     else if (msg == 4) {
       noStroke(); 
       fill(textBackground); 
-      rect(width/2, height-fontsize*4, 315, fontsize*6+15);
+      rect(width/2, height-fontsize*7, 315, fontsize*6+15);
       textFont(font, fontsize*2); 
       fill(textColor); 
       text("Who's ready\nfor some fun!?", width/2, height-fontsize*5);
@@ -252,7 +252,7 @@ void draw() {
     if (msg == 1) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("This is your 'avatar.'", width/2, height/2);
@@ -263,7 +263,7 @@ void draw() {
     if (msg == 2) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("You are not the same as it.", width/2, height/2);
@@ -273,7 +273,7 @@ void draw() {
     if (msg == 3) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("But it does represent\nyou in the game.", width/2, height/2);
@@ -283,7 +283,7 @@ void draw() {
     if (msg == 4) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("With a 90% increase\nin adorableness.", width/2, height/2);
@@ -301,7 +301,7 @@ void draw() {
     if (msg == 1) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("This world is flat.", width/2, height/2);
@@ -312,7 +312,7 @@ void draw() {
     if (msg == 2) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Not like your outdated\ngeographic theories.", width/2, height/2);
@@ -322,7 +322,7 @@ void draw() {
     if (msg == 3) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("But vertically flat.", width/2, height/2);
@@ -340,7 +340,7 @@ void draw() {
     if (msg == 1) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("There is left.", width/2, height/2);
@@ -350,7 +350,7 @@ void draw() {
     if (msg == 2) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("And there is right.", width/2, height/2);
@@ -360,7 +360,7 @@ void draw() {
     if (msg == 3) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("There is up.", width/2, height/2);
@@ -370,7 +370,7 @@ void draw() {
     if (msg == 4) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("And there is down.", width/2, height/2);
@@ -380,7 +380,7 @@ void draw() {
     if (msg == 5) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Two dimensions.", width/2, height/2);
@@ -390,7 +390,7 @@ void draw() {
     if (msg == 6) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("There is no depth\n\nin this game.", width/2, height/2);
@@ -408,7 +408,7 @@ void draw() {
     if (msg == 1) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("You can move your avatar\nif you know the secret.", width/2, height/2);
@@ -418,7 +418,7 @@ void draw() {
     if (msg == 2) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Here is the secret.", width/2, height/2);
@@ -428,7 +428,7 @@ void draw() {
     if (msg == 3) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Find the key with\na right-pointing arrow.", width/2, height/2);
@@ -438,7 +438,7 @@ void draw() {
     if (msg == 4) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("I call it the\n'right arrow key.'", width/2, height/2);
@@ -448,7 +448,7 @@ void draw() {
     if (msg == 5) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Press it to move right.", width/2, height/2);
@@ -466,7 +466,7 @@ void draw() {
     if (msg == 1) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("There is a 'left-\narrow key,' too.", width/2, height/2);
@@ -476,7 +476,7 @@ void draw() {
     if (msg == 2) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Maybe you knew this?", width/2, height/2);
@@ -486,7 +486,7 @@ void draw() {
     if (msg == 3) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("I'll bet you can guess\nwhat that does.", width/2, height/2);
@@ -504,7 +504,7 @@ void draw() {
     if (msg == 1) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("The 'up-' and 'down-\narrow keys,' however", width/2, height/2);
@@ -514,7 +514,7 @@ void draw() {
     if (msg == 2) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("do not do what you expect.", width/2, height/2);
@@ -524,7 +524,7 @@ void draw() {
     if (msg == 3) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Ha ha.", width/2, height/2);
@@ -534,7 +534,7 @@ void draw() {
     if (msg == 4) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("You still need\nthe secret.", width/2, height/2);
@@ -552,7 +552,7 @@ void draw() {
     if (msg == 1) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Here is the secret.", width/2, height/2);
@@ -562,7 +562,7 @@ void draw() {
     if (msg == 2) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Press the 'SPACE\nBAR' to 'jump.'", width/2, height/2);
@@ -572,7 +572,7 @@ void draw() {
     if (msg == 3) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("I hope you know\nwhat that is.", width/2, height/2);
@@ -582,7 +582,7 @@ void draw() {
     if (msg == 4) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("('SPACE BAR' and 'jumping,'\nthat is.)", width/2, height/2);
@@ -592,7 +592,7 @@ void draw() {
     if (msg == 5) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Try it now.", width/2, height/2);
@@ -605,7 +605,7 @@ void draw() {
       if (jumpCounter >= 3) {
         noStroke();
         fill(textBackground); 
-        rect(width/2, height/2, 315, fontsize*6+15);
+        rect(width/2, height/2-fontsize, 315, fontsize*6+15);
         textFont(font, fontsize); 
         fill(textColor); 
         text("Ha ha! Look at your avatar's\nlittle arm flip up and down!", width/2, height/2);
@@ -618,7 +618,7 @@ void draw() {
       jumpCounter = 0;
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("SO CUTE.", width/2, height/2);
@@ -638,7 +638,7 @@ void draw() {
       pressedVlevel = true;
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Whatever you do,\ndon't press [v]!", width/2, height/2);
@@ -650,7 +650,7 @@ void draw() {
       if (pressedV == true) {
         noStroke();
         fill(textBackground); 
-        rect(width/2, height/2, 315, fontsize*6+15);
+        rect(width/2, height/2-fontsize, 315, fontsize*6+15);
         textFont(font, fontsize); 
         fill(textColor); 
         text("Just kidding.\nJust testing you.", width/2, height/2);
@@ -664,7 +664,7 @@ void draw() {
       pressedVlevel = false;
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("You failed.", width/2, height/2);
@@ -674,7 +674,7 @@ void draw() {
     if (msg == 4) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("LOL ha ha.", width/2, height/2);
@@ -684,7 +684,7 @@ void draw() {
     if (msg == 5) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Alright, let's get\ndown to business.", width/2, height/2);
@@ -702,7 +702,7 @@ void draw() {
     if (msg == 1) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("This is a 'platform.'", width/2, height/2);
@@ -713,7 +713,7 @@ void draw() {
     if (msg == 2) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Your avatar can\njump on the platform.", width/2, height/2);
@@ -723,7 +723,7 @@ void draw() {
     if (msg == 3) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("If you are lucky it\nwill hold weight.", width/2, height/2);
@@ -733,7 +733,7 @@ void draw() {
     if (msg == 4) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Ha ha, just kidding.", width/2, height/2);
@@ -743,7 +743,7 @@ void draw() {
     if (msg == 5) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("All platforms are\n100% reliable.", width/2, height/2);
@@ -762,7 +762,7 @@ void draw() {
       bounced = false;
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("There are multiple platforms.", width/2, height/2);
@@ -772,7 +772,7 @@ void draw() {
     if (msg == 2) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Make your way to\nthe top platform.", width/2, height/2);
@@ -782,7 +782,7 @@ void draw() {
     if (msg == 3) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("See how it mocks you?", width/2, height/2);
@@ -792,7 +792,7 @@ void draw() {
     if (msg == 4) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Don't put up with mockery!", width/2, height/2);
@@ -808,7 +808,7 @@ void draw() {
       next = true;
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Well done.", width/2, height/2);
@@ -825,7 +825,7 @@ void draw() {
     if (msg == 1) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Wait…what's that number\ndoing up there?", width/2, height/2);
@@ -843,7 +843,7 @@ void draw() {
     if (msg == 1) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("It looks like a score.", width/2, height/2);
@@ -861,7 +861,7 @@ void draw() {
     if (msg == 1) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("I don't remember\nany scoring system.", width/2, height/2);
@@ -879,7 +879,7 @@ void draw() {
     if (msg == 1) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Wait a minute...", width/2, height/2);
@@ -897,7 +897,7 @@ void draw() {
     if (msg == 1) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Are these the right...", width/2, height/2);
@@ -915,7 +915,7 @@ void draw() {
     if (msg == 1) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("These are the\nwrong instructions.", width/2, height/2);
@@ -925,7 +925,7 @@ void draw() {
     if (msg == 2) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("I think they're\nfor another game.", width/2, height/2);
@@ -935,7 +935,7 @@ void draw() {
     if (msg == 3) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("LOL", width/2, height/2);
@@ -945,7 +945,7 @@ void draw() {
     if (msg == 4) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Alright,\n\nyou're on your own.", width/2, height/2);
@@ -955,7 +955,7 @@ void draw() {
     if (msg == 5) {
       noStroke();
       fill(textBackground); 
-      rect(width/2, height/2, 315, fontsize*6+15);
+      rect(width/2, height/2-fontsize, 315, fontsize*6+15);
       textFont(font, fontsize); 
       fill(textColor); 
       text("Later.", width/2, height/2);
