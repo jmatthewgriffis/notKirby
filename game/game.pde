@@ -4,7 +4,7 @@ PFont font;
 boolean bounced = true; //Detect whether player has achieved the winning condition.
 boolean direction = true; //Control which direction notKirby faces.
 float resizer = 0.25; //Use to scale notKirby's size as needed.
-int currentLevel = 0; //Control the current level (game screen).
+int currentLevel = 7; //Control the current level (game screen).
 int msg = 1; //Control the display of messages and how they affect game play.
 boolean next = true; //Control transition between messages and game play.
 int fontsize = 24;
@@ -15,6 +15,9 @@ boolean noAdvance = false; //Prevent moving through messages at one point.
 int jumpCounter = 0; //Tally jumps at one point.
 boolean pressedV = false; //Check if V has been pressed.
 boolean pressedVlevel = false; //Check if this is the level to press V.
+float msgXpos; //Use this to position a specific message.
+int moveMsg = 2; //Use this to move the message.
+float msgYpos; //Use this to posiition a specific message.
 
 notKirby notKirby; //Declare an instance of the protagonist object ("notKirby").
 Level [] myLevels; //Declare an array of "Level" objects (which are themselves ArrayLists, "Inception"-style.)
@@ -24,6 +27,8 @@ boolean[] levelNew;
 
 void setup() {
   size(800, 600);
+  msgXpos = width/2;
+  msgYpos = height/2;
   smooth();
   font = loadFont("font.vlw");
 
@@ -202,6 +207,8 @@ void draw() {
   if (currentLevel == 1) { //Second level.
     //rectMode(CENTER);
     if (msg == 1) {
+      pushMatrix();
+      translate(-(215/2),0);
       noStroke(); 
       fill(textBackground); 
       rect(width/2, height/7-fontsize, 215, 50+fontsize*1.5);
@@ -210,8 +217,11 @@ void draw() {
       text("This is a 'game.'", width/2, height/7);
       textFont(font, fontsize/1.5); 
       text("[Press ENTER]", width/2, height/7+fontsize*2);
+      popMatrix();
     }
     else if (msg == 2) {
+      pushMatrix();
+      translate(-130,0);
       noStroke(); 
       fill(textBackground); 
       rect(width/2, height/3-fontsize, 260, fontsize*5-10);
@@ -220,8 +230,11 @@ void draw() {
       text("The purpose of a 'game'\nis to have 'fun.'", width/2, height/3);
       textFont(font, fontsize/1.5); 
       text("[Press ENTER]", width/2, height/3+fontsize*3);
+      popMatrix();
     }
     else if (msg == 3) {
+      pushMatrix();
+      translate(-130,0);
       noStroke(); 
       fill(textBackground); 
       rect(width/2, height/2, 260, fontsize*4+10);
@@ -230,8 +243,11 @@ void draw() {
       text("'Fun' is what you have\nwhen you're being 'useless.'", width/2, height/2+fontsize);
       textFont(font, fontsize/1.5); 
       text("[Press ENTER]", width/2, height/2+fontsize*4);
+      popMatrix();
     }
     else if (msg == 4) {
+      pushMatrix();
+      translate(-(315/2),0);
       noStroke(); 
       fill(textBackground); 
       rect(width/2, height-fontsize*7, 315, fontsize*6+10);
@@ -240,6 +256,7 @@ void draw() {
       text("Who's ready\nfor some fun!?", width/2, height-fontsize*5);
       textFont(font, fontsize/1.5); 
       text("[Press ENTER]", width/2, height-fontsize);
+      popMatrix();
     }
     else if (msg == 5) {
       levelNew[currentLevel] = true; //We have now read the messages here so we set the variable to true so the messages don't repeat if we return to this screen.
@@ -251,7 +268,7 @@ void draw() {
 if (currentLevel == 2) {
   if (msg == 1) {
     pushMatrix(); 
-    //translate();
+    translate(-390,50);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 225, fontsize*3+10);
@@ -265,7 +282,7 @@ if (currentLevel == 2) {
   }
   if (msg == 2) {
     pushMatrix(); 
-    //translate();
+    translate(-350,100);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 300, fontsize*3+10);
@@ -278,7 +295,7 @@ if (currentLevel == 2) {
   }
   if (msg == 3) {
     pushMatrix(); 
-    //translate();
+    translate(-310,150);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 225, fontsize*4+10);
@@ -291,7 +308,7 @@ if (currentLevel == 2) {
   }
   if (msg == 4) {
     pushMatrix(); 
-    //translate();
+    translate(-270,200);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 225, fontsize*4+10);
@@ -311,10 +328,10 @@ if (currentLevel == 2) {
 if (currentLevel == 3) {
   if (msg == 1) {
     pushMatrix(); 
-    //translate();
+    translate(200,-250);
     noStroke();
     fill(textBackground); 
-    rect(width/2, height/2-fontsize, 200, fontsize*3+10);
+    rect(width/2, height/2-fontsize, 180, fontsize*3+10);
     textFont(font, fontsize); 
     fill(textColor); 
     text("This world is flat.", width/2, height/2);
@@ -325,7 +342,7 @@ if (currentLevel == 3) {
   }
   if (msg == 2) {
     pushMatrix(); 
-    //translate();
+    translate(-390,-250);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 230, fontsize*4+10);
@@ -338,10 +355,10 @@ if (currentLevel == 3) {
   }
   if (msg == 3) {
     pushMatrix(); 
-    //translate();
+    translate(200,225);
     noStroke();
     fill(textBackground); 
-    rect(width/2, height/2-fontsize, 200, fontsize*3+10);
+    rect(width/2, height/2-fontsize, 180, fontsize*3+10);
     textFont(font, fontsize); 
     fill(textColor); 
     text("But vertically flat.", width/2, height/2);
@@ -358,7 +375,7 @@ if (currentLevel == 3) {
 if (currentLevel == 4) {
   if (msg == 1) {
     pushMatrix(); 
-    //translate();
+    translate(250,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 130, fontsize*3+10);
@@ -371,7 +388,7 @@ if (currentLevel == 4) {
   }
   if (msg == 2) {
     pushMatrix(); 
-    //translate();
+    translate(-390,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 200, fontsize*3+10);
@@ -384,7 +401,7 @@ if (currentLevel == 4) {
   }
   if (msg == 3) {
     pushMatrix(); 
-    //translate();
+    translate(-(130/2),230);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 130, fontsize*3+10);
@@ -397,7 +414,7 @@ if (currentLevel == 4) {
   }
   if (msg == 4) {
     pushMatrix(); 
-    //translate();
+    translate(-100,-260);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 200, fontsize*3+10);
@@ -409,8 +426,9 @@ if (currentLevel == 4) {
     popMatrix();
   }
   if (msg == 5) {
-    pushMatrix(); 
-    //translate();
+    pushMatrix();
+    translate(0,0);
+    rotate(25);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 175, fontsize*3+10);
@@ -422,8 +440,9 @@ if (currentLevel == 4) {
     popMatrix();
   }
   if (msg == 6) {
-    pushMatrix(); 
-    //translate();
+    pushMatrix();
+    rotate(-25);
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 185, fontsize*5+10);
@@ -442,21 +461,26 @@ if (currentLevel == 4) {
 }
 if (currentLevel == 5) {
   if (msg == 1) {
+    msgXpos += moveMsg;
+    if (msgXpos >= (width-300) || msgXpos <= 0) {
+      moveMsg *= -1;
+    }
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
-    rect(width/2, height/2-fontsize, 300, fontsize*4+10);
+    rect(msgXpos, height/2-fontsize, 300, fontsize*4+10);
     textFont(font, fontsize); 
     fill(textColor); 
-    text("You can move your avatar\nif you know the secret.", width/2, height/2);
+    text("You can move your avatar\nif you know the secret.", msgXpos, height/2);
     textFont(font, fontsize/1.5); 
-    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    text("[Press ENTER]", msgXpos, height/2+fontsize*3);
     popMatrix();
   }
   if (msg == 2) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
+    scale(0.5);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 200, fontsize*3+10);
@@ -469,7 +493,7 @@ if (currentLevel == 5) {
   }
   if (msg == 3) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 230, fontsize*4+10);
@@ -482,7 +506,7 @@ if (currentLevel == 5) {
   }
   if (msg == 4) {
     pushMatrix(); 
-    //translate();
+    translate(-200,100);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 185, fontsize*4+10);
@@ -495,7 +519,7 @@ if (currentLevel == 5) {
   }
   if (msg == 5) {
     pushMatrix(); 
-    //translate();
+    translate(100,230);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 230, fontsize*3+10);
@@ -515,7 +539,7 @@ if (currentLevel == 5) {
 if (currentLevel == 6) {
   if (msg == 1) {
     pushMatrix(); 
-    //translate();
+    translate(-390,-260);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 185, fontsize*4+10);
@@ -528,7 +552,7 @@ if (currentLevel == 6) {
   }
   if (msg == 2) {
     pushMatrix(); 
-    //translate();
+    translate(130,230);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 250, fontsize*3+10);
@@ -541,7 +565,7 @@ if (currentLevel == 6) {
   }
   if (msg == 3) {
     pushMatrix(); 
-    //translate();
+    translate(-(235/2),0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 235, fontsize*4+10);
@@ -560,21 +584,25 @@ if (currentLevel == 6) {
 }
 if (currentLevel == 7) {
   if (msg == 1) {
+    msgYpos += moveMsg;
+    if ((msgYpos-fontsize) >= (height-(fontsize*4+10)) || (msgYpos-fontsize) <= 0) {
+      moveMsg *= -1;
+    }
     pushMatrix(); 
-    //translate();
+    translate(-120,0);
     noStroke();
     fill(textBackground); 
-    rect(width/2, height/2-fontsize, 240, fontsize*4+10);
+    rect(width/2, msgYpos-fontsize, 240, fontsize*4+10);
     textFont(font, fontsize); 
     fill(textColor); 
-    text("The 'up-' and 'down-\narrow keys,' however", width/2, height/2);
+    text("The 'up-' and 'down-\narrow keys,' however", width/2, msgYpos);
     textFont(font, fontsize/1.5); 
-    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    text("[Press ENTER]", width/2, msgYpos+fontsize*3);
     popMatrix();
   }
   if (msg == 2) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 300, fontsize*3+10);
@@ -586,8 +614,9 @@ if (currentLevel == 7) {
     popMatrix();
   }
   if (msg == 3) {
-    pushMatrix(); 
-    //translate();
+    pushMatrix();
+    scale(2.5);
+    translate(-300,-150);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 115, fontsize*3+10);
@@ -600,7 +629,7 @@ if (currentLevel == 7) {
   }
   if (msg == 4) {
     pushMatrix(); 
-    //translate();
+    translate(-300,200);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 145, fontsize*4+10);
@@ -620,7 +649,7 @@ if (currentLevel == 7) {
 if (currentLevel == 8) {
   if (msg == 1) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 200, fontsize*3+10);
@@ -633,7 +662,7 @@ if (currentLevel == 8) {
   }
   if (msg == 2) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 205, fontsize*4+10);
@@ -646,7 +675,7 @@ if (currentLevel == 8) {
   }
   if (msg == 3) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 180, fontsize*4+10);
@@ -659,7 +688,7 @@ if (currentLevel == 8) {
   }
   if (msg == 4) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 315, fontsize*4+10);
@@ -672,7 +701,7 @@ if (currentLevel == 8) {
   }
   if (msg == 5) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 115, fontsize*3+10);
@@ -691,7 +720,7 @@ if (currentLevel == 8) {
   if (msg == 6) {
     noAdvance = false;
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 305, fontsize*4+10);
@@ -705,7 +734,7 @@ if (currentLevel == 8) {
   if (msg == 7) {
     jumpCounter = 0;
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 115, fontsize*3+10);
@@ -727,7 +756,7 @@ if (currentLevel == 9) {
   if (msg == 1) {
     pressedVlevel = true;
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 185, fontsize*2+15);
@@ -741,7 +770,7 @@ if (currentLevel == 9) {
     noAdvance = false;
     pressedVlevel = false;
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 185, fontsize*4+10);
@@ -754,7 +783,7 @@ if (currentLevel == 9) {
   }
   if (msg == 3) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 115, fontsize*3+10);
@@ -767,7 +796,7 @@ if (currentLevel == 9) {
   }
   if (msg == 4) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 120, fontsize*3+10);
@@ -780,7 +809,7 @@ if (currentLevel == 9) {
   }
   if (msg == 5) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 200, fontsize*4+10);
@@ -800,7 +829,7 @@ if (currentLevel == 9) {
 if (currentLevel == 10) {
   if (msg == 1) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 210, fontsize*3+10);
@@ -814,7 +843,7 @@ if (currentLevel == 10) {
   }
   if (msg == 2) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 225, fontsize*4+10);
@@ -827,7 +856,7 @@ if (currentLevel == 10) {
   }
   if (msg == 3) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 180, fontsize*4+10);
@@ -840,7 +869,7 @@ if (currentLevel == 10) {
   }
   if (msg == 4) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 210, fontsize*3+10);
@@ -853,7 +882,7 @@ if (currentLevel == 10) {
   }
   if (msg == 5) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 180, fontsize*4+10);
@@ -874,7 +903,7 @@ if (currentLevel == 11) {
   if (msg == 1) {
     bounced = false;
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 315, fontsize*3+10);
@@ -887,7 +916,7 @@ if (currentLevel == 11) {
   }
   if (msg == 2) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 200, fontsize*4+10);
@@ -900,7 +929,7 @@ if (currentLevel == 11) {
   }
   if (msg == 3) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 260, fontsize*3+10);
@@ -913,7 +942,7 @@ if (currentLevel == 11) {
   }
   if (msg == 4) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 285, fontsize*3+10);
@@ -932,7 +961,7 @@ if (currentLevel == 11) {
   if (msg == 6) {
     next = true;
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 115, fontsize*3+10);
@@ -951,7 +980,7 @@ if (currentLevel == 11) {
 if (currentLevel == 12) {
   if (msg == 1) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 285, fontsize*4+10);
@@ -971,7 +1000,7 @@ if (currentLevel == 12) {
 if (currentLevel == 13) {
   if (msg == 1) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 220, fontsize*3+10);
@@ -991,7 +1020,7 @@ if (currentLevel == 13) {
 if (currentLevel == 14) {
   if (msg == 1) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 215, fontsize*4+10);
@@ -1011,7 +1040,7 @@ if (currentLevel == 14) {
 if (currentLevel == 15) {
   if (msg == 1) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 175, fontsize*3+10);
@@ -1031,7 +1060,7 @@ if (currentLevel == 15) {
 if (currentLevel == 16) {
   if (msg == 1) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 225, fontsize*3+10);
@@ -1051,7 +1080,7 @@ if (currentLevel == 16) {
 if (currentLevel == 17) {
   if (msg == 1) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 200, fontsize*4+10);
@@ -1064,7 +1093,7 @@ if (currentLevel == 17) {
   }
   if (msg == 2) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 200, fontsize*4+10);
@@ -1077,7 +1106,7 @@ if (currentLevel == 17) {
   }
   if (msg == 3) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 115, fontsize*3+10);
@@ -1090,7 +1119,7 @@ if (currentLevel == 17) {
   }
   if (msg == 4) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 215, fontsize*5+10);
@@ -1103,7 +1132,7 @@ if (currentLevel == 17) {
   }
   if (msg == 5) {
     pushMatrix(); 
-    //translate();
+    translate(0,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 115, fontsize*3+10);
