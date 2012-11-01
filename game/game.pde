@@ -279,7 +279,12 @@ if (currentLevel == 2) {
     text("This is your 'avatar.'", width/2, height/2);
     textFont(font, fontsize/1.5); 
     text("[Press ENTER]", width/2, height/2+fontsize*2);
-    //draw arrow
+    strokeWeight(10);
+    stroke(0);
+    line(width/2+40, height/2+fontsize*4, width/2+40, height/2+fontsize*7);
+    line(width/2+30, height/2+fontsize*6.5, width/2+40, height/2+fontsize*7);
+    line(width/2+50, height/2+fontsize*6.5, width/2+40, height/2+fontsize*7);
+    noStroke();
     popMatrix();
   }
   if (msg == 2) {
