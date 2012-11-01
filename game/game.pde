@@ -4,7 +4,7 @@ PFont font;
 boolean bounced = true; //Detect whether player has achieved the winning condition.
 boolean direction = true; //Control which direction notKirby faces.
 float resizer = 0.25; //Use to scale notKirby's size as needed.
-int currentLevel = 17; //Control the current level (game screen).
+int currentLevel = 0; //Control the current level (game screen).
 int msg = 1; //Control the display of messages and how they affect game play.
 boolean next = true; //Control transition between messages and game play.
 int fontsize = 24;
@@ -248,722 +248,878 @@ void draw() {
     }
   }
 
-  if (currentLevel == 2) {
-    if (msg == 1) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 225, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("This is your 'avatar.'", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-      //draw arrow
-    }
-    if (msg == 2) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 300, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("You are not the same as it.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 3) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 225, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("But it does represent\nyou in the game.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 4) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 225, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("With a 90% increase\nin adorableness.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 5) {
-      levelNew[currentLevel] = true;
-      currentLevel++;
-      msg = 1;
+if (currentLevel == 2) {
+  if (msg == 1) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 225, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("This is your 'avatar.'", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    //draw arrow
+    popMatrix();
+  }
+  if (msg == 2) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 300, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("You are not the same as it.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 3) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 225, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("But it does represent\nyou in the game.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
+  }
+  if (msg == 4) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 225, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("With a 90% increase\nin adorableness.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
+  }
+  if (msg == 5) {
+    levelNew[currentLevel] = true;
+    currentLevel++;
+    msg = 1;
+  }
+}
+if (currentLevel == 3) {
+  if (msg == 1) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 200, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("This world is flat.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    //draw arrow
+    popMatrix();
+  }
+  if (msg == 2) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 230, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Not like your outdated\ngeographic theories.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
+  }
+  if (msg == 3) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 200, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("But vertically flat.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 4) {
+    levelNew[currentLevel] = true;
+    currentLevel++;
+    msg = 1;
+  }
+}
+if (currentLevel == 4) {
+  if (msg == 1) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 130, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("There is left.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 2) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 200, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("And there is right.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 3) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 130, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("There is up.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 4) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 200, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("And there is down.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 5) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 175, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Two dimensions.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 6) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 185, fontsize*5+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("There is no depth\n\nin this game.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*4);
+    popMatrix();
+  }
+  if (msg == 7) {
+    levelNew[currentLevel] = true;
+    currentLevel++;
+    msg = 1;
+  }
+}
+if (currentLevel == 5) {
+  if (msg == 1) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 300, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("You can move your avatar\nif you know the secret.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
+  }
+  if (msg == 2) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 200, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Here is the secret.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 3) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 230, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Find the key with\na right-pointing arrow.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
+  }
+  if (msg == 4) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 185, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("I call it the\n'right arrow key.'", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
+  }
+  if (msg == 5) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 230, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Press it to move right.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 6) {
+    next = false;
+    levelNew[currentLevel] = true;
+    msg = 0;
+  }
+}
+if (currentLevel == 6) {
+  if (msg == 1) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 185, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("There is a 'left-\narrow key,' too.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
+  }
+  if (msg == 2) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 250, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Maybe you knew this?", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 3) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 235, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("I'll bet you can guess\nwhat that does.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
+  }
+  if (msg == 4) {
+    next = false;
+    levelNew[currentLevel] = true;
+    msg = 0;
+  }
+}
+if (currentLevel == 7) {
+  if (msg == 1) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 240, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("The 'up-' and 'down-\narrow keys,' however", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
+  }
+  if (msg == 2) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 300, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("do not do what you expect.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 3) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 115, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Ha ha.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 4) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 145, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("You still need\nthe secret.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
+  }
+  if (msg == 5) {
+    next = false;
+    levelNew[currentLevel] = true;
+    msg = 0;
+  }
+}
+if (currentLevel == 8) {
+  if (msg == 1) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 200, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Here is the secret.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 2) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 205, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Press the 'SPACE\nBAR' to 'jump.'", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
+  }
+  if (msg == 3) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 180, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("I hope you know\nwhat that is.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
+  }
+  if (msg == 4) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 315, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("('SPACE BAR' and 'jumping,'\nI mean.)", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
+  }
+  if (msg == 5) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 115, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Try it now.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press SPACE]", width/2, height/2+fontsize*2);
+    promptJump = true; //Enable jumping.
+    noAdvance = true;
+    if (jumpCounter >= 3) {
+      popMatrix();
+      msg++;
     }
   }
-
-  if (currentLevel == 3) {
-    if (msg == 1) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 200, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("This world is flat.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-      //draw arrow
-    }
-    if (msg == 2) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 230, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Not like your outdated\ngeographic theories.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 3) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 200, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("But vertically flat.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 4) {
-      levelNew[currentLevel] = true;
-      currentLevel++;
-      msg = 1;
-    }
+  if (msg == 6) {
+    noAdvance = false;
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 305, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Ha ha! Look at your avatar's\nlittle arm flip up and down!", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
   }
-
-  if (currentLevel == 4) {
-    if (msg == 1) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 130, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("There is left.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 2) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 200, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("And there is right.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 3) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 130, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("There is up.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 4) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 200, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("And there is down.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 5) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 175, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Two dimensions.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 6) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 185, fontsize*5+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("There is no depth\n\nin this game.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*4);
-    }
-    if (msg == 7) {
-      levelNew[currentLevel] = true;
-      currentLevel++;
-      msg = 1;
-    }
+  if (msg == 7) {
+    jumpCounter = 0;
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 115, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("SO CUTE.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
   }
-
-  if (currentLevel == 5) {
-    if (msg == 1) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 300, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("You can move your avatar\nif you know the secret.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 2) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 200, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Here is the secret.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 3) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 230, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Find the key with\na right-pointing arrow.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 4) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 185, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("I call it the\n'right arrow key.'", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 5) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 230, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Press it to move right.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 6) {
-      next = false;
-      levelNew[currentLevel] = true;
-      msg = 0;
-    }
+  if (msg == 8) {
+    promptJump = false;
+    next = false;
+    levelNew[currentLevel] = true;
+    msg = 0;
   }
-
-  if (currentLevel == 6) {
-    if (msg == 1) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 185, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("There is a 'left-\narrow key,' too.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 2) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 250, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Maybe you knew this?", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 3) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 235, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("I'll bet you can guess\nwhat that does.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 4) {
-      next = false;
-      levelNew[currentLevel] = true;
-      msg = 0;
-    }
+}
+if (currentLevel == 9) {
+  if (msg == 1) {
+    pressedVlevel = true;
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 185, fontsize*2+15);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Whatever you do,\ndon't press [v]!", width/2, height/2);
+    noAdvance = true;
+    popMatrix();
   }
-
-  if (currentLevel == 7) {
-    if (msg == 1) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 240, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("The 'up-' and 'down-\narrow keys,' however", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 2) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 300, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("do not do what you expect.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 3) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 115, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Ha ha.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 4) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 145, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("You still need\nthe secret.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 5) {
-      next = false;
-      levelNew[currentLevel] = true;
-      msg = 0;
-    }
+  if (msg == 2) {
+    noAdvance = false;
+    pressedVlevel = false;
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 185, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Just kidding.\nJust testing you.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
   }
-
-  if (currentLevel == 8) {
-    if (msg == 1) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 200, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Here is the secret.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 2) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 205, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Press the 'SPACE\nBAR' to 'jump.'", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 3) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 180, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("I hope you know\nwhat that is.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 4) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 315, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("('SPACE BAR' and 'jumping,'\nI mean.)", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 5) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 115, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Try it now.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press SPACE]", width/2, height/2+fontsize*2);
-      promptJump = true; //Enable jumping.
-      noAdvance = true;
-      if (jumpCounter >= 3) {
-        msg++;
-      }
-    }
-    if (msg == 6) {
-      noAdvance = false;
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 305, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Ha ha! Look at your avatar's\nlittle arm flip up and down!", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 7) {
-      jumpCounter = 0;
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 115, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("SO CUTE.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 8) {
-      promptJump = false;
-      next = false;
-      levelNew[currentLevel] = true;
-      msg = 0;
-    }
+  if (msg == 3) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 115, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("You failed.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
   }
-
-  if (currentLevel == 9) {
-    if (msg == 1) {
-      pressedVlevel = true;
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 185, fontsize*2+15);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Whatever you do,\ndon't press [v]!", width/2, height/2);
-      noAdvance = true;
-    }
-    if (msg == 2) {
-      noAdvance = false;
-      pressedVlevel = false;
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 185, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Just kidding.\nJust testing you.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 3) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 115, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("You failed.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 4) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 120, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("LOL ha ha.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 5) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 200, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Alright, let's get\ndown to business.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 6) {
-      next = false;
-      levelNew[currentLevel] = true;
-      msg = 0;
-    }
+  if (msg == 4) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 120, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("LOL ha ha.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
   }
-
-  if (currentLevel == 10) {
-    if (msg == 1) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 210, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("This is a 'platform.'", width/2, height/2);
-      textFont(font, fontsize/1.5);
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-      //draw arrow
-    }
-    if (msg == 2) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 225, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Your avatar can\njump on the platform.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 3) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 180, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("If you are lucky it\nwill hold weight.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 4) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 210, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Ha ha, just kidding.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 5) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 180, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("All platforms are\n100% reliable.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 6) {
-      next = false;
-      levelNew[currentLevel] = true;
-      msg = 0;
-    }
+  if (msg == 5) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 200, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Alright, let's get\ndown to business.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
   }
-
-  if (currentLevel == 11) {
-    if (msg == 1) {
-      bounced = false;
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 315, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("There are multiple platforms.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 2) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 200, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Make your way to\nthe top platform.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 3) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 260, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("See how it mocks you?", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 4) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 285, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Don't put up with mockery!", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 5) {
-      next = false;
-      levelNew[currentLevel] = true;
-      msg = 0;
-    }
-    if (msg == 6) {
-      next = true;
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 115, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Well done.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 7) {
-      next = false;
-      msg = 0;
-    }
+  if (msg == 6) {
+    next = false;
+    levelNew[currentLevel] = true;
+    msg = 0;
   }
-
-  if (currentLevel == 12) {
-    if (msg == 1) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 285, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Wait…what's that number\ndoing up there?", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 2) {
-      next = false;
-      levelNew[currentLevel] = true;
-      msg = 0;
-    }
+}
+if (currentLevel == 10) {
+  if (msg == 1) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 210, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("This is a 'platform.'", width/2, height/2);
+    textFont(font, fontsize/1.5);
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    //draw arrow
+    popMatrix();
   }
-
-  if (currentLevel == 13) {
-    if (msg == 1) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 220, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("It looks like a score.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 2) {
-      next = false;
-      levelNew[currentLevel] = true;
-      msg = 0;
-    }
+  if (msg == 2) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 225, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Your avatar can\njump on the platform.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
   }
-
-  if (currentLevel == 14) {
-    if (msg == 1) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 215, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("I don't remember\nany scoring system.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 2) {
-      next = false;
-      levelNew[currentLevel] = true;
-      msg = 0;
-    }
+  if (msg == 3) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 180, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("If you are lucky it\nwill hold weight.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
   }
-
-  if (currentLevel == 15) {
-    if (msg == 1) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 175, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Wait a minute...", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 2) {
-      next = false;
-      levelNew[currentLevel] = true;
-      msg = 0;
-    }
+  if (msg == 4) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 210, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Ha ha, just kidding.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
   }
-
-  if (currentLevel == 16) {
-    if (msg == 1) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 225, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Are these the right...", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 2) {
-      next = false;
-      levelNew[currentLevel] = true;
-      msg = 0;
-    }
+  if (msg == 5) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 180, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("All platforms are\n100% reliable.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
   }
-
-  if (currentLevel == 17) {
-    if (msg == 1) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 200, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("These are the\nwrong instructions.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 2) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 200, fontsize*4+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("I think they're\nfor another game.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*3);
-    }
-    if (msg == 3) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 115, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("LOL", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 4) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 215, fontsize*5+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Alright,\n\nyou're on your own.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*4);
-    }
-    if (msg == 5) {
-      noStroke();
-      fill(textBackground); 
-      rect(width/2, height/2-fontsize, 115, fontsize*3+10);
-      textFont(font, fontsize); 
-      fill(textColor); 
-      text("Later.", width/2, height/2);
-      textFont(font, fontsize/1.5); 
-      text("[Press ENTER]", width/2, height/2+fontsize*2);
-    }
-    if (msg == 6) {
-      next = false;
-      levelNew[currentLevel] = true;
-      msg = 0;
-    }
+  if (msg == 6) {
+    next = false;
+    levelNew[currentLevel] = true;
+    msg = 0;
   }
+}
+if (currentLevel == 11) {
+  if (msg == 1) {
+    bounced = false;
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 315, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("There are multiple platforms.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 2) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 200, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Make your way to\nthe top platform.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
+  }
+  if (msg == 3) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 260, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("See how it mocks you?", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 4) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 285, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Don't put up with mockery!", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 5) {
+    next = false;
+    levelNew[currentLevel] = true;
+    msg = 0;
+  }
+  if (msg == 6) {
+    next = true;
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 115, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Well done.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 7) {
+    next = false;
+    msg = 0;
+  }
+}
+if (currentLevel == 12) {
+  if (msg == 1) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 285, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Wait…what's that number\ndoing up there?", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
+  }
+  if (msg == 2) {
+    next = false;
+    levelNew[currentLevel] = true;
+    msg = 0;
+  }
+}
+if (currentLevel == 13) {
+  if (msg == 1) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 220, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("It looks like a score.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 2) {
+    next = false;
+    levelNew[currentLevel] = true;
+    msg = 0;
+  }
+}
+if (currentLevel == 14) {
+  if (msg == 1) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 215, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("I don't remember\nany scoring system.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
+  }
+  if (msg == 2) {
+    next = false;
+    levelNew[currentLevel] = true;
+    msg = 0;
+  }
+}
+if (currentLevel == 15) {
+  if (msg == 1) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 175, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Wait a minute...", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 2) {
+    next = false;
+    levelNew[currentLevel] = true;
+    msg = 0;
+  }
+}
+if (currentLevel == 16) {
+  if (msg == 1) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 225, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Are these the right...", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 2) {
+    next = false;
+    levelNew[currentLevel] = true;
+    msg = 0;
+  }
+}
+if (currentLevel == 17) {
+  if (msg == 1) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 200, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("These are the\nwrong instructions.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
+  }
+  if (msg == 2) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 200, fontsize*4+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("I think they're\nfor another game.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*3);
+    popMatrix();
+  }
+  if (msg == 3) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 115, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("LOL", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 4) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 215, fontsize*5+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Alright,\n\nyou're on your own.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*4);
+    popMatrix();
+  }
+  if (msg == 5) {
+    pushMatrix(); 
+    //translate();
+    noStroke();
+    fill(textBackground); 
+    rect(width/2, height/2-fontsize, 115, fontsize*3+10);
+    textFont(font, fontsize); 
+    fill(textColor); 
+    text("Later.", width/2, height/2);
+    textFont(font, fontsize/1.5); 
+    text("[Press ENTER]", width/2, height/2+fontsize*2);
+    popMatrix();
+  }
+  if (msg == 6) {
+    next = false;
+    levelNew[currentLevel] = true;
+    msg = 0;
+  }
+}
 
   if (currentLevel > 17) {
     /*
@@ -1080,3 +1236,47 @@ void keyReleased() { //We use these statements to stop movement when the player 
   }
 }
 
+//_____________________________________________________________________________________________________________
+
+/*
+The following code is a hack of sorts from the Processing website, for
+which I'm very grateful. I use pushMatrix and popMatrix to position
+the text instructions above more easily, but I discovered that Processing has a
+built-in limit of 32 uses of the push function, which was insufficient.
+Fortunately I found this solution, which overrides the default limit. Everything
+below the end of this comment is copied and pasted from the page cited below in
+the next comment. I don't totally understand what it's doing, but I'm grateful for it!
+*/
+
+/**
+deepmatrixstack taken from http://wiki.processing.org/index.php/Matrix_stack
+to override the default stack just copy & paste the following code
+   to your sketch
+@author steve
+*/
+ 
+// adjust this value to whatever depth is actually necessary
+public final int STACK_DEPTH = 512;
+public float[][] matrixStack = new float[STACK_DEPTH][6];
+public int matrixStackDepth;
+ 
+// this version will override the built-in version pushMatrix function
+public void pushMatrix() {
+  if (matrixStackDepth == 512) {
+    throw new RuntimeException("too many calls to pushMatrix()");
+  }
+  this.g.getMatrix().get(matrixStack[matrixStackDepth]);
+  matrixStackDepth++;
+}
+ 
+// this version will override the built-in version popMatrix function
+public void popMatrix() {
+  if (matrixStackDepth == 0) {
+    throw new RuntimeException("too many calls to popMatrix()" +
+                               "(or too few to pushMatrix)");
+  }
+  matrixStackDepth--;
+  PMatrix2D m = new PMatrix2D();
+  m.set(matrixStack[matrixStackDepth]);
+  this.g.setMatrix(m);
+}
