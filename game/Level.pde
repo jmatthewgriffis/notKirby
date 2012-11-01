@@ -23,7 +23,17 @@ class Level { //Are you ready to GET CRAZY????
       myPlats.add(new Platform(165, height-100, 200, 20));
     }
     else if (thisLevel == 11) {
-      myPlats.add(new Platform(165, height-100, 150, 20));
+      myPlats.add(new Platform(270, 530, 80, 20));
+      myPlats.add(new Platform(420, 470, 60, 20));
+      myPlats.add(new Platform(550, 410, 60, 20));
+      myPlats.add(new Platform(680, 350, 60, 20));
+      myPlats.add(new Platform(490, 250, 100, 20));
+      myPlats.add(new Platform(0, 170, 60, 20));
+      myPlats.add(new Platform(150, 250, 60, 20));
+      myPlats.add(new Platform(300, 300, 60, 20));
+      myPlats.add(new Platform(450, 150, 60, 20));
+      myPlats.add(new Platform(75, 75, 200, 20));
+
     }
     else if (thisLevel >= 2 && thisLevel != 11 && thisLevel != 10) {
     }
