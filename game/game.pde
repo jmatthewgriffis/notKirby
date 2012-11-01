@@ -984,7 +984,7 @@ if (currentLevel == 11) {
 if (currentLevel == 12) {
   if (msg == 1) {
     pushMatrix(); 
-    translate(0,0);
+    translate(-(285/2),0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 285, fontsize*4+10);
@@ -1004,7 +1004,7 @@ if (currentLevel == 12) {
 if (currentLevel == 13) {
   if (msg == 1) {
     pushMatrix(); 
-    translate(0,0);
+    translate(-110,0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 220, fontsize*3+10);
@@ -1024,7 +1024,7 @@ if (currentLevel == 13) {
 if (currentLevel == 14) {
   if (msg == 1) {
     pushMatrix(); 
-    translate(0,0);
+    translate(-(215/2),0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 215, fontsize*4+10);
@@ -1044,7 +1044,7 @@ if (currentLevel == 14) {
 if (currentLevel == 15) {
   if (msg == 1) {
     pushMatrix(); 
-    translate(0,0);
+    translate(-(175/2),0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 175, fontsize*3+10);
@@ -1064,7 +1064,7 @@ if (currentLevel == 15) {
 if (currentLevel == 16) {
   if (msg == 1) {
     pushMatrix(); 
-    translate(0,0);
+    translate(-(225/2),0);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 225, fontsize*3+10);
@@ -1083,7 +1083,8 @@ if (currentLevel == 16) {
 }
 if (currentLevel == 17) {
   if (msg == 1) {
-    pushMatrix(); 
+    pushMatrix();
+    scale(0.75);
     translate(0,0);
     noStroke();
     fill(textBackground); 
@@ -1109,8 +1110,9 @@ if (currentLevel == 17) {
     popMatrix();
   }
   if (msg == 3) {
-    pushMatrix(); 
-    translate(0,0);
+    pushMatrix();
+    scale(4);
+    translate(-350,-250);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 115, fontsize*3+10);
@@ -1123,7 +1125,7 @@ if (currentLevel == 17) {
   }
   if (msg == 4) {
     pushMatrix(); 
-    translate(0,0);
+    translate(-390,130);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 215, fontsize*5+10);
@@ -1136,7 +1138,7 @@ if (currentLevel == 17) {
   }
   if (msg == 5) {
     pushMatrix(); 
-    translate(0,0);
+    translate(275,225);
     noStroke();
     fill(textBackground); 
     rect(width/2, height/2-fontsize, 115, fontsize*3+10);
