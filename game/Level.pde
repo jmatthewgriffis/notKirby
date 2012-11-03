@@ -2,6 +2,7 @@ class Level { //Are you ready to GET CRAZY????
   int thisLevel; //This is not the crazy part. We will use this variable to label each instance as a particular level.
   int platCount; //Use to check interactions with platforms in the alternative game mode.
   ArrayList<Platform> myPlats; //Time for an ArrayList of platforms! We declare and name it. The "<Platform>" is to tell the ArrayList what kind of object it is storing, since it doesn't know otherwise.
+  boolean[] platColor; //Use to check whether notKirby has rocketed this platform and display the color appropriately.
 
   Level(int _thisLevel) { //Here is the constructor for the Level object. We use variable "_thisLevel" so that when we create an instance of the Level object in the main tab, we can distinguish it from other Level objects without giving it a different name. We use the variable below to draw different sets of platforms.
     thisLevel = _thisLevel; //Here we set "_thisLevel" (which exists only inside the constructor) equal to the variable we created above. This way we can use the number we enter into the constructor in contexts outside the constructor, like below.
@@ -43,7 +44,7 @@ class Level { //Are you ready to GET CRAZY????
     for (int i = 0; i < myPlats.size(); i++) { //Here we use a for loop to iterate through all the platforms in the ArrayList. We use i to identify which element we are looking at. Note that we use "size()" instead of "length," because ArrayList has different syntax than array.
       Platform myPlatform = myPlats.get(i); //As on the main tab, we pull an object from the ArrayList so we can do something with it.
       myPlatform.drawPlatform(); //Call the drawPlatform function from the Platform tab using the specific parameters for this value of i (which is a specific element in the ArrayList).
-      //fill(255); text(i, myPlatform.xPos + (myPlatform.platWidth / 2), myPlatform.yPos + (myPlatform.platHeight / 1.5)); //Debug - print the name of the element on the Platform drawn in that element, so we can easily tell which Platform is which.
+      fill(255); text(i, myPlatform.xPos + (myPlatform.platWidth / 2), myPlatform.yPos + (myPlatform.platHeight / 1.5)); //Debug - print the name of the element on the Platform drawn in that element, so we can easily tell which Platform is which.
       textAlign(CENTER);
       textFont(font, fontsize);
       text(platCount, width-fontsize, fontsize);

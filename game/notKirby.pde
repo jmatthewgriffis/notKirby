@@ -90,9 +90,11 @@ class notKirby { //Make a class called "notKirby." This will create a nested obj
         if ((yPos + (tall / 2) >= myPlatform.yPos) && (yPos + (tall / 2) <= (myPlatform.yPos + depth))) { //Assuming we got a positive result above, is the ball's yPos within the upper part of the Platform at that element?
           if (yVel == speed_limit) { //The ball hit the platform, so change its velocity appropriately.
             yVel = rebound;
+            myLevels[currentLevel].platColor[i] = true;
           }
           else {
             yVel = 0; //All of this is the same deal as when the ball hits the ground (see comments above).
+            myLevels[currentLevel].platColor[i] = true;
           }
         }
         else if ((yPos - (tall / 2) >= (myPlatform.yPos + depth)) && (yPos - (tall / 2) <= (myPlatform.yPos + myPlatform.platHeight))) { //Ah, but what if the yPos is within the lower part of the Platform at that ArrayList element?

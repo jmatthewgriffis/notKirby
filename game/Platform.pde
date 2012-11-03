@@ -14,11 +14,22 @@ class Platform { //Make a class called "Platform."
   }
 
   void drawPlatform() {
-    rectMode(CORNER);
-    noFill();
-    stroke(255); //Give a white outline to objects.
-    strokeWeight(2); //Thicken the outline.
-    rect(xPos, yPos, platWidth, platHeight); //Now we draw the rectangle using the values entered in the constructor (see note above).
+    //for (int i = 0; i < myLevels[currentLevel].myPlats.size(); i++) {
+      //Platform myPlatform = myLevels[currentLevel].myPlats.get(i);
+
+
+      //if (myLevels[currentLevel].platColor[i] == true) {
+        //stroke(0); //Give a black outline to objects.
+      //}
+      //else {
+        stroke(255); //Give a white outline to objects.
+      //}
+
+      rectMode(CORNER);
+      noFill();
+      strokeWeight(2); //Thicken the outline.
+      rect(xPos, yPos, platWidth, platHeight); //Now we draw the rectangle using the values entered in the constructor (see note above).
+    //}
   }
 }
 

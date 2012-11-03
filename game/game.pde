@@ -25,7 +25,7 @@ float msgYpos; //Use this to posiition a specific message.
 notKirby notKirby; //Declare an instance of the protagonist object ("notKirby").
 Level [] myLevels; //Declare an array of "Level" objects (which are themselves ArrayLists, "Inception"-style.)
 boolean[] levelNew;
-boolean platRockd; //Use to control changing the conditions of platforms.
+boolean platRockd; //Use to control changing the condition of platforms.
 
 //_____________________________________________________________________________________________________________
 
@@ -93,6 +93,10 @@ void setup() {
   for (int i = 0; i < myLevels.length; i++) { //Use a for loop to iterate through each level in the array.
     myLevels[i].prep(); //Prepare every level to be drawn. We won't draw them all at once. Sorry.
     myLevels[i].platCount = myLevels[i].myPlats.size(); //Set the value of platCount for each level equal to the number of platforms in the level.
+    myLevels[i].platColor = new boolean[myLevels[i].myPlats.size()]; //Create a boolean for each platform in the current level.
+    for (int j = 0; j < myLevels[i].myPlats.size(); j++) {
+      myLevels[i].platColor[j] = false;
+    }
   }
   notKirby = new notKirby(50, 600 - ((175 * resizer) / 2), 175, 200, color(#FF08F3)); //Create an instance of notKirby object using parameters entered in the constructor (see notKirby tab).
   notKirby.prep(); //Load notKirby's components.
@@ -102,6 +106,10 @@ void setup() {
 
 void draw() {
   background(150);
+
+  //for (int i = 0; i < myLevels.length; i++) {
+
+  //}
 
   myLevels[currentLevel].display(); //Here's where things get awesome. We draw only the level in the array whose element label matches the value of the variable indicating the current level. If the current level is set at 2, we don't draw level 1 or level 3. Look, Ma, no for loop!
 
@@ -161,13 +169,20 @@ void draw() {
   notKirby.updateBall(); //Call the updateBall function from the notKirby tab.
 
   if (platRockd == true) { //If notKirby rocketed a platform...
-      if (myLevels[currentLevel].platCount > 0) { //check if the counter is greater than zero.
-        myLevels[currentLevel].platCount--; //If so, subtract one.
-        platRockd = false; //Then turn off the boolean so we don't subtract more than one at a time.
+    if (myLevels[currentLevel].platCount > 0) { //check if the counter is greater than zero.
+      myLevels[currentLevel].platCount--; //If so, subtract one.
+      platRockd = false; //Then turn off the boolean so we don't subtract more than one at a time.
     }
   }
 
-  println(currentLevel); //Debug.
+  //println(currentLevel); //Debug.
+  
+  //Debug:
+  /*for (int i = 0; i < myLevels.length; i++) {
+    for (int j = 0; j < myLevels[i].myPlats.size(); j++) {
+      println("0 = "+ myLevels[currentLevel].platColor[0] + " 1 = " + myLevels[currentLevel].platColor[1] + " 2 = " + myLevels[currentLevel].platColor[2]);
+    }
+  }*/
 
   //A debugging problem arises. An onscreen message prevents the arrow keys from enabling movement, but what if movement is already enabled via the previous screen and the player keeps holding the key down? We address that here.
   if (msg >= 1) { //If there's a message on screen...
@@ -1231,7 +1246,7 @@ void keyPressed() {
     }
   }
 
-if (key=='3') { //Debug.
+  if (key=='3') { //Debug.
     platRockd = true;
   }
 
@@ -1332,7 +1347,7 @@ if (key=='3') { //Debug.
 //_____________________________________________________________________________________________________________
 
 void keyReleased() { //We use these statements to stop movement when the player releases the key. Otherwise notKirby would just keep groovin' in the same direction until he runs into a wall. You jerk.
-  
+
   if (keyCode==RIGHT) {
     notKirby.R = false;
   }
