@@ -14,7 +14,7 @@ class Level { //Are you ready to GET CRAZY????
       myPlats.add(new Platform(width-100, 200, 80, 20));
       myPlats.add(new Platform(width-100, 400, 80, 20));
     }
-    else if (thisLevel == 0) { //A third level? CRAZY.
+    else if (thisLevel == 0) { //First level.
       myPlats.add(new Platform(165, 200, 80, 20));
       myPlats.add(new Platform(365, 300, 80, 20));
       myPlats.add(new Platform(565, 200, 80, 20));
