@@ -771,7 +771,7 @@ if (currentLevel == 9) {
     rect(width/2, height/2-fontsize, 185, fontsize*2+15);
     textFont(font, fontsize); 
     fill(textColor); 
-    text("Whatever you do,\ndon't press [v]!", width/2, height/2);
+    text("Whatever you do,\ndon't press 'v'!", width/2, height/2);
     noAdvance = true;
     popMatrix();
   }
