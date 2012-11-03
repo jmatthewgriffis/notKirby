@@ -14,15 +14,23 @@ class Platform { //Make a class called "Platform."
   }
 
   void drawPlatform() {
-    //for (int i = 0; i < myLevels[currentLevel].myPlats.size(); i++) {
+    /*for (int i = 0; i < myLevels[currentLevel].myPlats.size(); i++) {
       //Platform myPlatform = myLevels[currentLevel].myPlats.get(i);
 
 
-      //if (myLevels[currentLevel].platColor[i] == true) {
-        //stroke(0); //Give a black outline to objects.
-      //}
-      //else {
+      if (myLevels[currentLevel].platColor[i] == true) {
+        stroke(0); //Give a black outline to objects.
+      }
+      else {
+        colorTurn = true;
+      }
+    }
+        if (colorTurn == true) {
+          stroke(0);
+        }
+        else {*/
         stroke(255); //Give a white outline to objects.
+        //}
       //}
 
       rectMode(CORNER);
