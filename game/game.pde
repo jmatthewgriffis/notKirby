@@ -25,6 +25,7 @@ float msgYpos; //Use this to posiition a specific message.
 notKirby notKirby; //Declare an instance of the protagonist object ("notKirby").
 Level [] myLevels; //Declare an array of "Level" objects (which are themselves ArrayLists, "Inception"-style.)
 boolean[] levelNew;
+boolean platRockd; //Use to control changing the conditions of platforms.
 
 //_____________________________________________________________________________________________________________
 
@@ -42,6 +43,7 @@ void setup() {
   jumpCounter = 0;
   pressedV = false;
   pressedVlevel = false;
+  platRockd = false;
 
   msgXpos = width/2;
   msgYpos = height/2;
@@ -90,6 +92,7 @@ void setup() {
 
   for (int i = 0; i < myLevels.length; i++) { //Use a for loop to iterate through each level in the array.
     myLevels[i].prep(); //Prepare every level to be drawn. We won't draw them all at once. Sorry.
+    myLevels[i].platCount = myLevels[i].myPlats.size(); //Set the value of platCount for each level equal to the number of platforms in the level.
   }
   notKirby = new notKirby(50, 600 - ((175 * resizer) / 2), 175, 200, color(#FF08F3)); //Create an instance of notKirby object using parameters entered in the constructor (see notKirby tab).
   notKirby.prep(); //Load notKirby's components.
@@ -156,6 +159,13 @@ void draw() {
 
   notKirby.display(); //Draw notKirby! (by calling the function from the tab)
   notKirby.updateBall(); //Call the updateBall function from the notKirby tab.
+
+  if (platRockd == true) { //If notKirby rocketed a platform...
+      if (myLevels[currentLevel].platCount > 0) { //check if the counter is greater than zero.
+        myLevels[currentLevel].platCount--; //If so, subtract one.
+        platRockd = false; //Then turn off the boolean so we don't subtract more than one at a time.
+    }
+  }
 
   println(currentLevel); //Debug.
 
@@ -1221,6 +1231,10 @@ void keyPressed() {
     }
   }
 
+if (key=='3') { //Debug.
+    platRockd = true;
+  }
+
   if (key=='0') { //Debug.
     msg--;
   }
@@ -1297,7 +1311,7 @@ void keyPressed() {
       }
     }
   }
-  
+
   //Alternative movement mechanics:
   if (key=='w' || key=='W') {
     notKirby.blastU = true;
@@ -1313,19 +1327,19 @@ void keyPressed() {
     notKirby.blastR = true;
     direction = true;
   }
-  
 }
 
 //_____________________________________________________________________________________________________________
 
 void keyReleased() { //We use these statements to stop movement when the player releases the key. Otherwise notKirby would just keep groovin' in the same direction until he runs into a wall. You jerk.
+  
   if (keyCode==RIGHT) {
     notKirby.R = false;
   }
   if (keyCode==LEFT) {
     notKirby.L = false;
   }
-  
+
   //Alternative movement mechanics:
   if (key=='w' || key=='W') {
     notKirby.blastU = false;
