@@ -100,7 +100,7 @@ void setup() {
 void draw() {
   background(150);
 
-  //if (currentLevel == (myLevels.length - 1)) {
+  myLevels[currentLevel].display(); //Here's where things get awesome. We draw only the level in the array whose element label matches the value of the variable indicating the current level. If the current level is set at 2, we don't draw level 1 or level 3. Look, Ma, no for loop!
   
     if (currentLevel == 11) {
     if (bounced == true) { //Did the player win?
@@ -115,7 +115,7 @@ void draw() {
     }
   }
 
-  myLevels[currentLevel].display(); //Here's where things get awesome. We draw only the level in the array whose element label matches the value of the variable indicating the current level. If the current level is set at 2, we don't draw level 1 or level 3. Look, Ma, no for loop!
+
 
   if (currentLevel < (myLevels.length - 1)) { //If the next level exists...
     if (bounced == true) { //If we are not on the 'winning' level, needing to win...
