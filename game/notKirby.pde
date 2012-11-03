@@ -22,7 +22,7 @@ class notKirby { //Make a class called "notKirby." This will create a nested obj
   //Now we create variables to control a different type of movement for a separate game mode:
   boolean blastL, blastR, blastU, blastD = false; //Control when notKirby can rocket.
   float blastXvel, blastYvel = 0; //Use to modify position with rocketing.
-  int blastSpeed = 25; //Speed of rocketing.
+  int blastSpeed = 20; //Speed of rocketing.
   float slow = .3; //Gradually slow rocketing speed.
 
   Eye eyes1;
@@ -114,12 +114,14 @@ class notKirby { //Make a class called "notKirby." This will create a nested obj
           }
         }
       }
-      if ((yPos + (tall / 2) >= (myPlatform.yPos + depth)) && (yPos - (tall / 2) <= (myPlatform.yPos + myPlatform.platHeight - depth))) { //Glitch control! Here we prevent the ball from getting inside a platform by coming from the side (rather than the bottom or top). Pseudo code was extremely helpful to figure out how to say this. If the bottom of the ball is above the top of the platform, the ball is definitely not in the platform. If the top of the ball is below the bottom of the platform, the ball is definitely not in the platform. So we check if the ball's bottom is below the platform's top, and if the ball's top is above the platform's bottom. We also include the depth variable for both the top and bottom of the platform as a sort of margin of error - that is to account for the imprecision of the collision detection. It's the same thing as we did when detecting landing on a platform, except that we're applying it to the underside of the platform too, because otherwise if you jump into the bottom of a platform (as opposed to coming from the side) it doesn't detect the collision quickly enough and loads the behavior as if you had come from the side, with the result that the ball warps to the side of the platform.
-        if ((xPos + (wide / 2) >= (myPlatform.xPos + (myPlatform.platWidth / 2))) && (xPos - (wide / 2) <= (myPlatform.xPos + myPlatform.platWidth))) { //Assuming yes to the above, we test once again to see if the ball's horizontal position is within the width of the platform. But, in order to control how movement is affected, we want to check if the ball is to the left or right side of the platform. So we split the test up into two sections - this first one checks if the ball is within the right half of the platform.
-          xPos = (myPlatform.xPos + myPlatform.platWidth) + (wide / 2); //If yes to the above (the ball is in the right half of the platform), it seems pretty certain that the ball was coming from the right, so we set the ball's xPos equal to the right edge of the platform and account for the ball's width.
-        }
-        else if (((xPos + (wide / 2)) >= myPlatform.xPos) && ((xPos - (wide / 2)) < myPlatform.xPos + (myPlatform.platWidth / 2))) { //Part two of the width test checks to see if the ball is in the left half of the platform.
-          xPos = myPlatform.xPos - (wide / 2); //If yes to the above (the ball is in the left half of the platform), it seems pretty certain that the ball was coming from the left, so we set the ball's xPos equal to the left edge of the platform and account for the ball's width. (The advantage of doing it this way is that we don't have to mess with the xVel value or the movement booleans). The result is the ball presses up against the edge of the platform like a wall and does not get stuck inside it!
+      if (blastR == false && blastL == false && blastU == false && blastD == false) {
+        if ((yPos + (tall / 2) >= (myPlatform.yPos + depth)) && (yPos - (tall / 2) <= (myPlatform.yPos + myPlatform.platHeight - depth))) { //Glitch control! Here we prevent the ball from getting inside a platform by coming from the side (rather than the bottom or top). Pseudo code was extremely helpful to figure out how to say this. If the bottom of the ball is above the top of the platform, the ball is definitely not in the platform. If the top of the ball is below the bottom of the platform, the ball is definitely not in the platform. So we check if the ball's bottom is below the platform's top, and if the ball's top is above the platform's bottom. We also include the depth variable for both the top and bottom of the platform as a sort of margin of error - that is to account for the imprecision of the collision detection. It's the same thing as we did when detecting landing on a platform, except that we're applying it to the underside of the platform too, because otherwise if you jump into the bottom of a platform (as opposed to coming from the side) it doesn't detect the collision quickly enough and loads the behavior as if you had come from the side, with the result that the ball warps to the side of the platform.
+          if ((xPos + (wide / 2) >= (myPlatform.xPos + (myPlatform.platWidth / 2))) && (xPos - (wide / 2) <= (myPlatform.xPos + myPlatform.platWidth))) { //Assuming yes to the above, we test once again to see if the ball's horizontal position is within the width of the platform. But, in order to control how movement is affected, we want to check if the ball is to the left or right side of the platform. So we split the test up into two sections - this first one checks if the ball is within the right half of the platform.
+            xPos = (myPlatform.xPos + myPlatform.platWidth) + (wide / 2); //If yes to the above (the ball is in the right half of the platform), it seems pretty certain that the ball was coming from the right, so we set the ball's xPos equal to the right edge of the platform and account for the ball's width.
+          }
+          else if (((xPos + (wide / 2)) >= myPlatform.xPos) && ((xPos - (wide / 2)) < myPlatform.xPos + (myPlatform.platWidth / 2))) { //Part two of the width test checks to see if the ball is in the left half of the platform.
+            xPos = myPlatform.xPos - (wide / 2); //If yes to the above (the ball is in the left half of the platform), it seems pretty certain that the ball was coming from the left, so we set the ball's xPos equal to the left edge of the platform and account for the ball's width. (The advantage of doing it this way is that we don't have to mess with the xVel value or the movement booleans). The result is the ball presses up against the edge of the platform like a wall and does not get stuck inside it!
+          }
         }
       }
     }
@@ -142,7 +144,7 @@ class notKirby { //Make a class called "notKirby." This will create a nested obj
       blastYvel = blastSpeed;
       yPos -= blastYvel;
     }
-    
+
     if (blastXvel > 0) {
       blastXvel -= slow;
     }
