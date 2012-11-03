@@ -30,7 +30,7 @@ boolean[] levelNew;
 
 void setup() {
   size(800, 600);
-  
+
   //It's necessary to initialize the following variables within setup so that when we switch game modes and reload setup, everything reverts properly.
   currentLevel = 0;
   msg = 0;
@@ -42,7 +42,7 @@ void setup() {
   jumpCounter = 0;
   pressedV = false;
   pressedVlevel = false;
-  
+
   msgXpos = width/2;
   msgYpos = height/2;
   smooth();
@@ -101,54 +101,55 @@ void draw() {
   background(150);
 
   myLevels[currentLevel].display(); //Here's where things get awesome. We draw only the level in the array whose element label matches the value of the variable indicating the current level. If the current level is set at 2, we don't draw level 1 or level 3. Look, Ma, no for loop!
-  
+
+  if (gameMode == 0) {
+
     if (currentLevel == 11) {
-    if (bounced == true) { //Did the player win?
-      fill(255);
-      textFont(font, fontsize*0.5);
-      text("Winner! You jumped this.", 115, 70); //Display winning text.
+      if (bounced == true) { //Did the player win?
+        fill(255);
+        textFont(font, fontsize*0.5);
+        text("Winner! You jumped this.", 115, 70); //Display winning text.
+      }
+      else if (bounced != true) { //The player hasn't won yet?
+        fill(255);
+        textFont(font, fontsize*0.5);
+        text("Can't jump this.", 135, 70); //Display other text.
+      }
     }
-    else if (bounced != true) { //The player hasn't won yet?
-      fill(255);
-      textFont(font, fontsize*0.5);
-      text("Can't jump this.", 135, 70); //Display other text.
-    }
-  }
 
 
 
-  if (currentLevel < (myLevels.length - 1)) { //If the next level exists...
-    if (bounced == true) { //If we are not on the 'winning' level, needing to win...
-      stroke(255);
-      strokeWeight(2);
-      line((width - 50), (height - 25), (width - 25), (height - 25)); //With these three lines we draw an arrow pointing to the next screen.
-      line((width - 25), (height - 25), (width - 35), (height - 35));
-      line((width - 25), (height - 25), (width - 35), (height - 15));
+    if (currentLevel < (myLevels.length - 1)) { //If the next level exists...
+      if (bounced == true) { //If we are not on the 'winning' level, needing to win...
+        stroke(255);
+        strokeWeight(2);
+        line((width - 50), (height - 25), (width - 25), (height - 25)); //With these three lines we draw an arrow pointing to the next screen.
+        line((width - 25), (height - 25), (width - 35), (height - 35));
+        line((width - 25), (height - 25), (width - 35), (height - 15));
 
-      if (notKirby.xPos >= width-(notKirby.wide / 2)) { //Here we will transition between levels. If notKirby crosses the right edge of the screen...
-        currentLevel++; //...switch to the next level...
-        notKirby.xPos = (notKirby.wide / 2); //...and move notKirby to the other side of the screen so it looks like he really moved between screens.
-        if (levelNew[currentLevel] == false) { //If we haven't visited this level before...
-          if (gameMode == 0) {
+        if (notKirby.xPos >= width-(notKirby.wide / 2)) { //Here we will transition between levels. If notKirby crosses the right edge of the screen...
+          currentLevel++; //...switch to the next level...
+          notKirby.xPos = (notKirby.wide / 2); //...and move notKirby to the other side of the screen so it looks like he really moved between screens.
+          if (levelNew[currentLevel] == false) { //If we haven't visited this level before...
             next = true; //...prepare for new messages.
             msg = 1; //Ditto.
           }
         }
       }
     }
-  }
 
-  if (currentLevel > 0) { //If the previous level exists...
-    if (bounced == true) { //If we are not on the 'winning' level, needing to win...
-      stroke(255);
-      strokeWeight(2);
-      line(50, (height - 25), 25, (height - 25)); //With these three lines we draw an arrow pointing to the next screen.
-      line(25, (height - 25), 35, (height - 35));
-      line(25, (height - 25), 35, (height - 15));
+    if (currentLevel > 0) { //If the previous level exists...
+      if (bounced == true) { //If we are not on the 'winning' level, needing to win...
+        stroke(255);
+        strokeWeight(2);
+        line(50, (height - 25), 25, (height - 25)); //With these three lines we draw an arrow pointing to the next screen.
+        line(25, (height - 25), 35, (height - 35));
+        line(25, (height - 25), 35, (height - 15));
 
-      if (notKirby.xPos < (notKirby.wide / 2)) { //Do the above going the other way. If notKirby crosses the left edge of the screen...
-        currentLevel--; //...switch to the previous level...
-        notKirby.xPos = width - (notKirby.wide / 2); //...and move notKirby to the other side of the screen so it looks like he really moved between screens.
+        if (notKirby.xPos < (notKirby.wide / 2)) { //Do the above going the other way. If notKirby crosses the left edge of the screen...
+          currentLevel--; //...switch to the previous level...
+          notKirby.xPos = width - (notKirby.wide / 2); //...and move notKirby to the other side of the screen so it looks like he really moved between screens.
+        }
       }
     }
   }
@@ -1296,6 +1297,23 @@ void keyPressed() {
       }
     }
   }
+  
+  //Alternative movement mechanics:
+  if (key=='w' || key=='W') {
+    notKirby.blastU = true;
+  }
+  if (key=='a' || key=='A') {
+    notKirby.blastL = true;
+    direction = false;
+  }
+  if (key=='s' || key=='S') {
+    notKirby.blastD = true;
+  }
+  if (key=='d' || key=='D') {
+    notKirby.blastR = true;
+    direction = true;
+  }
+  
 }
 
 //_____________________________________________________________________________________________________________
@@ -1306,6 +1324,20 @@ void keyReleased() { //We use these statements to stop movement when the player 
   }
   if (keyCode==LEFT) {
     notKirby.L = false;
+  }
+  
+  //Alternative movement mechanics:
+  if (key=='w' || key=='W') {
+    notKirby.blastU = false;
+  }
+  if (key=='a' || key=='A') {
+    notKirby.blastL = false;
+  }
+  if (key=='s' || key=='S') {
+    notKirby.blastD = false;
+  }
+  if (key=='d' || key=='D') {
+    notKirby.blastR = false;
   }
 }
 

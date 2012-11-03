@@ -19,6 +19,12 @@ class notKirby { //Make a class called "notKirby." This will create a nested obj
   boolean jump = false; //Control when the ball can jump.
   boolean L, R = false; //Control when the ball can move.
 
+  //Now we create variables to control a different type of movement for a separate game mode:
+  boolean blastL, blastR, blastU, blastD = false; //Control when notKirby can rocket.
+  float blastXvel, blastYvel = 0; //Use to modify position with rocketing.
+  int blastSpeed = 25; //Speed of rocketing.
+  float slow = .3; //Gradually slow rocketing speed.
+
   Eye eyes1;
   Face face1;
   Arm arm;
@@ -49,6 +55,9 @@ class notKirby { //Make a class called "notKirby." This will create a nested obj
   }
 
   void updateBall() {
+
+    //Here are the regular game mode mechanics:
+
     if (jump == true) { //If jumping is allowed...
       yVel = -speed_limit; //...give the ball upward velocity. It's a jump!
       jump = false; //Immediately forbid jumping to prevent mid-air jumps.
@@ -113,6 +122,38 @@ class notKirby { //Make a class called "notKirby." This will create a nested obj
           xPos = myPlatform.xPos - (wide / 2); //If yes to the above (the ball is in the left half of the platform), it seems pretty certain that the ball was coming from the left, so we set the ball's xPos equal to the left edge of the platform and account for the ball's width. (The advantage of doing it this way is that we don't have to mess with the xVel value or the movement booleans). The result is the ball presses up against the edge of the platform like a wall and does not get stuck inside it!
         }
       }
+    }
+
+
+    //Here are the alternative game mode mechanics:
+    if (blastR == true &&  xPos <= width-(wide / 2)) {
+      blastXvel = blastSpeed;
+      xPos += blastXvel;
+    }
+    if (blastL == true && xPos >= (wide / 2)) {
+      blastXvel = blastSpeed;
+      xPos -= blastXvel;
+    }
+    if (blastD == true &&  yPos <= height-(tall / 2)) {
+      blastYvel = blastSpeed;
+      yPos += blastYvel;
+    }
+    if (blastU == true && yPos >= (tall / 2)) {
+      blastYvel = blastSpeed;
+      yPos -= blastYvel;
+    }
+    
+    if (blastXvel > 0) {
+      blastXvel -= slow;
+    }
+    if (blastXvel <= 0) {
+      blastXvel = 0;
+    }
+    if (blastYvel > 0) {
+      blastYvel -= slow;
+    }
+    if (blastYvel <= 0) {
+      blastYvel = 0;
     }
   }
 }
