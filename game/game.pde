@@ -1,23 +1,23 @@
 //Please note - protagonist notKirby is also known as "Ball" throughout this code and commentary. Live free of perplexity!
 
-int currentLevel = 0; //Control the current level (game screen).
+int gameMode = 0; //Control which play style applies. Set to zero for the initial instruction set. This needs to be initialized outside the setup function to enable restarting the game with a new mode.
 
-int gameMode = 1; //Control which play style applies. Set to zero for the initial instruction set.
-int msg = 0; //Control the display of messages and how they affect game play. Set to zero to enable action.
+int msg; //Control the display of messages and how they affect game play. Set to zero to enable action.
+int currentLevel; //Control the current level (game screen).
 
 PFont font;
-boolean bounced = true; //Detect whether player has achieved the winning condition.
-boolean direction = true; //Control which direction notKirby faces.
+boolean bounced; //Detect whether player has achieved the winning condition.
+boolean direction; //Control which direction notKirby faces.
 float resizer = 0.25; //Use to scale notKirby's size as needed.
-boolean next = true; //Control transition between messages and game play.
+boolean next; //Control transition between messages and game play.
 int fontsize = 24;
 color textBackground = #9FA1FA; //Background color of text boxes.
 color textColor = 0;
-boolean promptJump = false; //Prompt jumping at one point.
-boolean noAdvance = false; //Prevent moving through messages at one point.
-int jumpCounter = 0; //Tally jumps at one point.
-boolean pressedV = false; //Check if V has been pressed.
-boolean pressedVlevel = false; //Check if this is the level to press V.
+boolean promptJump; //Prompt jumping at one point.
+boolean noAdvance; //Prevent moving through messages at one point.
+int jumpCounter; //Tally jumps at one point.
+boolean pressedV; //Check if V has been pressed.
+boolean pressedVlevel; //Check if this is the level to press V.
 float msgXpos; //Use this to position a specific message.
 int moveMsg = 2; //Use this to move the message.
 float msgYpos; //Use this to posiition a specific message.
@@ -30,6 +30,19 @@ boolean[] levelNew;
 
 void setup() {
   size(800, 600);
+  
+  //It's necessary to initialize the following variables within setup so that when we switch game modes and reload setup, everything reverts properly.
+  currentLevel = 0;
+  msg = 0;
+  bounced = true;
+  direction = true;
+  next = true;
+  promptJump = false;
+  noAdvance = false;
+  jumpCounter = 0;
+  pressedV = false;
+  pressedVlevel = false;
+  
   msgXpos = width/2;
   msgYpos = height/2;
   smooth();
@@ -88,7 +101,8 @@ void draw() {
   background(150);
 
   //if (currentLevel == (myLevels.length - 1)) {
-  if (currentLevel == 11) {
+  
+    if (currentLevel == 11) {
     if (bounced == true) { //Did the player win?
       fill(255);
       textFont(font, fontsize*0.5);
@@ -102,7 +116,6 @@ void draw() {
   }
 
   myLevels[currentLevel].display(); //Here's where things get awesome. We draw only the level in the array whose element label matches the value of the variable indicating the current level. If the current level is set at 2, we don't draw level 1 or level 3. Look, Ma, no for loop!
-  //println("levelNew[0] = " + levelNew[0] + " levelNew[1] = " + levelNew[1]); //Debug.
 
   if (currentLevel < (myLevels.length - 1)) { //If the next level exists...
     if (bounced == true) { //If we are not on the 'winning' level, needing to win...
@@ -1214,6 +1227,16 @@ void keyPressed() {
   if (key=='v' || key=='V') { //Debug.
     if (pressedVlevel == true) {
       msg++;
+    }
+  }
+  if (keyCode==SHIFT) {
+    if (gameMode == 0) {
+      gameMode = 1;
+      setup();
+    }
+    else {
+      gameMode = 0;
+      setup();
     }
   }
 
