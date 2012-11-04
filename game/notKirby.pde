@@ -90,22 +90,25 @@ class notKirby { //Make a class called "notKirby." This will create a nested obj
         if ((yPos + (tall / 2) >= myPlatform.yPos) && (yPos + (tall / 2) <= (myPlatform.yPos + depth))) { //Assuming we got a positive result above, is the ball's yPos within the upper part of the Platform at that element?
           if (yVel == speed_limit) { //The ball hit the platform, so change its velocity appropriately.
             yVel = rebound;
-            if (myLevels[currentLevel].platColor[i] == false) {
-              myLevels[currentLevel].platColor[i] = true;
-              platRockd = true;
-            }
           }
           else {
             yVel = 0; //All of this is the same deal as when the ball hits the ground (see comments above).
-            if (myLevels[currentLevel].platColor[i] == false) {
-              myLevels[currentLevel].platColor[i] = true;
-              platRockd = true;
-            }
           }
         }
         else if ((yPos - (tall / 2) >= (myPlatform.yPos + depth)) && (yPos - (tall / 2) <= (myPlatform.yPos + myPlatform.platHeight))) { //Ah, but what if the yPos is within the lower part of the Platform at that ArrayList element?
           yPos = (myPlatform.yPos + myPlatform.platHeight) + (tall / 2); //Set the yPos of the top of the ball (yPos - (tall / 2)) equal to the bottom of the platform (we must add (tall / 2) to the other side of the equation so yPos is isolated on the left). This prevents the ball from getting stuck within the platform when it reverses its velocity.
           yVel = (yVel - grav) * -1; //In that case the ball has hit the bottom of that Platform, so we reverse the direction (nullifying the gravity addition at this frame).
+        }
+      }
+      
+      if ((xPos + (wide / 2) >= myPlatform.xPos) && (xPos - (wide / 2) <= (myPlatform.xPos + myPlatform.platWidth))) { //At each value of i (aka ArrayList element in this case), is the ball's xPos within the width of the Platform at that element?
+        if ((yPos + (tall / 2) >= myPlatform.yPos) && (yPos + (tall / 2) <= (myPlatform.yPos + myPlatform.platHeight))) { //Assuming we got a positive result above, is the ball's yPos within the height of the Platform at that element?
+          if (blastL == true || blastR == true || blastU == true || blastD == true) { //If notKirby is rocketing...
+            if (myLevels[currentLevel].platColor[i] == false) { //if the platform hasn't been rocketed...
+              myLevels[currentLevel].platColor[i] = true; //set it to rocketed...
+              platRockd = true; //and subtract one from the tally.
+            }
+          }
         }
       }
 

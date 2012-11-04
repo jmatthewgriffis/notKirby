@@ -884,6 +884,12 @@ void draw() {
       }
     }
     if (currentLevel == 10) {
+      if (pressedVlevel == true) {
+        pressedVlevel = false;
+      }
+      if (noAdvance == true) {
+        noAdvance = false;
+      }
       if (msg == 1) {
         pushMatrix(); 
         translate(0, 185);
@@ -1244,10 +1250,6 @@ void keyPressed() {
     if (currentLevel < (myLevels.length - 1)) { //If next level exists...
       currentLevel++; //...switch to next level.
     }
-  }
-
-  if (key=='3') { //Debug.
-    platRockd = true;
   }
 
   if (key=='0') { //Debug.
