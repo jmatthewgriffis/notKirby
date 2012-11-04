@@ -33,7 +33,7 @@ void setup() {
   size(800, 600);
 
   //It's necessary to initialize the following variables within setup so that when we switch game modes and reload setup, everything reverts properly.
-  currentLevel = 0;
+  currentLevel = 7;
   msg = 0;
   bounced = true;
   direction = true;
@@ -430,7 +430,7 @@ void draw() {
     if (currentLevel == 4) {
       if (msg == 1) {
         pushMatrix(); 
-        translate(250, 0);
+        translate(230, 0);
         noStroke();
         fill(textBackground); 
         rect(width/2, height/2-fontsize, 130, fontsize*3+10);
@@ -443,7 +443,7 @@ void draw() {
       }
       if (msg == 2) {
         pushMatrix(); 
-        translate(-390, 0);
+        translate(-370, 0);
         noStroke();
         fill(textBackground); 
         rect(width/2, height/2-fontsize, 200, fontsize*3+10);
@@ -456,7 +456,7 @@ void draw() {
       }
       if (msg == 3) {
         pushMatrix(); 
-        translate(-(130/2), 230);
+        translate(-(130/2), 210);
         noStroke();
         fill(textBackground); 
         rect(width/2, height/2-fontsize, 130, fontsize*3+10);
@@ -469,7 +469,7 @@ void draw() {
       }
       if (msg == 4) {
         pushMatrix(); 
-        translate(-100, -260);
+        translate(-100, -240);
         noStroke();
         fill(textBackground); 
         rect(width/2, height/2-fontsize, 200, fontsize*3+10);

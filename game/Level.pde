@@ -12,32 +12,47 @@ class Level { //Are you ready to GET CRAZY????
     myPlats = new ArrayList<Platform>(); //Here we initialize the ArrayList. ArrayLists don't have a fixed size, so we don't have to give a number in brackets like in arrays. Hurray! The "<Platform>" serves the same purpose here as it did above - identifying to the ArrayList what kind of object it's storing. I'm not sure why we need to say this twice, but hey. As long as it works, amirite?
     if (thisLevel == 0) { //Yeah, baby. Here's how we create different levels and tell them apart. We create all these levels, identified by their thisLevel value. They're all ready to go from the get-go. But we only draw one at a time.
       myPlats.add(new Platform(165, 200, 80, 20));
-      myPlats.add(new Platform(365, 300, 80, 20));
-      myPlats.add(new Platform(565, 200, 80, 20));
+      myPlats.add(new Platform((width/2)-40, 300, 80, 20));
+      myPlats.add(new Platform(545, 200, 80, 20));
     }
-    else if (thisLevel == 1) { //First level.
+    else if (thisLevel == 1) {
       myPlats.add(new Platform(100, 200, 80, 20));
       myPlats.add(new Platform(100, 400, 80, 20));
-      myPlats.add(new Platform(width-100, 200, 80, 20));
-      myPlats.add(new Platform(width-100, 400, 80, 20));
+      myPlats.add(new Platform(width-180, 200, 80, 20));
+      myPlats.add(new Platform(width-180, 400, 80, 20));
     }
     else if (thisLevel == 2) {
-      
+      myPlats.add(new Platform(165, 200, 80, 20));
+      myPlats.add(new Platform((width/2)-40, 300, 80, 20));
+      myPlats.add(new Platform(545, 400, 80, 20));
     }
     else if (thisLevel == 3) {
-      
+      myPlats.add(new Platform((width/2)-250, (height/2)-10, 500, 20));
     }
     else if (thisLevel == 4) {
-      
+      myPlats.add(new Platform(80, (height/2)-10, 80, 20));
+      myPlats.add(new Platform(width-160, (height/2)-10, 80, 20));
+      myPlats.add(new Platform((width/2)-40, 60, 80, 20));
+      myPlats.add(new Platform((width/2)-40, height-80, 80, 20));
     }
     else if (thisLevel == 5) {
-      
+      myPlats.add(new Platform(200, (height/2)-100, 80, 20));
+      myPlats.add(new Platform(520, (height/2)+100, 80, 20));
     }
     else if (thisLevel == 6) {
-      
+      myPlats.add(new Platform(200, height-100, 80, 20));
+      myPlats.add(new Platform(400, (height/2)-100, 80, 20));
+      myPlats.add(new Platform(600, (height/2)-10, 80, 20));
+      myPlats.add(new Platform(400, (height/2)+100, 80, 20));
+      myPlats.add(new Platform(200, 100, 80, 20));
     }
     else if (thisLevel == 7) {
-      
+      myPlats.add(new Platform(-10, (height/2)-200, 80, 20));
+      myPlats.add(new Platform(-10, (height/2)+200, 80, 20));
+      myPlats.add(new Platform(-10, (height/2)-10, 80, 20));
+      myPlats.add(new Platform(width-70, (height/2)-10, 80, 20));
+      myPlats.add(new Platform(width-70, (height/2)+200, 80, 20));
+      myPlats.add(new Platform(width-70, (height/2)-200, 80, 20));
     }
     else if (thisLevel == 8) {
       
