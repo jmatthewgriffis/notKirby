@@ -21,11 +21,11 @@ boolean pressedVlevel; //Check if this is the level to press V.
 float msgXpos; //Use this to position a specific message.
 int moveMsg = 2; //Use this to move the message.
 float msgYpos; //Use this to posiition a specific message.
-
 notKirby notKirby; //Declare an instance of the protagonist object ("notKirby").
 Level [] myLevels; //Declare an array of "Level" objects (which are themselves ArrayLists, "Inception"-style.)
 boolean[] levelNew;
 boolean platRockd; //Use to control changing the condition of platforms.
+color platFlipped = color(0, 255, 0); //Platform changes to this color when it's been rocketed.
 
 //_____________________________________________________________________________________________________________
 
@@ -176,13 +176,13 @@ void draw() {
   }
 
   //println(currentLevel); //Debug.
-  
+
   //Debug:
   /*for (int i = 0; i < myLevels.length; i++) {
-    for (int j = 0; j < myLevels[i].myPlats.size(); j++) {
-      println("0 = "+ myLevels[currentLevel].platColor[0] + " 1 = " + myLevels[currentLevel].platColor[1] + " 2 = " + myLevels[currentLevel].platColor[2]);
-    }
-  }*/
+   for (int j = 0; j < myLevels[i].myPlats.size(); j++) {
+   println("0 = "+ myLevels[currentLevel].platColor[0] + " 1 = " + myLevels[currentLevel].platColor[1] + " 2 = " + myLevels[currentLevel].platColor[2]);
+   }
+   }*/
 
   //A debugging problem arises. An onscreen message prevents the arrow keys from enabling movement, but what if movement is already enabled via the previous screen and the player keeps holding the key down? We address that here.
   if (msg >= 1) { //If there's a message on screen...

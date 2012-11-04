@@ -103,234 +103,244 @@ class notKirby { //Make a class called "notKirby." This will create a nested obj
             }
           }
         }
-          else if ((yPos - (tall / 2) >= (myPlatform.yPos + depth)) && (yPos - (tall / 2) <= (myPlatform.yPos + myPlatform.platHeight))) { //Ah, but what if the yPos is within the lower part of the Platform at that ArrayList element?
-            yPos = (myPlatform.yPos + myPlatform.platHeight) + (tall / 2); //Set the yPos of the top of the ball (yPos - (tall / 2)) equal to the bottom of the platform (we must add (tall / 2) to the other side of the equation so yPos is isolated on the left). This prevents the ball from getting stuck within the platform when it reverses its velocity.
-            yVel = (yVel - grav) * -1; //In that case the ball has hit the bottom of that Platform, so we reverse the direction (nullifying the gravity addition at this frame).
-          }
+        else if ((yPos - (tall / 2) >= (myPlatform.yPos + depth)) && (yPos - (tall / 2) <= (myPlatform.yPos + myPlatform.platHeight))) { //Ah, but what if the yPos is within the lower part of the Platform at that ArrayList element?
+          yPos = (myPlatform.yPos + myPlatform.platHeight) + (tall / 2); //Set the yPos of the top of the ball (yPos - (tall / 2)) equal to the bottom of the platform (we must add (tall / 2) to the other side of the equation so yPos is isolated on the left). This prevents the ball from getting stuck within the platform when it reverses its velocity.
+          yVel = (yVel - grav) * -1; //In that case the ball has hit the bottom of that Platform, so we reverse the direction (nullifying the gravity addition at this frame).
         }
-        //if (currentLevel == (myLevels.length - 1)) { //Make sure this is the last level.
-        if (currentLevel == 11) {
-          if (i == (myLevels[currentLevel].myPlats.size() - 1)) {
-            if ((xPos + (wide / 2) >= myPlatform.xPos) && (xPos - (wide / 2) <= (myPlatform.xPos + myPlatform.platWidth))) { //Is the ball within the width of the last (and winning) Platform?
-              if ((yPos + (tall / 2) >= myPlatform.yPos) && (yPos + (tall / 2) <= (myPlatform.yPos + depth))) { //If yes, is its vertical position within the upper part of that Platform?
-                if (bounced == false) {
-                  bounced = true;
-                  msg = 6;
-                  next = true;
-                }
+      }
+
+      //Changing the stroke color of the platform when notKirby rockets it is not working as desired. So we use an alternative solution. Instead of changing the color of the existing rectangle, we check to see if the appropriate boolean registers a collision, and if it does, we draw a new rectangle of a different color on top of the old one. Voila!
+      if (myLevels[currentLevel].platColor[i] == true) {
+        stroke(platFlipped);
+        rectMode(CORNER);
+        noFill();
+        strokeWeight(4);
+        rect(myPlatform.xPos, myPlatform.yPos, myPlatform.platWidth, myPlatform.platHeight);
+      }
+
+      //if (currentLevel == (myLevels.length - 1)) { //Make sure this is the last level.
+      if (currentLevel == 11) {
+        if (i == (myLevels[currentLevel].myPlats.size() - 1)) {
+          if ((xPos + (wide / 2) >= myPlatform.xPos) && (xPos - (wide / 2) <= (myPlatform.xPos + myPlatform.platWidth))) { //Is the ball within the width of the last (and winning) Platform?
+            if ((yPos + (tall / 2) >= myPlatform.yPos) && (yPos + (tall / 2) <= (myPlatform.yPos + depth))) { //If yes, is its vertical position within the upper part of that Platform?
+              if (bounced == false) {
+                bounced = true;
+                msg = 6;
+                next = true;
               }
             }
           }
         }
-        if (blastR == false && blastL == false && blastU == false && blastD == false) {
-          if ((yPos + (tall / 2) >= (myPlatform.yPos + depth)) && (yPos - (tall / 2) <= (myPlatform.yPos + myPlatform.platHeight - depth))) { //Glitch control! Here we prevent the ball from getting inside a platform by coming from the side (rather than the bottom or top). Pseudo code was extremely helpful to figure out how to say this. If the bottom of the ball is above the top of the platform, the ball is definitely not in the platform. If the top of the ball is below the bottom of the platform, the ball is definitely not in the platform. So we check if the ball's bottom is below the platform's top, and if the ball's top is above the platform's bottom. We also include the depth variable for both the top and bottom of the platform as a sort of margin of error - that is to account for the imprecision of the collision detection. It's the same thing as we did when detecting landing on a platform, except that we're applying it to the underside of the platform too, because otherwise if you jump into the bottom of a platform (as opposed to coming from the side) it doesn't detect the collision quickly enough and loads the behavior as if you had come from the side, with the result that the ball warps to the side of the platform.
-            if ((xPos + (wide / 2) >= (myPlatform.xPos + (myPlatform.platWidth / 2))) && (xPos - (wide / 2) <= (myPlatform.xPos + myPlatform.platWidth))) { //Assuming yes to the above, we test once again to see if the ball's horizontal position is within the width of the platform. But, in order to control how movement is affected, we want to check if the ball is to the left or right side of the platform. So we split the test up into two sections - this first one checks if the ball is within the right half of the platform.
-              xPos = (myPlatform.xPos + myPlatform.platWidth) + (wide / 2); //If yes to the above (the ball is in the right half of the platform), it seems pretty certain that the ball was coming from the right, so we set the ball's xPos equal to the right edge of the platform and account for the ball's width.
-            }
-            else if (((xPos + (wide / 2)) >= myPlatform.xPos) && ((xPos - (wide / 2)) < myPlatform.xPos + (myPlatform.platWidth / 2))) { //Part two of the width test checks to see if the ball is in the left half of the platform.
-              xPos = myPlatform.xPos - (wide / 2); //If yes to the above (the ball is in the left half of the platform), it seems pretty certain that the ball was coming from the left, so we set the ball's xPos equal to the left edge of the platform and account for the ball's width. (The advantage of doing it this way is that we don't have to mess with the xVel value or the movement booleans). The result is the ball presses up against the edge of the platform like a wall and does not get stuck inside it!
-            }
+      }
+      if (blastR == false && blastL == false && blastU == false && blastD == false) {
+        if ((yPos + (tall / 2) >= (myPlatform.yPos + depth)) && (yPos - (tall / 2) <= (myPlatform.yPos + myPlatform.platHeight - depth))) { //Glitch control! Here we prevent the ball from getting inside a platform by coming from the side (rather than the bottom or top). Pseudo code was extremely helpful to figure out how to say this. If the bottom of the ball is above the top of the platform, the ball is definitely not in the platform. If the top of the ball is below the bottom of the platform, the ball is definitely not in the platform. So we check if the ball's bottom is below the platform's top, and if the ball's top is above the platform's bottom. We also include the depth variable for both the top and bottom of the platform as a sort of margin of error - that is to account for the imprecision of the collision detection. It's the same thing as we did when detecting landing on a platform, except that we're applying it to the underside of the platform too, because otherwise if you jump into the bottom of a platform (as opposed to coming from the side) it doesn't detect the collision quickly enough and loads the behavior as if you had come from the side, with the result that the ball warps to the side of the platform.
+          if ((xPos + (wide / 2) >= (myPlatform.xPos + (myPlatform.platWidth / 2))) && (xPos - (wide / 2) <= (myPlatform.xPos + myPlatform.platWidth))) { //Assuming yes to the above, we test once again to see if the ball's horizontal position is within the width of the platform. But, in order to control how movement is affected, we want to check if the ball is to the left or right side of the platform. So we split the test up into two sections - this first one checks if the ball is within the right half of the platform.
+            xPos = (myPlatform.xPos + myPlatform.platWidth) + (wide / 2); //If yes to the above (the ball is in the right half of the platform), it seems pretty certain that the ball was coming from the right, so we set the ball's xPos equal to the right edge of the platform and account for the ball's width.
+          }
+          else if (((xPos + (wide / 2)) >= myPlatform.xPos) && ((xPos - (wide / 2)) < myPlatform.xPos + (myPlatform.platWidth / 2))) { //Part two of the width test checks to see if the ball is in the left half of the platform.
+            xPos = myPlatform.xPos - (wide / 2); //If yes to the above (the ball is in the left half of the platform), it seems pretty certain that the ball was coming from the left, so we set the ball's xPos equal to the left edge of the platform and account for the ball's width. (The advantage of doing it this way is that we don't have to mess with the xVel value or the movement booleans). The result is the ball presses up against the edge of the platform like a wall and does not get stuck inside it!
           }
         }
       }
+    }
 
 
-      //Here are the alternative game mode mechanics:
-      if (blastR == true &&  xPos <= width-(wide / 2)) {
-        blastXvel = blastSpeed;
-        xPos += blastXvel;
-      }
-      if (blastL == true && xPos >= (wide / 2)) {
-        blastXvel = blastSpeed;
-        xPos -= blastXvel;
-      }
-      if (blastD == true &&  yPos <= height-(tall / 2)) {
-        blastYvel = blastSpeed;
-        yPos += blastYvel;
-      }
-      if (blastU == true && yPos >= (tall / 2)) {
-        blastYvel = blastSpeed;
-        yPos -= blastYvel;
-      }
+    //Here are the alternative game mode mechanics:
+    if (blastR == true &&  xPos <= width-(wide / 2)) {
+      blastXvel = blastSpeed;
+      xPos += blastXvel;
+    }
+    if (blastL == true && xPos >= (wide / 2)) {
+      blastXvel = blastSpeed;
+      xPos -= blastXvel;
+    }
+    if (blastD == true &&  yPos <= height-(tall / 2)) {
+      blastYvel = blastSpeed;
+      yPos += blastYvel;
+    }
+    if (blastU == true && yPos >= (tall / 2)) {
+      blastYvel = blastSpeed;
+      yPos -= blastYvel;
+    }
 
-      if (blastXvel > 0) {
-        blastXvel -= slow;
+    if (blastXvel > 0) {
+      blastXvel -= slow;
+    }
+    if (blastXvel <= 0) {
+      blastXvel = 0;
+    }
+    if (blastYvel > 0) {
+      blastYvel -= slow;
+    }
+    if (blastYvel <= 0) {
+      blastYvel = 0;
+    }
+  }
+}
+
+
+
+//_________________________________________________________________________________________________________________________________________
+//Arm class
+//Please note - protagonist notKirby is also known as "Ball" throughout this code and commentary. Live free of perplexity!
+
+class Arm { //Note I learned the hard way: any variables initialized here will only use the values from the first frame. If I need to update the variables, I must initialize them in a function into which I can pass the updated variables each frame.
+  //xPos, yPos, width, height, start of arc (radians), end of arc (radians)
+  float xPos;
+  float yPos;
+  //  float xPos = notKirby.xPos-(10 * resizer); //These two are no longer necessary (replaced with the two above) because they would pull only the first value of xPos and yPos from the notKirby object. We need to update each frame so the parts move together, so we update the display function below with the coordinates and initialize them there.
+  //  float yPos = notKirby.yPos+(30 * resizer);
+  float wide = notKirby.wide-(125 * resizer);
+  float tall = notKirby.tall-(150 * resizer);
+  float ang1 = notKirby.ang1;
+  float ang2 = notKirby.ang2;
+
+  /*
+  Arm(float _xPos, float _yPos, float _wide, float _tall, float _ang1, float _ang2) { //Constructor - no longer needed because we are controlling all the variables through the main object, 'notKirby.'
+   xPos = _xPos;
+   yPos = _yPos;
+   wide = _wide;
+   tall = _tall;
+   ang1 = _ang1;
+   ang2 = _ang2;
+   }
+   */
+
+  void display(float _xPos, float _yPos) {
+    xPos = _xPos-(10 * resizer);
+    yPos = _yPos+(30 * resizer);
+    noFill();
+    stroke(0); //Color
+    strokeWeight(2 * resizer); //Thickness of arc
+    if (direction==true) { //Character is facing to the right.
+      if (notKirby.yVel == 0) { //Character is on a surface.
+        arc(xPos, yPos, wide, tall, ang1, ang2);  // Draw arm down and to the left.
       }
-      if (blastXvel <= 0) {
-        blastXvel = 0;
+      else { //Character is in the air.
+        arc(xPos, yPos, wide, tall, -ang2, ang1);  // Draw arm up and to the left.
       }
-      if (blastYvel > 0) {
-        blastYvel -= slow;
+    }
+    else { //Character is facing to the left.
+      if (notKirby.yVel == 0) { //Character is on a surface.
+        arc(xPos+(20 * resizer), yPos, wide, tall, ang1, ang2);  // Draw arm down and to the right.
       }
-      if (blastYvel <= 0) {
-        blastYvel = 0;
+      else { //Character is in the air.
+        arc(xPos+(20 * resizer), yPos, wide, tall, -ang2, ang1);  // Draw arm up and to the right.
       }
     }
   }
+}
 
 
 
-  //_________________________________________________________________________________________________________________________________________
-  //Arm class
-  //Please note - protagonist notKirby is also known as "Ball" throughout this code and commentary. Live free of perplexity!
+//_________________________________________________________________________________________________________________________________________
+//Eye class
+//Please note - protagonist notKirby is also known as "Ball" throughout this code and commentary. Live free of perplexity!
 
-  class Arm { //Note I learned the hard way: any variables initialized here will only use the values from the first frame. If I need to update the variables, I must initialize them in a function into which I can pass the updated variables each frame.
-    //xPos, yPos, width, height, start of arc (radians), end of arc (radians)
-    float xPos;
-    float yPos;
-    //  float xPos = notKirby.xPos-(10 * resizer); //These two are no longer necessary (replaced with the two above) because they would pull only the first value of xPos and yPos from the notKirby object. We need to update each frame so the parts move together, so we update the display function below with the coordinates and initialize them there.
-    //  float yPos = notKirby.yPos+(30 * resizer);
-    float wide = notKirby.wide-(125 * resizer);
-    float tall = notKirby.tall-(150 * resizer);
-    float ang1 = notKirby.ang1;
-    float ang2 = notKirby.ang2;
+//Initial character code for separate parts Face, Eye and Mouth provided in class by Francisco, then modified by me.
 
-    /*
-  Arm(float _xPos, float _yPos, float _wide, float _tall, float _ang1, float _ang2) { //Constructor - no longer needed because we are controlling all the variables through the main object, 'notKirby.'
-     xPos = _xPos;
-     yPos = _yPos;
-     wide = _wide;
-     tall = _tall;
-     ang1 = _ang1;
-     ang2 = _ang2;
-     }
-     */
+class Eye { //Note I learned the hard way: any variables initialized here will only use the values from the first frame. If I need to update the variables, I must initialize them in a function into which I can pass the updated variables each frame.
+  //posx, posy, size, blink frequency, color, distance from center of face
+  float xPos;
+  float yPos;
+  //  float xPos = notKirby.xPos; //These two are no longer necessary (replaced with the two above) because they would pull only the first value of xPos and yPos from the notKirby object. We need to update each frame so the parts move together, so we update the display function below with the coordinates and initialize them there.
+  //  float yPos = notKirby.yPos - (30  * resizer);
+  float wide = notKirby.wide - (115 * resizer);
+  float f = notKirby.f;
+  color c = notKirby.c2;
+  float eyeDistance = notKirby.eyeDistance;
 
-    void display(float _xPos, float _yPos) {
-      xPos = _xPos-(10 * resizer);
-      yPos = _yPos+(30 * resizer);
-      noFill();
-      stroke(0); //Color
-      strokeWeight(2 * resizer); //Thickness of arc
+  /*
+  //constructor. It receives values from outside the class - no longer needed because we are controlling all the variables through the main object, 'notKirby.'
+   Eye(float _xPos, float _yPos, float _wide, color _c, float _f) {
+   //we copy the values coming from outside to our global variables
+   xPos = _xPos;
+   yPos = _yPos;
+   wide = _wide;
+   c = _c;
+   f = _f;
+   }
+   */
+
+  void display(float _xPos, float _yPos) {
+    xPos = _xPos;
+    yPos = _yPos - (30  * resizer);
+    //a small modulo trick to cycle and make the eyes blink
+    if (frameCount % f < 8 ) {
+      fill(0);
       if (direction==true) { //Character is facing to the right.
-        if (notKirby.yVel == 0) { //Character is on a surface.
-          arc(xPos, yPos, wide, tall, ang1, ang2);  // Draw arm down and to the left.
-        }
-        else { //Character is in the air.
-          arc(xPos, yPos, wide, tall, -ang2, ang1);  // Draw arm up and to the left.
-        }
+        ellipse (xPos+eyeDistance, yPos, wide, 2); //Draw the right eye blinking.
       }
       else { //Character is facing to the left.
-        if (notKirby.yVel == 0) { //Character is on a surface.
-          arc(xPos+(20 * resizer), yPos, wide, tall, ang1, ang2);  // Draw arm down and to the right.
-        }
-        else { //Character is in the air.
-          arc(xPos+(20 * resizer), yPos, wide, tall, -ang2, ang1);  // Draw arm up and to the right.
-        }
+        ellipse (xPos-eyeDistance, yPos, wide, 2); //Draw the left eye blinking.
       }
     }
-  }
 
+    else {
+      if (direction==true) { //Character is facing to the right.      
+        //Draw right eye open.
+        fill(255);
+        ellipse (xPos+eyeDistance, yPos, wide, wide/2); //white of eye
 
+        fill(c);
+        noStroke();
+        ellipse (xPos+(eyeDistance*1.4), yPos, wide/3, wide/3);//iris
 
-  //_________________________________________________________________________________________________________________________________________
-  //Eye class
-  //Please note - protagonist notKirby is also known as "Ball" throughout this code and commentary. Live free of perplexity!
-
-  //Initial character code for separate parts Face, Eye and Mouth provided in class by Francisco, then modified by me.
-
-  class Eye { //Note I learned the hard way: any variables initialized here will only use the values from the first frame. If I need to update the variables, I must initialize them in a function into which I can pass the updated variables each frame.
-    //posx, posy, size, blink frequency, color, distance from center of face
-    float xPos;
-    float yPos;
-    //  float xPos = notKirby.xPos; //These two are no longer necessary (replaced with the two above) because they would pull only the first value of xPos and yPos from the notKirby object. We need to update each frame so the parts move together, so we update the display function below with the coordinates and initialize them there.
-    //  float yPos = notKirby.yPos - (30  * resizer);
-    float wide = notKirby.wide - (115 * resizer);
-    float f = notKirby.f;
-    color c = notKirby.c2;
-    float eyeDistance = notKirby.eyeDistance;
-
-    /*
-  //constructor. It receives values from outside the class - no longer needed because we are controlling all the variables through the main object, 'notKirby.'
-     Eye(float _xPos, float _yPos, float _wide, color _c, float _f) {
-     //we copy the values coming from outside to our global variables
-     xPos = _xPos;
-     yPos = _yPos;
-     wide = _wide;
-     c = _c;
-     f = _f;
-     }
-     */
-
-    void display(float _xPos, float _yPos) {
-      xPos = _xPos;
-      yPos = _yPos - (30  * resizer);
-      //a small modulo trick to cycle and make the eyes blink
-      if (frameCount % f < 8 ) {
         fill(0);
-        if (direction==true) { //Character is facing to the right.
-          ellipse (xPos+eyeDistance, yPos, wide, 2); //Draw the right eye blinking.
-        }
-        else { //Character is facing to the left.
-          ellipse (xPos-eyeDistance, yPos, wide, 2); //Draw the left eye blinking.
-        }
+        ellipse (xPos+(eyeDistance*1.5), yPos, wide/5, wide/5);//pupil
       }
+      else { //Character is facing to the left.
+        //Draw left eye open.
+        fill(255);
+        ellipse (xPos-eyeDistance, yPos, wide, wide/2); //white
 
-      else {
-        if (direction==true) { //Character is facing to the right.      
-          //Draw right eye open.
-          fill(255);
-          ellipse (xPos+eyeDistance, yPos, wide, wide/2); //white of eye
+        fill(c);
+        noStroke();
+        ellipse (xPos-(eyeDistance*1.4), yPos, wide/3, wide/3); //iris
 
-          fill(c);
-          noStroke();
-          ellipse (xPos+(eyeDistance*1.4), yPos, wide/3, wide/3);//iris
-
-          fill(0);
-          ellipse (xPos+(eyeDistance*1.5), yPos, wide/5, wide/5);//pupil
-        }
-        else { //Character is facing to the left.
-          //Draw left eye open.
-          fill(255);
-          ellipse (xPos-eyeDistance, yPos, wide, wide/2); //white
-
-          fill(c);
-          noStroke();
-          ellipse (xPos-(eyeDistance*1.4), yPos, wide/3, wide/3); //iris
-
-          fill(0);
-          ellipse (xPos-(eyeDistance*1.5), yPos, wide/5, wide/5); //pupil
-        }
+        fill(0);
+        ellipse (xPos-(eyeDistance*1.5), yPos, wide/5, wide/5); //pupil
       }
     }
   }
+}
 
 
 
-  //_________________________________________________________________________________________________________________________________________
-  //Face class
-  //Please note - protagonist notKirby is also known as "Ball" throughout this code and commentary. Live free of perplexity!
+//_________________________________________________________________________________________________________________________________________
+//Face class
+//Please note - protagonist notKirby is also known as "Ball" throughout this code and commentary. Live free of perplexity!
 
-  //Initial character code for separate parts Face, Eye and Mouth provided in class by Francisco, then modified by me.
+//Initial character code for separate parts Face, Eye and Mouth provided in class by Francisco, then modified by me.
 
-  class Face { //Note I learned the hard way: any variables initialized here will only use the values from the first frame. If I need to update the variables, I must initialize them in a function into which I can pass the updated variables each frame.
-    //These will be the default values for all other components of the face, to be modified in their cases for correct placement.
-    float xPos;
-    float yPos;
-    //  float xPos = notKirby.xPos; //These two are no longer necessary (replaced with the two above) because they would pull only the first value of xPos and yPos from the notKirby object. We need to update each frame so the parts move together, so we update the display function below with the coordinates and initialize them there.
-    //  float yPos = notKirby.yPos;
-    float wide = notKirby.wide;
-    float tall = notKirby.tall;
-    color c = notKirby.c;
+class Face { //Note I learned the hard way: any variables initialized here will only use the values from the first frame. If I need to update the variables, I must initialize them in a function into which I can pass the updated variables each frame.
+  //These will be the default values for all other components of the face, to be modified in their cases for correct placement.
+  float xPos;
+  float yPos;
+  //  float xPos = notKirby.xPos; //These two are no longer necessary (replaced with the two above) because they would pull only the first value of xPos and yPos from the notKirby object. We need to update each frame so the parts move together, so we update the display function below with the coordinates and initialize them there.
+  //  float yPos = notKirby.yPos;
+  float wide = notKirby.wide;
+  float tall = notKirby.tall;
+  color c = notKirby.c;
 
-    /*
+  /*
   //constructor - no longer needed because we are controlling all the variables through the main object, 'notKirby.'
-     Face(float _xPos, float _yPos, float _wide, float _tall, color _c) {
-     xPos = _xPos;
-     yPos = _yPos;
-     wide = _wide;
-     tall = _tall;
-     c = _c;
-     }
-     */
+   Face(float _xPos, float _yPos, float _wide, float _tall, color _c) {
+   xPos = _xPos;
+   yPos = _yPos;
+   wide = _wide;
+   tall = _tall;
+   c = _c;
+   }
+   */
 
-    //draw
-    void display(float _xPos, float _yPos) {
-      xPos = _xPos;
-      yPos = _yPos;
-      fill(c);
-      noStroke();
-      ellipse(xPos, yPos, wide, tall);
-    }
+  //draw
+  void display(float _xPos, float _yPos) {
+    xPos = _xPos;
+    yPos = _yPos;
+    fill(c);
+    noStroke();
+    ellipse(xPos, yPos, wide, tall);
   }
+}
 
