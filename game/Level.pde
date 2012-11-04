@@ -10,16 +10,40 @@ class Level { //Are you ready to GET CRAZY????
 
   void prep() { //Aw yeah. Things are about to get to the CRAZY I mentioned earlier.
     myPlats = new ArrayList<Platform>(); //Here we initialize the ArrayList. ArrayLists don't have a fixed size, so we don't have to give a number in brackets like in arrays. Hurray! The "<Platform>" serves the same purpose here as it did above - identifying to the ArrayList what kind of object it's storing. I'm not sure why we need to say this twice, but hey. As long as it works, amirite?
-    if (thisLevel == 1) { //Yeah, baby. Here's how we create different levels and tell them apart. We create all these levels, identified by their thisLevel value. They're all ready to go from the get-go. But we only draw one at a time.
+    if (thisLevel == 0) { //Yeah, baby. Here's how we create different levels and tell them apart. We create all these levels, identified by their thisLevel value. They're all ready to go from the get-go. But we only draw one at a time.
+      myPlats.add(new Platform(165, 200, 80, 20));
+      myPlats.add(new Platform(365, 300, 80, 20));
+      myPlats.add(new Platform(565, 200, 80, 20));
+    }
+    else if (thisLevel == 1) { //First level.
       myPlats.add(new Platform(100, 200, 80, 20));
       myPlats.add(new Platform(100, 400, 80, 20));
       myPlats.add(new Platform(width-100, 200, 80, 20));
       myPlats.add(new Platform(width-100, 400, 80, 20));
     }
-    else if (thisLevel == 0) { //First level.
-      myPlats.add(new Platform(165, 200, 80, 20));
-      myPlats.add(new Platform(365, 300, 80, 20));
-      myPlats.add(new Platform(565, 200, 80, 20));
+    else if (thisLevel == 2) {
+      
+    }
+    else if (thisLevel == 3) {
+      
+    }
+    else if (thisLevel == 4) {
+      
+    }
+    else if (thisLevel == 5) {
+      
+    }
+    else if (thisLevel == 6) {
+      
+    }
+    else if (thisLevel == 7) {
+      
+    }
+    else if (thisLevel == 8) {
+      
+    }
+    else if (thisLevel == 9) {
+      
     }
     else if (thisLevel == 10) {
       myPlats.add(new Platform(165, height-100, 200, 20));
@@ -36,7 +60,23 @@ class Level { //Are you ready to GET CRAZY????
       myPlats.add(new Platform(450, 150, 60, 20));
       myPlats.add(new Platform(75, 75, 200, 20));
     }
-    else if (thisLevel >= 2 && thisLevel != 11 && thisLevel != 10) {
+    else if (thisLevel == 12) {
+      
+    }
+    else if (thisLevel == 13) {
+      
+    }
+    else if (thisLevel == 14) {
+      
+    }
+    else if (thisLevel == 15) {
+      
+    }
+    else if (thisLevel == 16) {
+      
+    }
+    else if (thisLevel == 17) {
+      
     }
   }
 
@@ -45,7 +85,9 @@ class Level { //Are you ready to GET CRAZY????
       Platform myPlatform = myPlats.get(i); //As on the main tab, we pull an object from the ArrayList so we can do something with it.
       myPlatform.drawPlatform(); //Call the drawPlatform function from the Platform tab using the specific parameters for this value of i (which is a specific element in the ArrayList).
       fill(255); 
-      //text(i, myPlatform.xPos + (myPlatform.platWidth / 2), myPlatform.yPos + (myPlatform.platHeight / 1.5)); //Debug - print the name of the element on the Platform drawn in that element, so we can easily tell which Platform is which.
+      
+      text(i, myPlatform.xPos + (myPlatform.platWidth / 2), myPlatform.yPos + (myPlatform.platHeight / 1.5)); //Debug - print the name of the element on the Platform drawn in that element, so we can easily tell which Platform is which.
+      
       textAlign(CENTER);
       textFont(font, fontsize);
       text(platCount, width-fontsize, fontsize);
