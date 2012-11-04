@@ -55,10 +55,13 @@ class Level { //Are you ready to GET CRAZY????
       myPlats.add(new Platform(width-70, (height/2)-200, 80, 20));
     }
     else if (thisLevel == 8) {
-      
+      myPlats.add(new Platform(150, 105, 80, 20));
+      myPlats.add(new Platform(300, 50, 80, 20));
+      myPlats.add(new Platform(450, -5, 80, 20));
     }
     else if (thisLevel == 9) {
-      
+      myPlats.add(new Platform(220, (height/2)+100, 120, 20));
+      myPlats.add(new Platform(430, (height/2)+100, 120, 20));
     }
     else if (thisLevel == 10) {
       myPlats.add(new Platform(165, height-100, 200, 20));
@@ -76,10 +79,29 @@ class Level { //Are you ready to GET CRAZY????
       myPlats.add(new Platform(75, 75, 200, 20));
     }
     else if (thisLevel == 12) {
-      
+      myPlats.add(new Platform((width/2)-120, height-70, 80, 20));
+      myPlats.add(new Platform((width/2)-280, height-70, 80, 20));
+      myPlats.add(new Platform((width/2)+40, height-70, 80, 20));
+      myPlats.add(new Platform((width/2)+200, height-70, 80, 20));
+      myPlats.add(new Platform((width/2)-120, height-205, 80, 20));
+      myPlats.add(new Platform((width/2)-280, height-205, 80, 20));
+      myPlats.add(new Platform((width/2)+40, height-205, 80, 20));
+      myPlats.add(new Platform((width/2)+200, height-205, 80, 20));
+      myPlats.add(new Platform((width/2)-120, height-340, 80, 20));
+      myPlats.add(new Platform((width/2)-280, height-340, 80, 20));
+      myPlats.add(new Platform((width/2)+40, height-340, 80, 20));
+      myPlats.add(new Platform((width/2)+200, height-340, 80, 20));
+      myPlats.add(new Platform((width/2)-120, height-470, 80, 20));
+      myPlats.add(new Platform((width/2)-280, height-470, 80, 20));
+      myPlats.add(new Platform((width/2)+40, height-470, 80, 20));
+      myPlats.add(new Platform((width/2)+200, height-470, 80, 20));
     }
     else if (thisLevel == 13) {
-      
+      myPlats.add(new Platform((width/2)-40, (height/2)-210, 150, 20));
+      myPlats.add(new Platform((width/2)-110, (height/2)-110, 20, 20));
+      myPlats.add(new Platform((width/2)-40, (height/2)-10, 80, 20));
+      myPlats.add(new Platform((width/2)+90, (height/2)+90, 20, 20));
+      myPlats.add(new Platform((width/2)-110, (height/2)+190, 150, 20));
     }
     else if (thisLevel == 14) {
       

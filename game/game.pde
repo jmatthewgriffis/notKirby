@@ -33,7 +33,7 @@ void setup() {
   size(800, 600);
 
   //It's necessary to initialize the following variables within setup so that when we switch game modes and reload setup, everything reverts properly.
-  currentLevel = 7;
+  currentLevel = 13;
   msg = 0;
   bounced = true;
   direction = true;
@@ -1043,7 +1043,7 @@ void draw() {
     if (currentLevel == 12) {
       if (msg == 1) {
         pushMatrix(); 
-        translate(-(285/2), 0);
+        translate(-(285/2), 10);
         noStroke();
         fill(textBackground); 
         rect(width/2, height/2-fontsize, 285, fontsize*4+10);
