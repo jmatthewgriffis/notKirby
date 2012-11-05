@@ -33,7 +33,7 @@ void setup() {
   size(800, 600);
 
   //It's necessary to initialize the following variables within setup so that when we switch game modes and reload setup, everything reverts properly.
-  currentLevel = 13;
+  currentLevel = 16;
   msg = 0;
   bounced = true;
   direction = true;

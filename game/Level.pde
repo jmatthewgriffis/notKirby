@@ -104,16 +104,25 @@ class Level { //Are you ready to GET CRAZY????
       myPlats.add(new Platform((width/2)-110, (height/2)+190, 150, 20));
     }
     else if (thisLevel == 14) {
-      
+      myPlats.add(new Platform((width/2)-(150/2)-40, (height/2)-250, 150+40, 20));
+      myPlats.add(new Platform((width/2)-(150/2)-80, (height/2)-220, 20, 20));
+      myPlats.add(new Platform((width/2)+(150/2)+20, (height/2)-150, 20, 20));
+      myPlats.add(new Platform((width/2)-(150/2)+40, (height/2)-50, (150-40), 20));
+      myPlats.add(new Platform((width/2)-(150/2), (height/2)+50, 20, 20));
+      myPlats.add(new Platform((width/2)-(150/2)-10, (height/2)+190, 40, 40));
     }
     else if (thisLevel == 15) {
-      
+      myPlats.add(new Platform((width/2)+100, (height/2)-20, 20, 20));
+      myPlats.add(new Platform((width/2)+175, (height/2)-20, 20, 20));
+      myPlats.add(new Platform((width/2)+250, (height/2)-20, 20, 20));
     }
     else if (thisLevel == 16) {
-      
+      myPlats.add(new Platform((width/2)+105, (height/2)-100, 185, 20));
+      myPlats.add(new Platform((width/2)+345, (height/2)-100, 20, 20));
+      myPlats.add(new Platform((width/2)+270, (height/2)-175, 20, 20));
+      myPlats.add(new Platform((width/2)+270, (height/2)-25, 20, 20));
     }
     else if (thisLevel == 17) {
-      
     }
   }
 
@@ -122,9 +131,9 @@ class Level { //Are you ready to GET CRAZY????
       Platform myPlatform = myPlats.get(i); //As on the main tab, we pull an object from the ArrayList so we can do something with it.
       myPlatform.drawPlatform(); //Call the drawPlatform function from the Platform tab using the specific parameters for this value of i (which is a specific element in the ArrayList).
       fill(255); 
-      
+
       text(i, myPlatform.xPos + (myPlatform.platWidth / 2), myPlatform.yPos + (myPlatform.platHeight / 1.5)); //Debug - print the name of the element on the Platform drawn in that element, so we can easily tell which Platform is which.
-      
+
       textAlign(CENTER);
       textFont(font, fontsize);
       text(platCount, width-fontsize, fontsize);
