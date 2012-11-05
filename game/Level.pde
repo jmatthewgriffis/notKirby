@@ -132,7 +132,7 @@ class Level { //Are you ready to GET CRAZY????
       myPlatform.drawPlatform(); //Call the drawPlatform function from the Platform tab using the specific parameters for this value of i (which is a specific element in the ArrayList).
       fill(255); 
 
-      text(i, myPlatform.xPos + (myPlatform.platWidth / 2), myPlatform.yPos + (myPlatform.platHeight / 1.5)); //Debug - print the name of the element on the Platform drawn in that element, so we can easily tell which Platform is which.
+      //text(i, myPlatform.xPos + (myPlatform.platWidth / 2), myPlatform.yPos + (myPlatform.platHeight / 1.5)); //Debug - print the name of the element on the Platform drawn in that element, so we can easily tell which Platform is which.
 
       textAlign(CENTER);
       textFont(font, fontsize);
