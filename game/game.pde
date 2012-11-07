@@ -1314,10 +1314,12 @@ void keyPressed() {
   if (key=='-' || key=='_') { //Switch game modes.
     if (gameMode == 0) {
       gameMode = 1;
+      delay(1000); //Add some visual pause to give significance to the transition (hopefully it doesn't just look like slowdown).
       setup();
     }
     else {
       gameMode = 0;
+      delay(1000); //Add some visual pause to give significance to the transition (hopefully it doesn't just look like slowdown).
       setup();
     }
   }

@@ -118,6 +118,7 @@ class notKirby { //Make a class called "notKirby." This will create a nested obj
           if ((yPos + (tall / 2) >= myPlatform.yPos) && (yPos + (tall / 2) <= (myPlatform.yPos + myPlatform.platHeight))) { //Assuming we got a positive result above, is the ball's yPos within the height of the Platform at that element?
             if (gameMode == 0) {
               gameMode = 1;
+              delay(1000); //Add some visual pause to give significance to the transition (hopefully it doesn't just look like slowdown).
               setup();
             }
           }
