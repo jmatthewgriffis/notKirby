@@ -26,6 +26,7 @@ Level [] myLevels; //Declare an array of "Level" objects (which are themselves A
 boolean[] levelNew;
 boolean platRockd; //Use to control changing the condition of platforms.
 color platFlipped = color(0, 255, 0); //Platform changes to this color when it's been rocketed.
+boolean displayWASD;
 
 //_____________________________________________________________________________________________________________
 
@@ -44,6 +45,7 @@ void setup() {
   pressedV = false;
   pressedVlevel = false;
   platRockd = false;
+  displayWASD = false;
 
   msgXpos = width/2;
   msgYpos = height/2;
@@ -157,6 +159,19 @@ void draw() {
           currentLevel--; //...switch to the previous level...
           notKirby.xPos = width - (notKirby.wide / 2); //...and move notKirby to the other side of the screen so it looks like he really moved between screens.
         }
+      }
+    }
+
+    if (currentLevel == 17) {
+      if (displayWASD == true) {
+        textFont(font, fontsize);
+        fill(255);
+        textAlign(CENTER);
+        text("W", width/2, fontsize);
+        text("A", fontsize/2, height/2);
+        text("S", width/2, height-5);
+        text("D", width-fontsize/2, height/2);
+        textAlign(LEFT);
       }
     }
   }
@@ -1236,6 +1251,7 @@ void draw() {
       if (msg == 6) {
         next = false;
         levelNew[currentLevel] = true;
+        displayWASD = true;
         msg = 0;
       }
     }
