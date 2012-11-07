@@ -27,6 +27,7 @@ boolean[] levelNew;
 boolean platRockd; //Use to control changing the condition of platforms.
 color platFlipped = color(0, 255, 0); //Platform changes to this color when it's been rocketed.
 boolean displayWASD;
+boolean noGoBack; //Use to stay on one screen.
 
 //_____________________________________________________________________________________________________________
 
@@ -46,6 +47,7 @@ void setup() {
   pressedVlevel = false;
   platRockd = false;
   displayWASD = false;
+  noGoBack = false;
 
   msgXpos = width/2;
   msgYpos = height/2;
@@ -148,22 +150,25 @@ void draw() {
     }
 
     if (currentLevel > 0) { //If the previous level exists...
-      if (bounced == true) { //If we are not on the 'winning' level, needing to win...
-        stroke(255);
-        strokeWeight(2);
-        line(50, (height - 25), 25, (height - 25)); //With these three lines we draw an arrow pointing to the next screen.
-        line(25, (height - 25), 35, (height - 35));
-        line(25, (height - 25), 35, (height - 15));
+      if (noGoBack == false) { //and if going back is allowed...
+        if (bounced == true) { //If we are not on the 'winning' level, needing to win...
+          stroke(255);
+          strokeWeight(2);
+          line(50, (height - 25), 25, (height - 25)); //With these three lines we draw an arrow pointing to the next screen.
+          line(25, (height - 25), 35, (height - 35));
+          line(25, (height - 25), 35, (height - 15));
 
-        if (notKirby.xPos < (notKirby.wide / 2)) { //Do the above going the other way. If notKirby crosses the left edge of the screen...
-          currentLevel--; //...switch to the previous level...
-          notKirby.xPos = width - (notKirby.wide / 2); //...and move notKirby to the other side of the screen so it looks like he really moved between screens.
+          if (notKirby.xPos < (notKirby.wide / 2)) { //Do the above going the other way. If notKirby crosses the left edge of the screen...
+            currentLevel--; //...switch to the previous level...
+            notKirby.xPos = width - (notKirby.wide / 2); //...and move notKirby to the other side of the screen so it looks like he really moved between screens.
+          }
         }
       }
     }
 
+    //Here is some conditional stuff just for the last level.
     if (currentLevel == 17) {
-      if (displayWASD == true) {
+      if (displayWASD == true) { //If we've moved past the last message and should display "WASD," do so.
         textFont(font, fontsize);
         fill(255);
         textAlign(CENTER);
@@ -172,6 +177,10 @@ void draw() {
         text("S", width/2, height-5);
         text("D", width-fontsize/2, height/2);
         textAlign(LEFT);
+        //If the player hits any of the cued keys on this screen...
+        if (keyPressed && (key=='w' || key=='W' || key=='a' || key=='A' || key=='s' || key=='S' || key=='d' || key=='D')) {
+          noGoBack = true; //...prevent return to a previous screen.
+        }
       }
     }
   }

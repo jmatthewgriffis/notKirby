@@ -123,21 +123,24 @@ class Level { //Are you ready to GET CRAZY????
       myPlats.add(new Platform((width/2)+270, (height/2)-25, 20, 20));
     }
     else if (thisLevel == 17) {
+      myPlats.add(new Platform(width-150, 50, 80, 20));
     }
   }
 
   void display() {
     for (int i = 0; i < myPlats.size(); i++) { //Here we use a for loop to iterate through all the platforms in the ArrayList. We use i to identify which element we are looking at. Note that we use "size()" instead of "length," because ArrayList has different syntax than array.
       Platform myPlatform = myPlats.get(i); //As on the main tab, we pull an object from the ArrayList so we can do something with it.
-      myPlatform.drawPlatform(); //Call the drawPlatform function from the Platform tab using the specific parameters for this value of i (which is a specific element in the ArrayList).
-      fill(255); 
+      if ((thisLevel < 17) || (thisLevel == 17 && gameMode == 0 && noGoBack == true)) {
+        myPlatform.drawPlatform(); //Call the drawPlatform function from the Platform tab using the specific parameters for this value of i (which is a specific element in the ArrayList).
+        fill(255); 
 
-      //text(i, myPlatform.xPos + (myPlatform.platWidth / 2), myPlatform.yPos + (myPlatform.platHeight / 1.5)); //Debug - print the name of the element on the Platform drawn in that element, so we can easily tell which Platform is which.
+        //text(i, myPlatform.xPos + (myPlatform.platWidth / 2), myPlatform.yPos + (myPlatform.platHeight / 1.5)); //Debug - print the name of the element on the Platform drawn in that element, so we can easily tell which Platform is which.
 
-      textAlign(CENTER);
-      textFont(font, fontsize);
-      text(platCount, width-fontsize, fontsize);
-      textAlign(LEFT);
+        textAlign(CENTER);
+        textFont(font, fontsize);
+        text(platCount, width-fontsize, fontsize);
+        textAlign(LEFT);
+      }
     }
   }
 }

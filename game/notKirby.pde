@@ -100,7 +100,7 @@ class notKirby { //Make a class called "notKirby." This will create a nested obj
           yVel = (yVel - grav) * -1; //In that case the ball has hit the bottom of that Platform, so we reverse the direction (nullifying the gravity addition at this frame).
         }
       }
-      
+
       if ((xPos + (wide / 2) >= myPlatform.xPos) && (xPos - (wide / 2) <= (myPlatform.xPos + myPlatform.platWidth))) { //At each value of i (aka ArrayList element in this case), is the ball's xPos within the width of the Platform at that element?
         if ((yPos + (tall / 2) >= myPlatform.yPos) && (yPos + (tall / 2) <= (myPlatform.yPos + myPlatform.platHeight))) { //Assuming we got a positive result above, is the ball's yPos within the height of the Platform at that element?
           if (blastL == true || blastR == true || blastU == true || blastD == true) { //If notKirby is rocketing...
@@ -112,6 +112,19 @@ class notKirby { //Make a class called "notKirby." This will create a nested obj
         }
       }
 
+      //Just for the last level:
+      if (currentLevel == 17) {
+        if ((xPos + (wide / 2) >= myPlatform.xPos) && (xPos - (wide / 2) <= (myPlatform.xPos + myPlatform.platWidth))) { //At each value of i (aka ArrayList element in this case), is the ball's xPos within the width of the Platform at that element?
+          if ((yPos + (tall / 2) >= myPlatform.yPos) && (yPos + (tall / 2) <= (myPlatform.yPos + myPlatform.platHeight))) { //Assuming we got a positive result above, is the ball's yPos within the height of the Platform at that element?
+            if (gameMode == 0) {
+              gameMode = 1;
+              setup();
+            }
+          }
+        }
+      }
+
+
       //Changing the stroke color of the platform when notKirby rockets it is not working as desired. So we use an alternative solution. Instead of changing the color of the existing rectangle, we check to see if the appropriate boolean registers a collision, and if it does, we draw a new rectangle of a different color on top of the old one. Voila!
       if (myLevels[currentLevel].platColor[i] == true) {
         stroke(platFlipped);
@@ -121,8 +134,7 @@ class notKirby { //Make a class called "notKirby." This will create a nested obj
         rect(myPlatform.xPos, myPlatform.yPos, myPlatform.platWidth, myPlatform.platHeight);
       }
 
-      //if (currentLevel == (myLevels.length - 1)) { //Make sure this is the last level.
-      if (currentLevel == 11) {
+      if (currentLevel == 11) { //Is this the level with the "winning" platform?
         if (i == (myLevels[currentLevel].myPlats.size() - 1)) {
           if ((xPos + (wide / 2) >= myPlatform.xPos) && (xPos - (wide / 2) <= (myPlatform.xPos + myPlatform.platWidth))) { //Is the ball within the width of the last (and winning) Platform?
             if ((yPos + (tall / 2) >= myPlatform.yPos) && (yPos + (tall / 2) <= (myPlatform.yPos + depth))) { //If yes, is its vertical position within the upper part of that Platform?
