@@ -107,10 +107,6 @@ void setup() {
 void draw() {
   background(150);
 
-  //for (int i = 0; i < myLevels.length; i++) {
-
-  //}
-
   myLevels[currentLevel].display(); //Here's where things get awesome. We draw only the level in the array whose element label matches the value of the variable indicating the current level. If the current level is set at 2, we don't draw level 1 or level 3. Look, Ma, no for loop!
 
   if (gameMode == 0) {
@@ -138,7 +134,7 @@ void draw() {
         line((width - 25), (height - 25), (width - 35), (height - 35));
         line((width - 25), (height - 25), (width - 35), (height - 15));
 
-        if (notKirby.xPos >= width-(notKirby.wide / 2)) { //Here we will transition between levels. If notKirby crosses the right edge of the screen...
+        if (notKirby.xPos > width-(notKirby.wide / 2)) { //Here we will transition between levels. If notKirby crosses the right edge of the screen...
           currentLevel++; //...switch to the next level...
           notKirby.xPos = (notKirby.wide / 2); //...and move notKirby to the other side of the screen so it looks like he really moved between screens.
           if (levelNew[currentLevel] == false) { //If we haven't visited this level before...
@@ -165,8 +161,37 @@ void draw() {
     }
   }
 
+  if (gameMode == 1) {
+    if (currentLevel > 0) { //If the previous level exists...
+      stroke(255);
+      strokeWeight(2);
+      line(50, (height - 25), 25, (height - 25)); //With these three lines we draw an arrow pointing to the next screen.
+      line(25, (height - 25), 35, (height - 35));
+      line(25, (height - 25), 35, (height - 15));
+
+      if (notKirby.xPos < (notKirby.wide / 2)) { //Do the above going the other way. If notKirby crosses the left edge of the screen...
+        currentLevel--; //...switch to the previous level...
+        notKirby.xPos = width - (notKirby.wide / 2); //...and move notKirby to the other side of the screen so it looks like he really moved between screens.
+      }
+    }
+    if (currentLevel < (myLevels.length - 1)) { //If the next level exists...
+      if (myLevels[currentLevel].platCount == 0) { //If all platforms have been rocketed...
+        stroke(255);
+        strokeWeight(2);
+        line((width - 50), (height - 25), (width - 25), (height - 25)); //With these three lines we draw an arrow pointing to the next screen.
+        line((width - 25), (height - 25), (width - 35), (height - 35));
+        line((width - 25), (height - 25), (width - 35), (height - 15));
+
+        if (notKirby.xPos > width-(notKirby.wide / 2)) { //Here we will transition between levels. If notKirby crosses the right edge of the screen...
+          currentLevel++; //...switch to the next level...
+          notKirby.xPos = (notKirby.wide / 2); //...and move notKirby to the other side of the screen so it looks like he really moved between screens.
+        }
+      }
+    }
+  }
+
+  notKirby.updateBall(); //Call the updateBall function from the notKirby tab. We list this one first so notKirby will be displayed afterward (and thus appear in front of objects where applicable versus behind them).
   notKirby.display(); //Draw notKirby! (by calling the function from the tab)
-  notKirby.updateBall(); //Call the updateBall function from the notKirby tab.
 
   if (platRockd == true) { //If notKirby rocketed a platform...
     if (myLevels[currentLevel].platCount > 0) { //check if the counter is greater than zero.
@@ -1261,7 +1286,7 @@ void keyPressed() {
       msg++;
     }
   }
-  if (keyCode==SHIFT) {
+  if (key=='-' || key=='_') { //Switch game modes.
     if (gameMode == 0) {
       gameMode = 1;
       setup();
