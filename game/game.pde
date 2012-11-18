@@ -1,40 +1,47 @@
-//Please note - protagonist notKirby is also known as "Ball" throughout this code and commentary. Live free of perplexity!
+// An awesome game by Matt, with awesome code and awesome comments. Awesome!
 
-int gameMode = 0; //Control which play style applies. Set to zero for the initial instruction set. This needs to be initialized outside the setup function to enable restarting the game with a new mode.
+// Please note: protagonist notKirby is also known as "Ball" throughout. Live free of perplexity!
 
-int msg; //Control the display of messages and how they affect game play. Set to zero to enable action.
-int currentLevel; //Control the current level (game screen).
+// Control which play style applies. Set to zero for the initial instruction set. This needs to be
+// initialized outside the setup function to enable restarting the game with a new mode:
+int gameMode = 0;
+
+// Control the display of messages and how they affect game play. Set to zero to enable action:
+int msg;
+
+int currentLevel; // Control the current level (game screen).
 
 PFont font;
-boolean bounced; //Detect whether player has achieved the winning condition.
-boolean direction; //Control which direction notKirby faces.
-float resizer = 0.25; //Use to scale notKirby's size as needed.
-boolean next; //Control transition between messages and game play.
+boolean bounced; // Detect whether player has achieved the winning condition.
+boolean direction; // Control which direction notKirby faces.
+float resizer = 0.25; // Use to scale notKirby's size as needed.
+boolean next; // Control transition between messages and game play.
 int fontsize = 24;
-color textBackground = #9FA1FA; //Background color of text boxes.
+color textBackground = #9FA1FA; // Background color of text boxes.
 color textColor = 0;
-boolean promptJump; //Prompt jumping at one point.
-boolean noAdvance; //Prevent moving through messages at one point.
-int jumpCounter; //Tally jumps at one point.
-boolean pressedV; //Check if V has been pressed.
-boolean pressedVlevel; //Check if this is the level to press V.
-float msgXpos; //Use this to position a specific message.
-int moveMsg = 2; //Use this to move the message.
-float msgYpos; //Use this to posiition a specific message.
-notKirby notKirby; //Declare an instance of the protagonist object ("notKirby").
-Level [] myLevels; //Declare an array of "Level" objects (which are themselves ArrayLists, "Inception"-style.)
+boolean promptJump; // Prompt jumping at one point.
+boolean noAdvance; // Prevent moving through messages at one point.
+int jumpCounter; // Tally jumps at one point.
+boolean pressedV; // Check if V has been pressed.
+boolean pressedVlevel; // Check if this is the level to press V.
+float msgXpos; // Use this to position a specific message.
+int moveMsg = 2; // Use this to move the message.
+float msgYpos; // Use this to posiition a specific message.
+notKirby notKirby; // Declare an instance of the protagonist object ("notKirby").
+Level [] myLevels; // Declare an array of "Level" objects (themselves ArrayLists, ala "Inception.")
 boolean[] levelNew;
-boolean platRockd; //Use to control changing the condition of platforms.
-color platFlipped = color(0, 255, 0); //Platform changes to this color when it's been rocketed.
+boolean platRockd; // Use to control changing the condition of platforms.
+color platFlipped = color(0, 255, 0); // Platform changes to this color when it's been rocketed.
 boolean displayWASD;
-boolean noGoBack; //Use to stay on one screen.
+boolean noGoBack; // Use to stay on one screen.
 
-//_____________________________________________________________________________________________________________
+// __________________________________________________________________________________________________
 
 void setup() {
   size(800, 600);
 
-  //It's necessary to initialize the following variables within setup so that when we switch game modes and reload setup, everything reverts properly.
+  // It's necessary to initialize the following variables within setup so that when we switch game
+  // modes and reload setup, everything reverts properly:
   currentLevel = 0;
   msg = 0;
   bounced = true;
@@ -54,8 +61,10 @@ void setup() {
   smooth();
   font = loadFont("font.vlw");
 
-  myLevels = new Level[18]; //Initialize the number of levels in the brackets.
-  myLevels[0] = new Level(0); //We initialize each element in the array, labeling each with the level number it represents and making it a level object. See the Level tab regarding the constructor.
+  myLevels = new Level[18]; // Initialize the number of levels in the brackets.
+  // We initialize each element in the array, labeling each with the level number it represents and
+  // making it a level object. See the Level tab regarding the constructor:
+  myLevels[0] = new Level(0); 
   myLevels[1] = new Level(1);
   myLevels[2] = new Level(2);
   myLevels[3] = new Level(3);
@@ -74,7 +83,7 @@ void setup() {
   myLevels[16] = new Level(16);
   myLevels[17] = new Level(17);
 
-  levelNew = new boolean[18]; //Use these booleans to test whether or not we are visiting a room for the first time.
+  levelNew = new boolean[18]; // Use booleans to test if we are visiting a room for the first time:
   levelNew[0] = false;
   levelNew[1] = false;
   levelNew[2] = false;
@@ -94,81 +103,101 @@ void setup() {
   levelNew[16] = false;
   levelNew[17] = false;
 
-  for (int i = 0; i < myLevels.length; i++) { //Use a for loop to iterate through each level in the array.
-    myLevels[i].prep(); //Prepare every level to be drawn. We won't draw them all at once. Sorry.
-    myLevels[i].platCount = myLevels[i].myPlats.size(); //Set the value of platCount for each level equal to the number of platforms in the level.
-    myLevels[i].platColor = new boolean[myLevels[i].myPlats.size()]; //Create a boolean for each platform in the current level.
+  // Use a for loop to iterate through each level in the array:
+  for (int i = 0; i < myLevels.length; i++) {
+    myLevels[i].prep(); // Prepare every level to be drawn. We won't draw them all at once.
+    // Set the value of platCount for each level equal to the number of platforms in the level:
+    myLevels[i].platCount = myLevels[i].myPlats.size();
+    // Create a boolean for each platform in the current level:
+    myLevels[i].platColor = new boolean[myLevels[i].myPlats.size()];
     for (int j = 0; j < myLevels[i].myPlats.size(); j++) {
       myLevels[i].platColor[j] = false;
     }
   }
-  notKirby = new notKirby(50, 600 - ((175 * resizer) / 2), 175, 200, color(#FF08F3)); //Create an instance of notKirby object using parameters entered in the constructor (see notKirby tab).
-  notKirby.prep(); //Load notKirby's components.
+  // Make instance of notKirby object using parameters entered via constructor (see notKirby tab):
+  notKirby = new notKirby(50, 600 - ((175 * resizer) / 2), 175, 200, color(#FF08F3));
+  notKirby.prep(); // Load notKirby's components.
 }
 
-//_____________________________________________________________________________________________________________
+// __________________________________________________________________________________________________
 
 void draw() {
   background(150);
 
-  myLevels[currentLevel].display(); //Here's where things get awesome. We draw only the level in the array whose element label matches the value of the variable indicating the current level. If the current level is set at 2, we don't draw level 1 or level 3. Look, Ma, no for loop!
+  // Here's where things get awesome. We draw only the level in the array whose element label
+  // matches the value of the variable indicating the current level. If the current level is
+  // set at 2, we don't draw level 1 or level 3. Look, Ma, no for loop!
+  myLevels[currentLevel].display();
 
   if (gameMode == 0) {
 
     if (currentLevel == 11) {
-      if (bounced == true) { //Did the player win?
+      if (bounced == true) { // Did the player win?
         fill(255);
         textFont(font, fontsize*0.5);
-        text("Winner! You jumped this.", 115, 70); //Display winning text.
+        text("Winner! You jumped this.", 115, 70); // Display winning text.
       }
-      else if (bounced != true) { //The player hasn't won yet?
+      else if (bounced != true) { // The player hasn't won yet?
         fill(255);
         textFont(font, fontsize*0.5);
-        text("Can't jump this.", 135, 70); //Display other text.
+        text("Can't jump this.", 135, 70); // Display other text.
       }
     }
 
 
 
-    if (currentLevel < (myLevels.length - 1)) { //If the next level exists...
-      if (bounced == true) { //If we are not on the 'winning' level, needing to win...
+    if (currentLevel < (myLevels.length - 1)) { // If the next level exists...
+      if (bounced == true) { // If we are not on the 'winning' level, needing to win...
         stroke(255);
         strokeWeight(2);
-        line((width - 50), (height - 25), (width - 25), (height - 25)); //With these three lines we draw an arrow pointing to the next screen.
+        // With these three lines we draw an arrow pointing to the next screen:
+        line((width - 50), (height - 25), (width - 25), (height - 25));
         line((width - 25), (height - 25), (width - 35), (height - 35));
         line((width - 25), (height - 25), (width - 35), (height - 15));
 
-        if (notKirby.xPos > width-(notKirby.wide / 2)) { //Here we will transition between levels. If notKirby crosses the right edge of the screen...
-          currentLevel++; //...switch to the next level...
-          notKirby.xPos = (notKirby.wide / 2); //...and move notKirby to the other side of the screen so it looks like he really moved between screens.
-          if (levelNew[currentLevel] == false) { //If we haven't visited this level before...
-            next = true; //...prepare for new messages.
-            msg = 1; //Ditto.
+        // Here we transition between levels. If notKirby crosses the right edge of the screen...
+        if (notKirby.xPos > width-(notKirby.wide / 2)) {
+          // ...switch to the next level...
+          currentLevel++;
+          // ...and move notKirby to the other side of the screen so it looks like he really moved
+          // between screens.
+          notKirby.xPos = (notKirby.wide / 2);
+          // If we haven't visited this level before...
+          if (levelNew[currentLevel] == false) {
+            // ...prepare for new messages.
+            next = true;
+            msg = 1;
           }
         }
       }
     }
 
-    if (currentLevel > 0) { //If the previous level exists...
-      if (noGoBack == false) { //and if going back is allowed...
-        if (bounced == true) { //If we are not on the 'winning' level, needing to win...
+    if (currentLevel > 0) { // If the previous level exists...
+      if (noGoBack == false) { // and if going back is allowed...
+        if (bounced == true) { // If we are not on the 'winning' level, needing to win...
           stroke(255);
           strokeWeight(2);
-          line(50, (height - 25), 25, (height - 25)); //With these three lines we draw an arrow pointing to the next screen.
+          // With these three lines we draw an arrow pointing to the next screen:
+          line(50, (height - 25), 25, (height - 25));
           line(25, (height - 25), 35, (height - 35));
           line(25, (height - 25), 35, (height - 15));
 
-          if (notKirby.xPos < (notKirby.wide / 2)) { //Do the above going the other way. If notKirby crosses the left edge of the screen...
-            currentLevel--; //...switch to the previous level...
-            notKirby.xPos = width - (notKirby.wide / 2); //...and move notKirby to the other side of the screen so it looks like he really moved between screens.
+          // Do the above going the other way. If notKirby crosses the left edge of the screen...
+          if (notKirby.xPos < (notKirby.wide / 2)) { 
+            // ...switch to the previous level...
+            currentLevel--;
+            // ...and move notKirby to the other side of the screen so it looks like he really
+            // moved between screens.
+            notKirby.xPos = width - (notKirby.wide / 2);
           }
         }
       }
     }
 
-    //Here is some conditional stuff just for the last level.
+    // Here is some conditional stuff just for the last level:
     if (currentLevel == 17) {
-      if (displayWASD == true) { //If we've moved past the last message and should display "WASD," do so.
+      // If we've moved past the last message and should display "WASD," do so:
+      if (displayWASD == true) { 
         textFont(font, fontsize);
         fill(255);
         textAlign(CENTER);
@@ -177,85 +206,108 @@ void draw() {
         text("S", width/2, height-5);
         text("D", width-fontsize/2, height/2);
         textAlign(LEFT);
-        //If the player hits any of the cued keys on this screen...
-        if (keyPressed && (key=='w' || key=='W' || key=='a' || key=='A' || key=='s' || key=='S' || key=='d' || key=='D')) {
-          noGoBack = true; //...prevent return to a previous screen.
+        // If the player hits any of the cued keys on this screen...
+        if (keyPressed && (key=='w' || key=='W' || key=='a' || key=='A' || key=='s' || key=='S' 
+          || key=='d' || key=='D')) {
+          // ...prevent return to a previous screen:
+          noGoBack = true;
         }
       }
     }
   }
 
   if (gameMode == 1) {
-    if (currentLevel > 0) { //If the previous level exists...
+    if (currentLevel > 0) { // If the previous level exists...
       stroke(255);
       strokeWeight(2);
-      line(50, (height - 25), 25, (height - 25)); //With these three lines we draw an arrow pointing to the next screen.
+      // With these three lines we draw an arrow pointing to the next screen:
+      line(50, (height - 25), 25, (height - 25));
       line(25, (height - 25), 35, (height - 35));
       line(25, (height - 25), 35, (height - 15));
 
-      if (notKirby.xPos < (notKirby.wide / 2)) { //Do the above going the other way. If notKirby crosses the left edge of the screen...
-        currentLevel--; //...switch to the previous level...
-        notKirby.xPos = width - (notKirby.wide / 2); //...and move notKirby to the other side of the screen so it looks like he really moved between screens.
+      // Do the above going the other way. If notKirby crosses the left edge of the screen...
+      if (notKirby.xPos < (notKirby.wide / 2)) { 
+        // ...switch to the previous level...
+        currentLevel--; 
+        // ...and move notKirby to the other side of the screen so it looks like he really
+        // moved between screens:
+        notKirby.xPos = width - (notKirby.wide / 2);
       }
     }
-    if (currentLevel < (myLevels.length - 1)) { //If the next level exists...
-      if (myLevels[currentLevel].platCount == 0) { //If all platforms have been rocketed...
+    if (currentLevel < (myLevels.length - 1)) { // If the next level exists...
+      if (myLevels[currentLevel].platCount == 0) { // If all platforms have been rocketed...
         stroke(255);
         strokeWeight(2);
-        line((width - 50), (height - 25), (width - 25), (height - 25)); //With these three lines we draw an arrow pointing to the next screen.
+        // With these three lines we draw an arrow pointing to the next screen:
+        line((width - 50), (height - 25), (width - 25), (height - 25));
         line((width - 25), (height - 25), (width - 35), (height - 35));
         line((width - 25), (height - 25), (width - 35), (height - 15));
 
-        if (notKirby.xPos > width-(notKirby.wide / 2)) { //Here we will transition between levels. If notKirby crosses the right edge of the screen...
-          currentLevel++; //...switch to the next level...
-          notKirby.xPos = (notKirby.wide / 2); //...and move notKirby to the other side of the screen so it looks like he really moved between screens.
+        // Here we will transition between levels. If notKirby crosses the right edge of the
+        // screen...
+        if (notKirby.xPos > width-(notKirby.wide / 2)) { 
+          // ...switch to the next level...
+          currentLevel++;
+          // ...and move notKirby to the other side of the screen so it looks like he really
+          // moved between screens:
+          notKirby.xPos = (notKirby.wide / 2);
         }
       }
     }
   }
 
-  notKirby.updateBall(); //Call the updateBall function from the notKirby tab. We list this one first so notKirby will be displayed afterward (and thus appear in front of objects where applicable versus behind them).
-  notKirby.display(); //Draw notKirby! (by calling the function from the tab)
+  // Call the updateBall function from the notKirby tab. We list this one first so notKirby
+  // will be displayed afterward (and thus appear in front of objects where applicable versus
+  // behind them):
+  notKirby.updateBall(); 
+  notKirby.display(); // Draw notKirby! (by calling the function from the tab)
 
-  if (platRockd == true) { //If notKirby rocketed a platform...
-    if (myLevels[currentLevel].platCount > 0) { //check if the counter is greater than zero.
-      myLevels[currentLevel].platCount--; //If so, subtract one.
-      platRockd = false; //Then turn off the boolean so we don't subtract more than one at a time.
+  if (platRockd == true) { // If notKirby rocketed a platform...
+    if (myLevels[currentLevel].platCount > 0) { // check if the counter is greater than zero.
+      myLevels[currentLevel].platCount--; // If so, subtract one.
+      platRockd = false; // Then turn off the boolean so we don't subtract more than one at a time.
     }
   }
 
-  //println(currentLevel); //Debug.
-
-  //Debug:
+  // Debug:
   /*for (int i = 0; i < myLevels.length; i++) {
    for (int j = 0; j < myLevels[i].myPlats.size(); j++) {
-   println("0 = "+ myLevels[currentLevel].platColor[0] + " 1 = " + myLevels[currentLevel].platColor[1] + " 2 = " + myLevels[currentLevel].platColor[2]);
+   println("0 = "+ myLevels[currentLevel].platColor[0] + " 1 = " + 
+   myLevels[currentLevel].platColor[1] + " 2 = " + myLevels[currentLevel].platColor[2]);
    }
    }*/
 
-  //A debugging problem arises. An onscreen message prevents the arrow keys from enabling movement, but what if movement is already enabled via the previous screen and the player keeps holding the key down? We address that here.
-  if (msg >= 1) { //If there's a message on screen...
-    if (notKirby.R == true) { //and rightward movement is enabled...
-      notKirby.R = false; //...disable it.
+  // A debugging problem arises. An onscreen message prevents the arrow keys from enabling movement,
+  // but what if movement is already enabled via the previous screen and the player keeps holding
+  // the key down? We address that here:
+  if (msg >= 1) { // If there's a message on screen...
+    if (notKirby.R == true) { // and rightward movement is enabled...
+      notKirby.R = false; // ...disable it.
     }
-    if (notKirby.L == true) { //Just so, if leftward movement is enabled...
-      notKirby.L = false; //...disable it.
-      //This is necessary for debugging; otherwise the player could move right through screens without going through the text boxes as long as he never stopped holding a directional key.
+    if (notKirby.L == true) { // Just so, if leftward movement is enabled...
+      notKirby.L = false; // ...disable it.
+      // (This is necessary for debugging; otherwise the player could move right through screens
+      // without going through the text boxes as long as he never stopped holding a directional key.)
     }
   }
 
-  //Start of instructions___________________________________________________________________________//
+  // Start of instructions__________________________________________________________________________// 
 
   if (gameMode == 0) {
 
-    //Let's display some instructions. We'll draw text at different points on screen and colored backgrounds behind the text, and instruct the player to press ENTER to progress through the messages.
-    textFont(font, fontsize);
-    //textAlign(CENTER);
+    // Let's display some instructions. We'll draw text at different points on screen and colored
+    // backgrounds behind the text, and instruct the player to press ENTER to progress through the
+    // messages.
 
-    if (currentLevel == 0) { //First level.
+    textFont(font, fontsize);
+
+    if (currentLevel == 0) { // First level.
       rectMode(CORNER);
-      if (msg == 0 && levelNew[currentLevel] == false) { //If there's no message but this is the first time on this level and it's the original game mode...
-        msg = 1; //...display the first message.
+      // If there's no message but this is the first time on this level and it's the original game
+      // mode...
+      if (msg == 0 && levelNew[currentLevel] == false) {
+        // ...display the first message:
+        msg = 1;
       }
       if (msg == 1) {
         noStroke(); 
@@ -296,15 +348,18 @@ void draw() {
         textFont(font, fontsize/1.5); 
         text("[Press ENTER]", 85, height-100+fontsize*3);
       }
-      else if (msg == 5) { //In this case we are not moving between screens by controlling notKirby so we handle the transition here.
-        levelNew[currentLevel] = true; //We have now read the messages here so we set the variable to true so the messages don't repeat if we return to this screen.
+      // In this case we are not moving between screens by controlling notKirby so we handle the
+      // transition here:
+      else if (msg == 5) { 
+        // We have now read the messages here so we set the variable to true so the messages don't
+        // repeat if we return to this screen:
+        levelNew[currentLevel] = true;
         currentLevel++;
         msg = 1;
       }
     }
 
-    if (currentLevel == 1) { //Second level.
-      //rectMode(CENTER);
+    if (currentLevel == 1) { // Second level.
       if (msg == 1) {
         pushMatrix();
         translate(-(215/2), 0);
@@ -358,7 +413,9 @@ void draw() {
         popMatrix();
       }
       else if (msg == 5) {
-        levelNew[currentLevel] = true; //We have now read the messages here so we set the variable to true so the messages don't repeat if we return to this screen.
+        // We have now read the messages here so we set the variable to true so the messages don't
+        // repeat if we return to this screen:
+        levelNew[currentLevel] = true; 
         currentLevel++;
         msg = 1;
       }
@@ -441,7 +498,7 @@ void draw() {
         text("This world is flat.", width/2, height/2);
         textFont(font, fontsize/1.5); 
         text("[Press ENTER]", width/2, height/2+fontsize*2);
-        //draw arrow
+        // draw arrow
         popMatrix();
       }
       if (msg == 2) {
@@ -815,7 +872,7 @@ void draw() {
         text("Try it now.", width/2, height/2);
         textFont(font, fontsize/1.5); 
         text("[Press SPACE]", width/2, height/2+fontsize*2);
-        promptJump = true; //Enable jumping.
+        promptJump = true; // Enable jumping.
         noAdvance = true;
         popMatrix();
         if (jumpCounter >= 3) {
@@ -950,7 +1007,7 @@ void draw() {
         text("This is a 'platform.'", width/2, height/2);
         textFont(font, fontsize/1.5);
         text("[Press ENTER]", width/2, height/2+fontsize*2);
-        //draw arrow
+        // draw arrow
         popMatrix();
       }
       if (msg == 2) {
@@ -1284,72 +1341,112 @@ void draw() {
     }
   }
 
-  //End of instructions___________________________________________________________________________//
+  // End of instructions___________________________________________________________________________//
 }
 
-//_____________________________________________________________________________________________________________
+// __________________________________________________________________________________________________
 
 void keyPressed() {
-  if (key=='1') { //Debug.
-    if (currentLevel > 0) { //If previous level exists...
-      currentLevel--; //...switch to previous level.
+
+  // Start debug section. Need to delete this before releasing the game: ____________________________
+
+  if (key=='1') { // Debug.
+    if (currentLevel > 0) { // If previous level exists...
+      currentLevel--; // ...switch to previous level.
     }
   }
 
-  if (key=='2') { //Debug.
-    if (currentLevel < (myLevels.length - 1)) { //If next level exists...
-      currentLevel++; //...switch to next level.
+  if (key=='2') { // Debug.
+    if (currentLevel < (myLevels.length - 1)) { // If next level exists...
+      currentLevel++; // ...switch to next level.
     }
   }
 
-  if (key=='0') { //Debug.
+  if (key=='0') { // Debug.
     msg--;
   }
 
-  if (key=='v' || key=='V') { //Debug.
+  // End debug section. _____________________________________________________________________________
+
+  if (key=='v' || key=='V') {
     if (pressedVlevel == true) {
       msg++;
     }
   }
-  if (key=='-' || key=='_') { //Switch game modes.
+  if (key=='-' || key=='_') { // Switch game modes.
     if (gameMode == 0) {
       gameMode = 1;
-      delay(1000); //Add some visual pause to give significance to the transition (hopefully it doesn't just look like slowdown).
-      setup();
+      // Add some visual pause to give significance to the transition (hopefully it doesn't just look
+      // like slowdown):
+      delay(1000);
+      setup(); // This returns to the first screen with the original setup, except it's a new mode.
     }
     else {
       gameMode = 0;
-      delay(1000); //Add some visual pause to give significance to the transition (hopefully it doesn't just look like slowdown).
+      // Add some visual pause to give significance to the transition (hopefully it doesn't just look
+      // like slowdown).
+      delay(1000); 
       setup();
     }
   }
 
-  if (keyCode==ENTER || keyCode==RETURN) { //Let's advance the text boxes.
-    if (noAdvance == false) { //Assuming it is permitted.
-      if (msg >= 1) { //If there's a message on screen...
-        if (next == true) { //...and if there are more messages to come...
-          msg++; //...advance to the next message.
+  if (keyCode==ENTER || keyCode==RETURN) { // Let's advance the text boxes.
+    if (noAdvance == false) { // Assuming it is permitted.
+      if (msg >= 1) { // If there's a message on screen...
+        if (next == true) { // ...and if there are more messages to come...
+          msg++; // ...advance to the next message.
         }
         else {
-          msg = 0; //Turn off messages (thereby enabling movement).
+          msg = 0; // Turn off messages (thereby enabling movement).
         }
       }
     }
   }
 
-  //Let's control the ball. Many, MANY thanks to Ramiro Corbetta and his Dorkshop on Intro to Game Programming for this method of controlling movement through booleans (resulting in much more fluid control and recognition of multiple buttons at once).
 
-  if (promptJump == true) { //Special jump instructions for if jumping is prompted.
-    if (key==' ') { //If the player presses the Space Bar...
-      if (notKirby.yPos >= height - (notKirby.tall / 2)) { //...and if the ball is on the ground...
-        notKirby.jump = true; //...enable jumping.
+
+  // Let's control the ball. Many, MANY thanks to Ramiro Corbetta and his Dorkshop on Intro to Game
+  // Programming for this method of controlling movement through booleans (resulting in much more
+  // fluid control and recognition of multiple buttons at once).
+
+  if (promptJump == true) { // Special jump instructions for if jumping is prompted.
+    if (key==' ') { // If the player presses the Space Bar...
+      if (notKirby.yPos >= height - (notKirby.tall / 2)) { // ...and if the ball is on the ground...
+        notKirby.jump = true; // ...enable jumping.
         jumpCounter ++;
       }
-      else for (int i = 0; i < myLevels[currentLevel].myPlats.size(); i++) { //OK, this is where things get really awesome (and really complicated). It's time for collision detection - super cool and super important! Each level is an ArrayList composed of varying numbers of Platform objects. We use a for loop to count how many platforms there are in the ArrayList for the current level, then iterate through those platforms. We are going to check the ball's position relative to each Platform in the ArrayList.
-        Platform myPlatform = myLevels[currentLevel].myPlats.get(i); //ArrayLists are weird (and cool). They don't necessarily know what kind of information they hold in their elements. In order to use if statements to check notKirby's position relative to each platform, we have to give each platform an identity, which we do by naming it as a platform ("myPlatform" in this case) and assigning it the current value of i. In other words, this statement allows us to pull one of the objects in the ArrayList so we can refer to it in the following statements.
-        if ((notKirby.xPos + (notKirby.wide / 2) >= myPlatform.xPos) && (notKirby.xPos - (notKirby.wide / 2) <= (myPlatform.xPos + myPlatform.platWidth))) { //At each value of i (aka ArrayList element in this case), is the ball's xPos within the width of the platform at that element?
-          if ((notKirby.yPos + (notKirby.tall / 2) >= myPlatform.yPos) && (notKirby.yPos + (notKirby.tall / 2) <= (myPlatform.yPos + notKirby.depth))) { //Assuming we got a positive result above, is the ball's yPos within the upper part of the platform at that element?
-            notKirby.jump = true; //If yes to all the above, enable jumping.
+
+      /*
+      OK, this is where things get really awesome (and really complicated). It's time for collision
+       detection - super cool and super important! Each level is an ArrayList composed of varying
+       numbers of Platform objects. We use a for loop to count how many platforms there are in the
+       ArrayList for the current level, then iterate through those platforms. We are going to check
+       the ball's position relative to each Platform in the ArrayList.
+       */
+
+      else for (int i = 0; i < myLevels[currentLevel].myPlats.size(); i++) { 
+
+        /*
+        ArrayLists are weird (and cool). They don't necessarily know what kind of information
+         they hold in their elements. In order to use if statements to check notKirby's position
+         relative to each platform, we have to give each platform an identity, which we do by naming
+         it as a platform ("myPlatform" in this case) and assigning it the current value of i. In
+         other words, this statement allows us to pull one of the objects in the ArrayList so we can
+         refer to it in the following statements.
+         */
+        Platform myPlatform = myLevels[currentLevel].myPlats.get(i);
+
+        // At each value of i (aka ArrayList element in this case), is the ball's xPos within the
+        // width of the platform at that element?
+        if ((notKirby.xPos + (notKirby.wide / 2) >= myPlatform.xPos) && (notKirby.xPos - 
+          (notKirby.wide / 2) <= (myPlatform.xPos + myPlatform.platWidth))) {
+
+          // Assuming we got a positive result above, is the ball's yPos within the upper part of
+          // the platform at that element?
+          if ((notKirby.yPos + (notKirby.tall / 2) >= myPlatform.yPos) && (notKirby.yPos + 
+            (notKirby.tall / 2) <= (myPlatform.yPos + notKirby.depth))) {
+
+            notKirby.jump = true; // If yes to all the above, enable jumping.
             jumpCounter ++;
           }
         }
@@ -1357,31 +1454,33 @@ void keyPressed() {
     }
   }
 
-  if (msg <= 0) { //If there are no messages on screen, proceed.
-    if (keyCode==RIGHT) { //If the player presses the right-directional arrow key...
-      notKirby.R = true; //...enable movement right...
-      direction=true; //...and face right.
+  if (msg <= 0) { // If there are no messages on screen, proceed.
+    if (keyCode==RIGHT) { // If the player presses the right-directional arrow key...
+      notKirby.R = true; // ...enable movement right...
+      direction=true; // ...and face right.
     }
-    if (keyCode==LEFT) { //If the player presses the left-directional arrow key...
-      notKirby.L = true; //...enable movement left...
-      direction=false; //...and face left.
+    if (keyCode==LEFT) { // If the player presses the left-directional arrow key...
+      notKirby.L = true; // ...enable movement left...
+      direction=false; // ...and face left.
     }
-    if (key==' ') { //If the player presses the Space Bar...
-      if (notKirby.yPos >= height - (notKirby.tall / 2)) { //...and if the ball is on the ground...
-        notKirby.jump = true; //...enable jumping.
+    if (key==' ') { // If the player presses the Space Bar...
+      if (notKirby.yPos >= height - (notKirby.tall / 2)) { // ...and if the ball is on the ground...
+        notKirby.jump = true; // ...enable jumping.
       }
-      else for (int i = 0; i < myLevels[currentLevel].myPlats.size(); i++) { //OK, this is where things get really awesome (and really complicated). It's time for collision detection - super cool and super important! Each level is an ArrayList composed of varying numbers of Platform objects. We use a for loop to count how many platforms there are in the ArrayList for the current level, then iterate through those platforms. We are going to check the ball's position relative to each Platform in the ArrayList.
-        Platform myPlatform = myLevels[currentLevel].myPlats.get(i); //ArrayLists are weird (and cool). They don't necessarily know what kind of information they hold in their elements. In order to use if statements to check notKirby's position relative to each platform, we have to give each platform an identity, which we do by naming it as a platform ("myPlatform" in this case) and assigning it the current value of i. In other words, this statement allows us to pull one of the objects in the ArrayList so we can refer to it in the following statements.
-        if ((notKirby.xPos + (notKirby.wide / 2) >= myPlatform.xPos) && (notKirby.xPos - (notKirby.wide / 2) <= (myPlatform.xPos + myPlatform.platWidth))) { //At each value of i (aka ArrayList element in this case), is the ball's xPos within the width of the platform at that element?
-          if ((notKirby.yPos + (notKirby.tall / 2) >= myPlatform.yPos) && (notKirby.yPos + (notKirby.tall / 2) <= (myPlatform.yPos + notKirby.depth))) { //Assuming we got a positive result above, is the ball's yPos within the upper part of the platform at that element?
-            notKirby.jump = true; //If yes to all the above, enable jumping.
+      else for (int i = 0; i < myLevels[currentLevel].myPlats.size(); i++) { // Collision detection.
+        Platform myPlatform = myLevels[currentLevel].myPlats.get(i); // Works the same as above.
+        if ((notKirby.xPos + (notKirby.wide / 2) >= myPlatform.xPos) && (notKirby.xPos - 
+          (notKirby.wide / 2) <= (myPlatform.xPos + myPlatform.platWidth))) { // Ball's within width?
+          if ((notKirby.yPos + (notKirby.tall / 2) >= myPlatform.yPos) && (notKirby.yPos + 
+            (notKirby.tall / 2) <= (myPlatform.yPos + notKirby.depth))) { // Ball's within upper part?
+            notKirby.jump = true; // If yes to all the above, enable jumping.
           }
         }
       }
     }
   }
 
-  //Alternative movement mechanics:
+  // Alternative movement mechanics:
   if (key=='w' || key=='W') {
     notKirby.blastU = true;
   }
@@ -1398,9 +1497,12 @@ void keyPressed() {
   }
 }
 
-//_____________________________________________________________________________________________________________
+// ___________________________________________________________________________________________________
 
-void keyReleased() { //We use these statements to stop movement when the player releases the key. Otherwise notKirby would just keep groovin' in the same direction until he runs into a wall. You jerk.
+// We use these statements to stop movement when the player releases the key. Otherwise notKirby would
+// just keep groovin' in the same direction until he runs into a wall. You jerk.
+
+void keyReleased() { 
 
   if (keyCode==RIGHT) {
     notKirby.R = false;
@@ -1409,7 +1511,7 @@ void keyReleased() { //We use these statements to stop movement when the player 
     notKirby.L = false;
   }
 
-  //Alternative movement mechanics:
+  // Alternative movement mechanics:
   if (key=='w' || key=='W') {
     notKirby.blastU = false;
   }
@@ -1424,7 +1526,7 @@ void keyReleased() { //We use these statements to stop movement when the player 
   }
 }
 
-//_____________________________________________________________________________________________________________
+// ___________________________________________________________________________________________________
 
 /*
 The following code is a hack of sorts from the Processing website, for
@@ -1437,7 +1539,7 @@ The following code is a hack of sorts from the Processing website, for
  */
 
 /**
- deepmatrixstack taken from http://wiki.processing.org/index.php/Matrix_stack
+ deepmatrixstack taken from http:// wiki.processing.org/index.php/Matrix_stack
  to override the default stack just copy & paste the following code
  to your sketch
  @author steve
