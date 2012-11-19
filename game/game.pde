@@ -61,12 +61,14 @@ void setup() {
   msgXpos = width/2;
   msgYpos = height/2;
   smooth();
-  
+
   font = loadFont("font.vlw"); // Used CreatFont tool to make this one.
   game = createFont("FREEDOM.ttf", 48); // Can't figure out how to import a new font so I used this.
   // Thanks to HXDes for the font! (http://www.fontspace.com/hxdes/freedom)
-  
-  light = loadImage("light-bulb.jpg");
+
+  light = loadImage("light-bulb.jpg"); // Free stock image FOR THE WIN. (http://www.public-domain-image.
+  //com/public-domain-images-pictures-free-stock-photos/objects-public-domain-images-pictures/electronics
+  //-devices-public-domain-images-pictures/electric-lights-pictures/light-bulb.jpg)
 
   myLevels = new Level[18]; // Initialize the number of levels in the brackets.
   // We initialize each element in the array, labeling each with the level number it represents and
@@ -124,7 +126,6 @@ void setup() {
   // Make instance of notKirby object using parameters entered via constructor (see notKirby tab):
   notKirby = new notKirby(50, 600 - ((175 * resizer) / 2), 175, 200, color(#FF08F3));
   notKirby.prep(); // Load notKirby's components.
-  
 }
 
 // __________________________________________________________________________________________________
@@ -133,7 +134,7 @@ void draw() {
   background(150);
 
   //Here's a title screen:
-  
+
   if (gameMode == 0) {
     background(0);
     textAlign(CENTER);
@@ -144,18 +145,18 @@ void draw() {
     textFont(game, 16);
     text("© 2012 John Matthew Griffis", width/2, height);
     textAlign(LEFT);
-    image(light, width/2 - (256/2), 0, 256, 192);
+    image(light, width/2 - (256/2), 0, 256, 192); // Light bulb.
     stroke(255);
     strokeWeight(2);
-    line(width/2+10, 75, width/2+275, 75);
+    line(width/2+10, 75, width/2+275, 75); // Horizontal pull for the light.
     textFont(game, 36);
     text("J", width/2+265, 80); // Ceiling hook. This is what's known as a "hack."
-    line(width/2+275, 75, width/2+275, height/2+140);
-    fill(255,0,0);
+    line(width/2+275, 75, width/2+275, height/2+140); // Vertical pull for the light.
+    fill(255, 0, 0);
     noStroke();
-    rect(width/2+270, height/2+140, 10, 50);
-    stroke(255);
-    fill(255);
+    rect(width/2+270, height/2+140, 10, 50); // Pull handle for the light.
+    stroke(255); // Reset stroke.
+    fill(255); // Reset fill.
   }
 
   if (gameMode >= 1) {
@@ -1382,6 +1383,24 @@ void draw() {
 }
 
 // __________________________________________________________________________________________________
+void mousePressed() {
+  
+  // Use this to click on the light pull handle to start the game!
+  if (gameMode == 0) {
+    
+    // Make sure the cursor is on the pull handle:
+    if (mouseX >= width/2+270 && mouseX <= width/2+280) {
+      if (mouseY >= height/2+140 && mouseY <= height/2+190) {
+        
+        // Add some visual pause to give significance to the transition (hopefully it doesn't just look
+        // like slowdown):
+        delay(1000);
+        gameMode = 1;
+      }
+    }
+  }
+}
+
 
 void keyPressed() {
 
