@@ -12,6 +12,7 @@ int msg;
 int currentLevel; // Control the current level (game screen).
 
 PFont font;
+PFont game;
 boolean bounced; // Detect whether player has achieved the winning condition.
 boolean direction; // Control which direction notKirby faces.
 float resizer = 0.25; // Use to scale notKirby's size as needed.
@@ -59,7 +60,9 @@ void setup() {
   msgXpos = width/2;
   msgYpos = height/2;
   smooth();
-  font = loadFont("font.vlw");
+  
+  font = loadFont("font.vlw"); // Used CreatFont tool to make this one.
+  game = createFont("FREEDOM.ttf", 48); // Can't figure out how to import a new font so I used this.
 
   myLevels = new Level[18]; // Initialize the number of levels in the brackets.
   // We initialize each element in the array, labeling each with the level number it represents and
@@ -128,6 +131,7 @@ void draw() {
   if (gameMode == 0) {
     background(0);
     textAlign(CENTER);
+    textFont(game);
     text("How to Play", width/2, height/2);
     textAlign(LEFT);
   }
