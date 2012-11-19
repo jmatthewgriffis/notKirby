@@ -61,6 +61,7 @@ boolean displayWASD;
 boolean noGoBack; // Use to stay on one screen.
 boolean stopMotion; // Use this to stop ALL notKirby motion.
 boolean finalBattle; // Use this to detect the...FINAL BATTLE.
+float bossXpos, bossYpos; // Position the boss.
 
 // __________________________________________________________________________________________________
 
@@ -87,6 +88,9 @@ void setup() {
 
   msgXpos = width/2;
   msgYpos = height/2;
+  bossXpos = width/2;
+  bossYpos = height/2;
+  
   smooth();
 
   font = loadFont("font.vlw"); // Used CreatFont tool to make this one.
@@ -1389,86 +1393,73 @@ void draw() {
             popMatrix();
           }
           if (msg == 2) {
-            stopMotion = true;
-            notKirby.blastU = false;
-            notKirby.blastD = false;
-            notKirby.blastL = false;
-            notKirby.blastR = false;
-            noAdvance = false;
             pushMatrix(); 
-            translate(-100, -50);
+            translate(-205, -50);
             noStroke();
             fill(textBackground); 
-            rect(width/2, height/2-(fontsize*2), 215, fontsize*6+10);
+            rect(width/2, height/2-(fontsize*2), 425, fontsize*7+10);
             textFont(font, fontsize*2); 
             fill(textColor); 
             text("I suppose you think\nyou're pretty clever.", width/2, height/2);
             textFont(font, fontsize/1.5); 
-            text("[Press ENTER]", width/2, height/2+fontsize*4);
+            text("[Press ENTER]", width/2, height/2+fontsize*5);
             popMatrix();
           }
           if (msg == 3) {
-            stopMotion = true;
-            notKirby.blastU = false;
-            notKirby.blastD = false;
-            notKirby.blastL = false;
-            notKirby.blastR = false;
-            noAdvance = false;
             pushMatrix(); 
-            translate(-100, -50);
+            translate(-235, -50);
             noStroke();
             fill(textBackground); 
-            rect(width/2, height/2-(fontsize*2), 215, fontsize*6+10);
+            rect(width/2, height/2-(fontsize*2), 485, fontsize*7+10);
             textFont(font, fontsize*2); 
             fill(textColor); 
             text("Maybe you've heard\ncuriosity killed the cat?", width/2, height/2);
             textFont(font, fontsize/1.5); 
-            text("[Press ENTER]", width/2, height/2+fontsize*4);
+            text("[Press ENTER]", width/2, height/2+fontsize*5);
             popMatrix();
           }
           if (msg == 4) {
-            stopMotion = true;
-            notKirby.blastU = false;
-            notKirby.blastD = false;
-            notKirby.blastL = false;
-            notKirby.blastR = false;
-            noAdvance = false;
             pushMatrix(); 
-            translate(-100, -50);
+            translate(-192.5, -50);
             noStroke();
             fill(textBackground); 
-            rect(width/2, height/2-(fontsize*2), 215, fontsize*6+10);
-            textFont(font, fontsize*2); 
+            rect(width/2, height/2-(fontsize*2), 400, fontsize*7+10);
+            textFont(font, fontsize*1.5); 
             fill(textColor); 
             text("There's a danger to\ngoing behind the scenes.", width/2, height/2);
             textFont(font, fontsize/1.5); 
-            text("[Press ENTER]", width/2, height/2+fontsize*4);
+            text("[Press ENTER]", width/2, height/2+fontsize*5);
             popMatrix();
           }
-          if (msg == 5) {
-            stopMotion = true;
-            notKirby.blastU = false;
-            notKirby.blastD = false;
-            notKirby.blastL = false;
-            notKirby.blastR = false;
-            noAdvance = false;
+          if (msg == 5 || msg == 0) {
             pushMatrix(); 
-            translate(-100, -50);
+            translate(-127.5, -50);
             noStroke();
             fill(textBackground); 
-            rect(width/2, height/2-(fontsize*2), 215, fontsize*6+10);
+            rect(bossXpos, bossYpos-(fontsize*2), 270, fontsize*5);
             textFont(font, fontsize*2); 
             fill(textColor); 
-            text("Here, let me\nshow you.", width/2, height/2);
-            textFont(font, fontsize/1.5); 
-            text("[Press ENTER]", width/2, height/2+fontsize*4);
+            text("Here, let me\nshow you.", bossXpos, bossYpos);
             popMatrix();
-          }
-          if (msg == 6) {
+            noGoBack = true;
             next = false;
-            levelNew[currentLevel] = true;
             stopMotion = false;
             msg = 0;
+            
+            // Thanks to Jennifer Presto for her elegant method of making one object follow another.
+            // See her sketch here: http://www.openprocessing.org/sketch/67512. Here I go:
+            if (bossXpos < notKirby.xPos) {
+              bossXpos++;
+            }
+            if (bossXpos > notKirby.xPos) {
+              bossXpos--;
+            }
+            if (bossYpos < notKirby.yPos) {
+              bossYpos++;
+            }
+            if (bossYpos > notKirby.yPos) {
+              bossYpos--;
+            }
           }
         }
         else {

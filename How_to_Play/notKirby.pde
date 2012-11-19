@@ -115,7 +115,7 @@ class notKirby {
 
       // Control for invisible platform in the last level. Don't want it to act even though it's
       // invisible:
-      if (currentLevel < 17 || (currentLevel == 17 && noGoBack == true)) { 
+      if (currentLevel < 17 || (currentLevel == 17 && noGoBack == true && finalBattle == false)) { 
 
         if ((xPos + (wide / 2) >= myPlatform.xPos) && (xPos - (wide / 2) <= (myPlatform.xPos + 
           myPlatform.platWidth))) { // Ball is within width?
@@ -166,7 +166,7 @@ class notKirby {
         }
 
         // Just for the last level:
-        if (currentLevel == 17 && noGoBack == true) {
+        if (currentLevel == 17 && noGoBack == true && finalBattle == false) {
           if ((xPos + (wide / 2) >= myPlatform.xPos) && (xPos - (wide / 2) <= (myPlatform.xPos + 
             myPlatform.platWidth))) { // Ball is within width?
             if ((yPos + (tall / 2) >= myPlatform.yPos) && (yPos + (tall / 2) <= (myPlatform.yPos + 

@@ -161,7 +161,8 @@ class Level { // Are you ready to GET CRAZY????
 
       // As on the main tab, we pull an object from the ArrayList so we can do something with it:
       Platform myPlatform = myPlats.get(i); 
-      if ((thisLevel < 17) || (thisLevel == 17 && gameMode == 1 && noGoBack == true)) {
+      if ((thisLevel < 17) || (thisLevel == 17 && gameMode == 1 && noGoBack == true 
+      && finalBattle == false)) {
         // Call the drawPlatform function from the Platform tab using the specific parameters for
         // this value of i (which is a specific element in the ArrayList):
         myPlatform.drawPlatform(); 
