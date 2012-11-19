@@ -171,8 +171,8 @@ class notKirby {
             myPlatform.platWidth))) { // Ball is within width?
             if ((yPos + (tall / 2) >= myPlatform.yPos) && (yPos + (tall / 2) <= (myPlatform.yPos + 
               myPlatform.platHeight))) { // Ball is within height?
-              if (gameMode == 0) {
-                gameMode = 1;
+              if (gameMode == 1) {
+                gameMode = 2;
 
                 // Add some visual pause to give significance to the transition (hopefully it doesn't
                 // just look like slowdown):
