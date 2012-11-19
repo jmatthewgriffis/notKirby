@@ -160,9 +160,14 @@ void setup() {
 void draw() {
   background(150);
 
-  for (int i = 0; i < levelNew.length; i++) {
-  println(levelNew[currentLevel]);
-  }
+  /*
+   // Debug.
+   for (int i = 0; i < levelNew.length; i++) {
+   println(levelNew[currentLevel]);
+   }
+   */
+
+  println(finalBattle);
 
   //Here's a title screen:
   if (gameMode == 0) {
@@ -256,12 +261,17 @@ void draw() {
               // ...and move notKirby to the other side of the screen so it looks like he really
               // moved between screens.
               notKirby.xPos = width - (notKirby.wide / 2);
+              
               // If we skipped reading through the messages...
-              if (levelNew[currentLevel] == false) {
-              // ...load them again:
-              next = true;
-              msg = 1;
-            }
+              if (levelNew[currentLevel] == true) {
+                msg = 0;
+              }
+              else {
+                // ...load them again:
+                next = true;
+                msg = 1;
+                noAdvance = false;
+              }
             }
           }
         }
@@ -1325,14 +1335,39 @@ void draw() {
         }
       }
       if (currentLevel == 17) {
-        for (int i = 0; i < levelNew.length; i++) {
-          if (levelNew[i] == false) {
-            finalBattle = true;
-          }
-          else {
-            finalBattle = false;
-          }
+        // Let's see if the player has refused to read through any level's set of messages.
+        // Use a for loop to iterate through all the variables for level newness check (i.e. whether
+        // the player has progressed through the messages). Must subtract one since the first level is
+        // zero, so i will max out at one fewer than the length of the array:
+        //for (int i = 0; i < levelNew.length-1; i++) {
+        //if (levelNew[i] == true) {
+
+        // The above method would be very elegant. Too bad I can't get it to work. So I use this one:
+        if (levelNew[0] == false &&
+          levelNew[1] == false &&
+          levelNew[2] == false &&
+          levelNew[3] == false &&
+          levelNew[4] == false &&
+          levelNew[5] == false &&
+          levelNew[6] == false &&
+          levelNew[7] == false &&
+          levelNew[8] == false &&
+          levelNew[9] == false &&
+          levelNew[10] == false &&
+          levelNew[11] == false &&
+          levelNew[12] == false &&
+          levelNew[13] == false &&
+          levelNew[14] == false &&
+          levelNew[15] == false &&
+          levelNew[16] == false &&
+          levelNew[17] == false) { // This last one is probably unecessary but whatever.
+
+          finalBattle = true; // No level's messages completely read. Let's get our battle on!
         }
+        else {
+          finalBattle = false;
+        }
+
         if (finalBattle == true) {
           // cool stuff here
         }
@@ -1437,6 +1472,7 @@ void draw() {
 
     // End of instructions___________________________________________________________________________//
 
+    // Additional instructions if the player gets to the last level in mode 2:
     if (gameMode == 2) {
       if (currentLevel == 17) {
         if (msg == 1) {

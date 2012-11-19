@@ -153,7 +153,7 @@ class Level { // Are you ready to GET CRAZY????
   }
 
   void display() {
-
+    
     // Here we use a for loop to iterate through all the platforms in the ArrayList. We use i to
     // identify which element we are looking at. Note that we use "size()" instead of "length,"
     // because ArrayList has different syntax than array:
