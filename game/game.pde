@@ -13,6 +13,7 @@ int currentLevel; // Control the current level (game screen).
 
 PFont font;
 PFont game;
+PImage light;
 boolean bounced; // Detect whether player has achieved the winning condition.
 boolean direction; // Control which direction notKirby faces.
 float resizer = 0.25; // Use to scale notKirby's size as needed.
@@ -63,6 +64,9 @@ void setup() {
   
   font = loadFont("font.vlw"); // Used CreatFont tool to make this one.
   game = createFont("FREEDOM.ttf", 48); // Can't figure out how to import a new font so I used this.
+  // Thanks to HXDes for the font! (http://www.fontspace.com/hxdes/freedom)
+  
+  light = loadImage("light-bulb.jpg");
 
   myLevels = new Level[18]; // Initialize the number of levels in the brackets.
   // We initialize each element in the array, labeling each with the level number it represents and
@@ -132,8 +136,13 @@ void draw() {
     background(0);
     textAlign(CENTER);
     textFont(game);
-    text("How to Play", width/2, height/2);
+    text("How to Play", width/2, height/2 - ((height/2) / 5));
+    textFont(game, 24);
+    text("a game by J. Matthew Griffis", width/2, height/2 + ((height/2) / 5));
+    textFont(game, 16);
+    text("© 2012 John Matthew Griffis", width/2, height);
     textAlign(LEFT);
+    image(light, 100, 200, 256, 192);
   }
 
   if (gameMode >= 1) {
