@@ -82,8 +82,8 @@ void setup() {
    zero, all within setup. That way loading setup from the winning screen does launch the title screen.
    */
   if (lastGameMode == 3) {
-    lastGameMode = 0;
     gameMode = 0;
+    lastGameMode = 0;
   }
 
   // It's necessary to initialize the following variables within setup so that when we switch game
@@ -232,13 +232,13 @@ void draw() {
     text("Niiiiiice.", width/2, height/2 - ((height/2) / 7));
     textFont(game, 24);
     text("This is the legendary 'credits page.' My name's Matt.\nI make games, including this one. " +
-    "I also hang out\nwith cool people at Parsons the New School for\nDesign. Some of them helped me " +
-    "with this game.\nI thanked them in the code commentary. Check it.", width/2, height/2);
+      "I also hang out\nwith cool people at Parsons the New School for\nDesign. Some of them helped me " +
+      "with this game.\nI thanked them in the code commentary. Check it.", width/2, height/2);
     textFont(game, 16);
     textAlign(LEFT);
     text("Hmm, not much of a credits page. Your eyes tell me you\nhunger. You hunger...for a reward. Yo," +
-    " don't even worry about it.\nDrop an email to grifj153(at)newschool.edu with the subject\nline 'nothing"+
-    " like kirby' (minus the quotes) and I'll hook you up.", width/2-385, height-(height/4.5));
+      " don't even worry about it.\nDrop an email to grifj153(at)newschool.edu with the subject\nline 'nothing"+
+      " like kirby' (minus the quotes) and I'll hook you up.", width/2-385, height-(height/4.5));
     textAlign(LEFT);
     image(light, width/2 - (256/2), 0, 256, 192); // Light bulb.
     stroke(255);
@@ -262,6 +262,10 @@ void draw() {
       delay(1000);
       setup();
     }
+
+    // I mention these here to make sure notKirby gets drawn on the end screen; otherwise he wouldn't:
+    notKirby.updateBall();
+    notKirby.display();
   }
 
   if (gameMode >= 1 && gameMode < 3) {
@@ -299,7 +303,7 @@ void draw() {
 
           // Here we transition between levels. If notKirby crosses the right edge of the screen...
           if (notKirby.xPos > width-(notKirby.wide / 2)) {
-            
+
             // We reset various screen-specific variables:
             if (promptJump == true) {
               promptJump = false;
@@ -313,13 +317,13 @@ void draw() {
             if (jumpCounter > 0) {
               jumpCounter = 0;
             }
-            
+
             // ...switch to the next level...
             currentLevel++;
             // ...and move notKirby to the other side of the screen so it looks like he really moved
             // between screens.
             notKirby.xPos = (notKirby.wide / 2);
-            
+
             // If we haven't visited this level before...
             if (levelNew[currentLevel] == false) {
               // ...prepare for new messages.
@@ -345,21 +349,21 @@ void draw() {
 
             // Do the above going the other way. If notKirby crosses the left edge of the screen...
             if (notKirby.xPos < (notKirby.wide / 2)) {
-              
+
               // We reset various screen-specific variables:
-            if (promptJump == true) {
-              promptJump = false;
-            }
-            if (noAdvance == true) {
-              noAdvance = false;
-            }
-            if (pressedVlevel == true) {
-              pressedVlevel = false;
-            }
-            if (jumpCounter > 0) {
-              jumpCounter = 0;
-            }
-            
+              if (promptJump == true) {
+                promptJump = false;
+              }
+              if (noAdvance == true) {
+                noAdvance = false;
+              }
+              if (pressedVlevel == true) {
+                pressedVlevel = false;
+              }
+              if (jumpCounter > 0) {
+                jumpCounter = 0;
+              }
+
               // ...switch to the previous level...
               currentLevel--;
               // ...and move notKirby to the other side of the screen so it looks like he really
@@ -548,7 +552,7 @@ void draw() {
           levelNew[currentLevel] = true;
           currentLevel++;
           if (levelNew[currentLevel] == false) {
-          msg = 1;
+            msg = 1;
           }
           else {
             msg = 0;
@@ -615,7 +619,7 @@ void draw() {
           levelNew[currentLevel] = true; 
           currentLevel++;
           if (levelNew[currentLevel] == false) {
-          msg = 1;
+            msg = 1;
           }
           else {
             msg = 0;
@@ -686,7 +690,7 @@ void draw() {
           levelNew[currentLevel] = true;
           currentLevel++;
           if (levelNew[currentLevel] == false) {
-          msg = 1;
+            msg = 1;
           }
           else {
             msg = 0;
@@ -738,7 +742,7 @@ void draw() {
           levelNew[currentLevel] = true;
           currentLevel++;
           if (levelNew[currentLevel] == false) {
-          msg = 1;
+            msg = 1;
           }
           else {
             msg = 0;
@@ -830,7 +834,7 @@ void draw() {
           levelNew[currentLevel] = true;
           currentLevel++;
           if (levelNew[currentLevel] == false) {
-          msg = 1;
+            msg = 1;
           }
           else {
             msg = 0;
@@ -1850,23 +1854,23 @@ void keyPressed() {
 
   // Start debug section. __________________________________________________________________________
 
-/*
+  /*
   if (key=='1') { // Debug.
-    if (currentLevel > 0) { // If previous level exists...
-      currentLevel--; // ...switch to previous level.
-    }
-  }
-
-  if (key=='2') { // Debug.
-    if (currentLevel < (myLevels.length - 1)) { // If next level exists...
-      currentLevel++; // ...switch to next level.
-    }
-  }
-
-  if (key=='0') { // Debug.
-    msg--;
-  }
-  */
+   if (currentLevel > 0) { // If previous level exists...
+   currentLevel--; // ...switch to previous level.
+   }
+   }
+   
+   if (key=='2') { // Debug.
+   if (currentLevel < (myLevels.length - 1)) { // If next level exists...
+   currentLevel++; // ...switch to next level.
+   }
+   }
+   
+   if (key=='0') { // Debug.
+   msg--;
+   }
+   */
 
   // End debug section. _____________________________________________________________________________
 
