@@ -204,7 +204,9 @@ void draw() {
     textFont(game, 24);
     text("a game by J. Matthew Griffis", width/2, height/2 + ((height/2) / 5));
     textFont(game, 16);
-    text("© 2012 John Matthew Griffis", width/2, height);
+    text("    John Matthew Griffis", width/2, height);
+    textFont(font, 16);
+    text("(c) 2012", width/2-125, height);
     textAlign(LEFT);
     image(light, width/2 - (256/2), 0, 256, 192); // Light bulb.
     stroke(255);
@@ -237,8 +239,12 @@ void draw() {
     textFont(game, 16);
     textAlign(LEFT);
     text("Hmm, not much of a credits page. Your eyes tell me you\nhunger. You hunger...for a reward. Yo," +
-      " don't even worry about it.\nDrop an email to grifj153(at)newschool.edu with the subject\nline 'nothing"+
-      " like kirby' (minus the quotes) and I'll hook you up.", width/2-385, height-(height/4.5));
+      " don't even worry about it.\nDrop an email to                          with the subject\nline "+
+      "                           and I'll hook you up.", width/2-385, height-(height/4.5));
+    textFont(font, 16);
+    text("grifj153(at)newschool.edu", width/2-210, height-(height/6.5));
+    text("'nothing like kirby' (no quotes)", width/2-340, height-(height/8.5));
+
     textAlign(LEFT);
     image(light, width/2 - (256/2), 0, 256, 192); // Light bulb.
     stroke(255);
