@@ -63,6 +63,7 @@ boolean stopMotion; // Use this to stop ALL notKirby motion.
 boolean finalBattle; // Use this to detect the...FINAL BATTLE.
 float bossXpos, bossYpos; // Position the boss.
 int bossLife, notKirbyLife;
+boolean ctrlDmg; // Use to control damage.
 
 // __________________________________________________________________________________________________
 
@@ -88,12 +89,13 @@ void setup() {
   finalBattle = false;
   bossLife = 3;
   notKirbyLife = 3;
+  ctrlDmg = false;
 
   msgXpos = width/2;
   msgYpos = height/2;
   bossXpos = width/2;
   bossYpos = height/2;
-  
+
   smooth();
 
   font = loadFont("font.vlw"); // Used CreatFont tool to make this one.
@@ -1448,7 +1450,7 @@ void draw() {
             next = false;
             stopMotion = false;
             msg = 0;
-            
+
             // Thanks to Jennifer Presto for her elegant method of making one object follow another.
             // See her sketch here: http://www.openprocessing.org/sketch/67512. Here I go:
             if (bossXpos < notKirby.xPos) {
@@ -1468,6 +1470,53 @@ void draw() {
             fill(textBackground);
             text(bossLife, width-fontsize-5, fontsize+10);
             fill(255);
+
+            // Collision detection: the gift that keeps on giving. Here we test to see if the boss msg
+            // collides with notKirby:
+            if ((notKirby.xPos-(notKirby.wide/2)) > (bossXpos-(270/2)) && (notKirby.xPos+
+              (notKirby.wide/2)) < (bossXpos+(270/2)) && (notKirby.yPos-(notKirby.tall/2)) > 
+              (bossYpos-((fontsize*5)/2)) && (notKirby.yPos+(notKirby.tall/2)) < 
+              (bossYpos+((fontsize*5)/2))) {
+              // If so we do damage and use a boolean to limit it to one damage per encounter.
+              // But to whom?
+
+              // Let's see if notKirby is rocketing:
+              if (notKirby.blastU == true || notKirby.blastD == true || notKirby.blastL == true ||
+                notKirby.blastR == true) {
+                // If so, do damage to the boss:
+                if (ctrlDmg == false) {
+                  bossLife--;
+                  ctrlDmg = true;
+                }
+              }
+              // If notKirby is not rocketing, do damage to notKirby:
+              else {
+                if (ctrlDmg == false) {
+                  notKirbyLife--;
+                  ctrlDmg = true;
+                }
+              }
+            }
+            else {
+              ctrlDmg = false;
+            }
+            
+            // If notKirby runs out of health, go back to the previous level and reset things:
+            if (notKirbyLife <= 0) {
+              delay(1000);
+              currentLevel = 16;
+              bossLife = 3;
+              notKirbyLife = 3;
+              bossXpos = width/2;
+              bossYpos = height/2;
+              //noGoBack = false; // With this commented out the player cannot avoid taking on the
+              // final battle again. I like that.
+            }
+            
+            // If the boss runs out of health, win the game!
+            if (bossLife <= 0)  {
+              //win condition
+            }
           }
         }
         else {
