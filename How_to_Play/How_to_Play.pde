@@ -27,7 +27,7 @@
 
 // Control which play style applies. Set to zero for the initial instruction set. This needs to be
 // initialized outside the setup function to enable restarting the game with a new mode:
-int gameMode = 0;
+int gameMode = 1;
 
 // Control the display of messages and how they affect game play. Set to zero to enable action:
 int msg;
@@ -69,8 +69,8 @@ void setup() {
 
   // It's necessary to initialize the following variables within setup so that when we switch game
   // modes and reload setup, everything reverts properly:
-  currentLevel = 0;
-  msg = 0;
+  currentLevel = 17;
+  msg = 1;
   bounced = true;
   direction = true;
   next = true;
@@ -167,7 +167,7 @@ void draw() {
    }
    */
 
-  println(finalBattle);
+  //println(finalBattle);
 
   //Here's a title screen:
   if (gameMode == 0) {
@@ -261,7 +261,7 @@ void draw() {
               // ...and move notKirby to the other side of the screen so it looks like he really
               // moved between screens.
               notKirby.xPos = width - (notKirby.wide / 2);
-              
+
               // If we skipped reading through the messages...
               if (levelNew[currentLevel] == true) {
                 msg = 0;
@@ -1369,7 +1369,107 @@ void draw() {
         }
 
         if (finalBattle == true) {
-          // cool stuff here
+          if (msg == 1) {
+            stopMotion = true;
+            notKirby.blastU = false;
+            notKirby.blastD = false;
+            notKirby.blastL = false;
+            notKirby.blastR = false;
+            noAdvance = false;
+            pushMatrix(); 
+            translate(-100, -50);
+            noStroke();
+            fill(textBackground); 
+            rect(width/2, height/2-(fontsize*2), 215, fontsize*6+10);
+            textFont(font, fontsize*2); 
+            fill(textColor); 
+            text("FREEZE!", width/2, height/2);
+            textFont(font, fontsize/1.5); 
+            text("[Press ENTER]", width/2, height/2+fontsize*4);
+            popMatrix();
+          }
+          if (msg == 2) {
+            stopMotion = true;
+            notKirby.blastU = false;
+            notKirby.blastD = false;
+            notKirby.blastL = false;
+            notKirby.blastR = false;
+            noAdvance = false;
+            pushMatrix(); 
+            translate(-100, -50);
+            noStroke();
+            fill(textBackground); 
+            rect(width/2, height/2-(fontsize*2), 215, fontsize*6+10);
+            textFont(font, fontsize*2); 
+            fill(textColor); 
+            text("I suppose you think\nyou're pretty clever.", width/2, height/2);
+            textFont(font, fontsize/1.5); 
+            text("[Press ENTER]", width/2, height/2+fontsize*4);
+            popMatrix();
+          }
+          if (msg == 3) {
+            stopMotion = true;
+            notKirby.blastU = false;
+            notKirby.blastD = false;
+            notKirby.blastL = false;
+            notKirby.blastR = false;
+            noAdvance = false;
+            pushMatrix(); 
+            translate(-100, -50);
+            noStroke();
+            fill(textBackground); 
+            rect(width/2, height/2-(fontsize*2), 215, fontsize*6+10);
+            textFont(font, fontsize*2); 
+            fill(textColor); 
+            text("Maybe you've heard\ncuriosity killed the cat?", width/2, height/2);
+            textFont(font, fontsize/1.5); 
+            text("[Press ENTER]", width/2, height/2+fontsize*4);
+            popMatrix();
+          }
+          if (msg == 4) {
+            stopMotion = true;
+            notKirby.blastU = false;
+            notKirby.blastD = false;
+            notKirby.blastL = false;
+            notKirby.blastR = false;
+            noAdvance = false;
+            pushMatrix(); 
+            translate(-100, -50);
+            noStroke();
+            fill(textBackground); 
+            rect(width/2, height/2-(fontsize*2), 215, fontsize*6+10);
+            textFont(font, fontsize*2); 
+            fill(textColor); 
+            text("There's a danger to\ngoing behind the scenes.", width/2, height/2);
+            textFont(font, fontsize/1.5); 
+            text("[Press ENTER]", width/2, height/2+fontsize*4);
+            popMatrix();
+          }
+          if (msg == 5) {
+            stopMotion = true;
+            notKirby.blastU = false;
+            notKirby.blastD = false;
+            notKirby.blastL = false;
+            notKirby.blastR = false;
+            noAdvance = false;
+            pushMatrix(); 
+            translate(-100, -50);
+            noStroke();
+            fill(textBackground); 
+            rect(width/2, height/2-(fontsize*2), 215, fontsize*6+10);
+            textFont(font, fontsize*2); 
+            fill(textColor); 
+            text("Here, let me\nshow you.", width/2, height/2);
+            textFont(font, fontsize/1.5); 
+            text("[Press ENTER]", width/2, height/2+fontsize*4);
+            popMatrix();
+          }
+          if (msg == 6) {
+            next = false;
+            levelNew[currentLevel] = true;
+            stopMotion = false;
+            msg = 0;
+          }
         }
         else {
           if (msg == 1) {
