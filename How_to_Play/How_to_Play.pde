@@ -27,7 +27,7 @@
 
 // Control which play style applies. Set to zero for the initial instruction set. This needs to be
 // initialized outside the setup function to enable restarting the game with a new mode:
-int gameMode = 2;
+int gameMode = 0;
 
 // Control the display of messages and how they affect game play. Set to zero to enable action:
 int msg;
@@ -1391,6 +1391,8 @@ void draw() {
       if (currentLevel > 17) {
         /*
     if (msg == 1) {
+      pushMatrix(); 
+         translate(0, 0);
          noStroke();
          fill(textBackground); 
          rect(width/2, height/2, 315, fontsize*3+10);
@@ -1399,6 +1401,7 @@ void draw() {
          text("", width/2, height/2);
          textFont(font, fontsize/1.5); 
          text("[Press ENTER]", width/2, height/2+fontsize*2);
+         popMatrix();
          }
          */
         next = false;
@@ -1419,18 +1422,70 @@ void draw() {
           notKirby.blastR = false;
           noAdvance = false;
           pushMatrix(); 
-          translate(275, 225);
+          translate(-100, 100);
           noStroke();
           fill(textBackground); 
-          rect(width/2, height/2-fontsize, 115, fontsize*3+10);
+          rect(width/2, height/2-(fontsize*2), 350, fontsize*6+10);
+          textFont(font, fontsize*2); 
+          fill(textColor); 
+          text("WHOA THERE,\nTURBO.", width/2, height/2);
+          textFont(font, fontsize/1.5); 
+          text("[Press ENTER]", width/2, height/2+fontsize*4);
+          popMatrix();
+        }
+        if (msg == 2) {
+          pushMatrix(); 
+          translate(-300, 0);
+          noStroke();
+          fill(textBackground); 
+          rect(width/2, height/2-fontsize, 215, fontsize*4+10);
           textFont(font, fontsize); 
           fill(textColor); 
-          text("Later.", width/2, height/2);
+          text("Nice moves. You've\nearned a 'Pro Tip.'", width/2, height/2);
+          textFont(font, fontsize/1.5); 
+          text("[Press ENTER]", width/2, height/2+fontsize*3);
+          popMatrix();
+        }
+        if (msg == 3) {
+          pushMatrix(); 
+          translate(175, -225);
+          noStroke();
+          fill(textBackground); 
+          rect(width/2, height/2-fontsize, 190, fontsize*4+10);
+          textFont(font, fontsize); 
+          fill(textColor); 
+          text("Pro Tip: press ' - '\nto switch modes.", width/2, height/2);
+          textFont(font, fontsize/1.5); 
+          text("[Press ENTER]", width/2, height/2+fontsize*3);
+          popMatrix();
+        }
+        if (msg == 4) {
+          pushMatrix(); 
+          translate(80, 225);
+          noStroke();
+          fill(textBackground); 
+          rect(width/2, height/2-fontsize, 300, fontsize*3+10);
+          textFont(font, fontsize); 
+          fill(textColor); 
+          text("...you're still not quite there.", width/2, height/2);
           textFont(font, fontsize/1.5); 
           text("[Press ENTER]", width/2, height/2+fontsize*2);
           popMatrix();
         }
-        if (msg == 2) {
+        if (msg == 5) {
+          pushMatrix(); 
+          translate(-390, 180);
+          noStroke();
+          fill(textBackground); 
+          rect(width/2, height/2-fontsize, 125, fontsize*3+10);
+          textFont(font, fontsize); 
+          fill(textColor); 
+          text("LOL peace.", width/2, height/2);
+          textFont(font, fontsize/1.5); 
+          text("[Press ENTER]", width/2, height/2+fontsize*2);
+          popMatrix();
+        }
+        if (msg == 6) {
           next = false;
           levelNew[currentLevel] = true;
           stopMotion = false;
