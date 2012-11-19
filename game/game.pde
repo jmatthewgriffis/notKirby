@@ -124,6 +124,7 @@ void setup() {
   // Make instance of notKirby object using parameters entered via constructor (see notKirby tab):
   notKirby = new notKirby(50, 600 - ((175 * resizer) / 2), 175, 200, color(#FF08F3));
   notKirby.prep(); // Load notKirby's components.
+  
 }
 
 // __________________________________________________________________________________________________
@@ -132,6 +133,7 @@ void draw() {
   background(150);
 
   //Here's a title screen:
+  
   if (gameMode == 0) {
     background(0);
     textAlign(CENTER);
@@ -142,7 +144,7 @@ void draw() {
     textFont(game, 16);
     text("© 2012 John Matthew Griffis", width/2, height);
     textAlign(LEFT);
-    image(light, 100, 200, 256, 192);
+    image(light, width/2 - (256/2), 0, 256, 192);
   }
 
   if (gameMode >= 1) {
