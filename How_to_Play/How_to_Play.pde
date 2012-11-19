@@ -178,9 +178,36 @@ void draw() {
 
   //println(finalBattle);
 
-  //Here's a title screen:
+  // Here's a title screen:
   if (gameMode == 0) {
     background(0);
+    fill(255);
+    textAlign(CENTER);
+    textFont(game);
+    text("How to Play", width/2, height/2 - ((height/2) / 5));
+    textFont(game, 24);
+    text("a game by J. Matthew Griffis", width/2, height/2 + ((height/2) / 5));
+    textFont(game, 16);
+    text("© 2012 John Matthew Griffis", width/2, height);
+    textAlign(LEFT);
+    image(light, width/2 - (256/2), 0, 256, 192); // Light bulb.
+    stroke(255);
+    strokeWeight(2);
+    line(width/2+10, 75, width/2+275, 75); // Horizontal pull for the light.
+    textFont(game, 36);
+    text("J", width/2+265, 80); // Ceiling hook. This is what's known as a "hack."
+    line(width/2+275, 75, width/2+275, height/2+140); // Vertical pull for the light.
+    fill(255, 0, 0);
+    noStroke();
+    rect(width/2+270, height/2+140, 10, 50); // Pull handle for the light.
+    stroke(255); // Reset stroke.
+    fill(255); // Reset fill.
+  }
+  
+  // And here's a credits screen:
+  if (gameMode == 3) {
+    background(0);
+    fill(255);
     textAlign(CENTER);
     textFont(game);
     text("How to Play", width/2, height/2 - ((height/2) / 5));
@@ -1515,7 +1542,8 @@ void draw() {
             
             // If the boss runs out of health, win the game!
             if (bossLife <= 0)  {
-              //win condition
+              delay(1000);
+              gameMode = 3;
             }
           }
         }
