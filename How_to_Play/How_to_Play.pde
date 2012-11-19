@@ -1,4 +1,27 @@
-// An awesome game by Matt, with awesome code and awesome comments. Awesome!
+/*
+ 
+ **************************************************************
+ * How to Play                                                *
+ * J. Matthew Griffis                                         *
+ * November 18, 2012                                          *
+ *                                                            *
+ * I made a game.                                             *
+ *                                                            *
+ * I made it for my MFA studies in Design and Technology      *
+ * at Parsons the New School for Design.                      *
+ * Specifically I made some of it for my CCLab class.         *
+ * Then I made more of it for Major Studio 1.                 *
+ * But mostly I made it to compel and confound.               *
+ *                                                            *
+ * Can you reach the credits screen?                          *
+ *                                                            *
+ * Acknowledgments: Ramiro Corbetta, Franscisco Zamorano,     *
+ * Mauricio Sanchez, Jennifer Presto, OpenProcessing.org      *
+ * and others I'm likely forgetting. Thanks, all.             *
+ **************************************************************
+  
+ */
+
 
 // Please note: protagonist notKirby is also known as "Ball" throughout. Live free of perplexity!
 
