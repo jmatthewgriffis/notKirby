@@ -19,7 +19,7 @@
  * Mauricio Sanchez, Jennifer Presto, OpenProcessing.org      *
  * and others I'm likely forgetting. Thanks, all.             *
  **************************************************************
-  
+ 
  */
 
 
@@ -27,7 +27,7 @@
 
 // Control which play style applies. Set to zero for the initial instruction set. This needs to be
 // initialized outside the setup function to enable restarting the game with a new mode:
-int gameMode = 0;
+int gameMode = 2;
 
 // Control the display of messages and how they affect game play. Set to zero to enable action:
 int msg;
@@ -59,6 +59,7 @@ boolean platRockd; // Use to control changing the condition of platforms.
 color platFlipped = color(0, 255, 0); // Platform changes to this color when it's been rocketed.
 boolean displayWASD;
 boolean noGoBack; // Use to stay on one screen.
+boolean stopMotion; // Use this to stop ALL notKirby motion.
 
 // __________________________________________________________________________________________________
 
@@ -80,6 +81,7 @@ void setup() {
   platRockd = false;
   displayWASD = false;
   noGoBack = false;
+  stopMotion = false;
 
   msgXpos = width/2;
   msgYpos = height/2;
@@ -157,7 +159,6 @@ void draw() {
   background(150);
 
   //Here's a title screen:
-
   if (gameMode == 0) {
     background(0);
     textAlign(CENTER);
@@ -311,6 +312,11 @@ void draw() {
             // ...and move notKirby to the other side of the screen so it looks like he really
             // moved between screens:
             notKirby.xPos = (notKirby.wide / 2);
+
+            // If this is the last level in mode 2 we need to display a message:
+            if (currentLevel == 17 && levelNew[currentLevel] == false) {
+              msg = 1;
+            }
           }
         }
       }
@@ -1402,19 +1408,49 @@ void draw() {
     }
 
     // End of instructions___________________________________________________________________________//
+
+    if (gameMode == 2) {
+      if (currentLevel == 17) {
+        if (msg == 1) {
+          stopMotion = true;
+          notKirby.blastU = false;
+          notKirby.blastD = false;
+          notKirby.blastL = false;
+          notKirby.blastR = false;
+          noAdvance = false;
+          pushMatrix(); 
+          translate(275, 225);
+          noStroke();
+          fill(textBackground); 
+          rect(width/2, height/2-fontsize, 115, fontsize*3+10);
+          textFont(font, fontsize); 
+          fill(textColor); 
+          text("Later.", width/2, height/2);
+          textFont(font, fontsize/1.5); 
+          text("[Press ENTER]", width/2, height/2+fontsize*2);
+          popMatrix();
+        }
+        if (msg == 2) {
+          next = false;
+          levelNew[currentLevel] = true;
+          stopMotion = false;
+          msg = 0;
+        }
+      }
+    }
   }
 }
 
 // __________________________________________________________________________________________________
 void mousePressed() {
-  
+
   // Use this to click on the light pull handle to start the game!
   if (gameMode == 0) {
-    
+
     // Make sure the cursor is on the pull handle:
     if (mouseX >= width/2+270 && mouseX <= width/2+280) {
       if (mouseY >= height/2+140 && mouseY <= height/2+190) {
-        
+
         // Add some visual pause to give significance to the transition (hopefully it doesn't just look
         // like slowdown):
         delay(1000);
@@ -1560,19 +1596,21 @@ void keyPressed() {
   }
 
   // Alternative movement mechanics:
-  if (key=='w' || key=='W') {
-    notKirby.blastU = true;
-  }
-  if (key=='a' || key=='A') {
-    notKirby.blastL = true;
-    direction = false;
-  }
-  if (key=='s' || key=='S') {
-    notKirby.blastD = true;
-  }
-  if (key=='d' || key=='D') {
-    notKirby.blastR = true;
-    direction = true;
+  if (stopMotion == false) {
+    if (key=='w' || key=='W') {
+      notKirby.blastU = true;
+    }
+    if (key=='a' || key=='A') {
+      notKirby.blastL = true;
+      direction = false;
+    }
+    if (key=='s' || key=='S') {
+      notKirby.blastD = true;
+    }
+    if (key=='d' || key=='D') {
+      notKirby.blastR = true;
+      direction = true;
+    }
   }
 }
 
