@@ -145,6 +145,17 @@ void draw() {
     text("© 2012 John Matthew Griffis", width/2, height);
     textAlign(LEFT);
     image(light, width/2 - (256/2), 0, 256, 192);
+    stroke(255);
+    strokeWeight(2);
+    line(width/2+10, 75, width/2+275, 75);
+    textFont(game, 36);
+    text("J", width/2+265, 80); // Ceiling hook. This is what's known as a "hack."
+    line(width/2+275, 75, width/2+275, height/2+140);
+    fill(255,0,0);
+    noStroke();
+    rect(width/2+270, height/2+140, 10, 50);
+    stroke(255);
+    fill(255);
   }
 
   if (gameMode >= 1) {
