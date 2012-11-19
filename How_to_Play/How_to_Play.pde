@@ -62,6 +62,7 @@ boolean noGoBack; // Use to stay on one screen.
 boolean stopMotion; // Use this to stop ALL notKirby motion.
 boolean finalBattle; // Use this to detect the...FINAL BATTLE.
 float bossXpos, bossYpos; // Position the boss.
+int bossLife, notKirbyLife;
 
 // __________________________________________________________________________________________________
 
@@ -85,6 +86,8 @@ void setup() {
   noGoBack = false;
   stopMotion = false;
   finalBattle = false;
+  bossLife = 3;
+  notKirbyLife = 3;
 
   msgXpos = width/2;
   msgYpos = height/2;
@@ -1460,6 +1463,11 @@ void draw() {
             if (bossYpos > notKirby.yPos) {
               bossYpos--;
             }
+            fill(notKirby.c);
+            text(notKirbyLife, 0, fontsize+10);
+            fill(textBackground);
+            text(bossLife, width-fontsize-5, fontsize+10);
+            fill(255);
           }
         }
         else {
