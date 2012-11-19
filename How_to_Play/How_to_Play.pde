@@ -20,6 +20,9 @@
  * and others I'm likely forgetting. Thanks, all.             *
  **************************************************************
  
+ // I totally jacked this sweet formatting style above from
+ // Jennifer Presto.
+ 
  */
 
 
@@ -27,7 +30,7 @@
 
 // Control which play style applies. Set to zero for the initial instruction set. This needs to be
 // initialized outside the setup function to enable restarting the game with a new mode:
-int gameMode = 3;
+int gameMode = 0;
 
 // Control the display of messages and how they affect game play. Set to zero to enable action:
 int msg;
@@ -189,7 +192,7 @@ void draw() {
    }
    */
 
-  //println(lastGameMode);
+  //println(lastGameMode); // Debug.
 
   // Here's a title screen:
   if (gameMode == 0) {
@@ -296,16 +299,35 @@ void draw() {
 
           // Here we transition between levels. If notKirby crosses the right edge of the screen...
           if (notKirby.xPos > width-(notKirby.wide / 2)) {
+            
+            // We reset various screen-specific variables:
+            if (promptJump == true) {
+              promptJump = false;
+            }
+            if (noAdvance == true) {
+              noAdvance = false;
+            }
+            if (pressedVlevel == true) {
+              pressedVlevel = false;
+            }
+            if (jumpCounter > 0) {
+              jumpCounter = 0;
+            }
+            
             // ...switch to the next level...
             currentLevel++;
             // ...and move notKirby to the other side of the screen so it looks like he really moved
             // between screens.
             notKirby.xPos = (notKirby.wide / 2);
+            
             // If we haven't visited this level before...
             if (levelNew[currentLevel] == false) {
               // ...prepare for new messages.
               next = true;
               msg = 1;
+            }
+            else {
+              msg = 0;
             }
           }
         }
@@ -322,7 +344,22 @@ void draw() {
             line(25, (height - 25), 35, (height - 15));
 
             // Do the above going the other way. If notKirby crosses the left edge of the screen...
-            if (notKirby.xPos < (notKirby.wide / 2)) { 
+            if (notKirby.xPos < (notKirby.wide / 2)) {
+              
+              // We reset various screen-specific variables:
+            if (promptJump == true) {
+              promptJump = false;
+            }
+            if (noAdvance == true) {
+              noAdvance = false;
+            }
+            if (pressedVlevel == true) {
+              pressedVlevel = false;
+            }
+            if (jumpCounter > 0) {
+              jumpCounter = 0;
+            }
+            
               // ...switch to the previous level...
               currentLevel--;
               // ...and move notKirby to the other side of the screen so it looks like he really
@@ -510,7 +547,12 @@ void draw() {
           // repeat if we return to this screen:
           levelNew[currentLevel] = true;
           currentLevel++;
+          if (levelNew[currentLevel] == false) {
           msg = 1;
+          }
+          else {
+            msg = 0;
+          }
         }
       }
 
@@ -572,7 +614,12 @@ void draw() {
           // repeat if we return to this screen:
           levelNew[currentLevel] = true; 
           currentLevel++;
+          if (levelNew[currentLevel] == false) {
           msg = 1;
+          }
+          else {
+            msg = 0;
+          }
         }
       }
 
@@ -638,7 +685,12 @@ void draw() {
         if (msg == 5) {
           levelNew[currentLevel] = true;
           currentLevel++;
+          if (levelNew[currentLevel] == false) {
           msg = 1;
+          }
+          else {
+            msg = 0;
+          }
         }
       }
       if (currentLevel == 3) {
@@ -685,7 +737,12 @@ void draw() {
         if (msg == 4) {
           levelNew[currentLevel] = true;
           currentLevel++;
+          if (levelNew[currentLevel] == false) {
           msg = 1;
+          }
+          else {
+            msg = 0;
+          }
         }
       }
       if (currentLevel == 4) {
@@ -772,7 +829,12 @@ void draw() {
         if (msg == 7) {
           levelNew[currentLevel] = true;
           currentLevel++;
+          if (levelNew[currentLevel] == false) {
           msg = 1;
+          }
+          else {
+            msg = 0;
+          }
         }
       }
       if (currentLevel == 5) {
@@ -1786,8 +1848,9 @@ void mousePressed() {
 
 void keyPressed() {
 
-  // Start debug section. Need to delete this before releasing the game: ____________________________
+  // Start debug section. __________________________________________________________________________
 
+/*
   if (key=='1') { // Debug.
     if (currentLevel > 0) { // If previous level exists...
       currentLevel--; // ...switch to previous level.
@@ -1803,6 +1866,7 @@ void keyPressed() {
   if (key=='0') { // Debug.
     msg--;
   }
+  */
 
   // End debug section. _____________________________________________________________________________
 
