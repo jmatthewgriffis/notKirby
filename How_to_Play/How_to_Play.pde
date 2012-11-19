@@ -27,7 +27,7 @@
 
 // Control which play style applies. Set to zero for the initial instruction set. This needs to be
 // initialized outside the setup function to enable restarting the game with a new mode:
-int gameMode = 1;
+int gameMode = 3;
 
 // Control the display of messages and how they affect game play. Set to zero to enable action:
 int msg;
@@ -64,16 +64,29 @@ boolean finalBattle; // Use this to detect the...FINAL BATTLE.
 float bossXpos, bossYpos; // Position the boss.
 int bossLife, notKirbyLife;
 boolean ctrlDmg; // Use to control damage.
+int lastGameMode = 0; // Use to reset the game once it's won.
 
 // __________________________________________________________________________________________________
 
 void setup() {
   size(800, 600);
 
+  /*
+  Here's a little trick to restart the game completely using a variable outside setup.
+   When you win the game, it sets lastGameMode to three and loads setup, but that wouldn't reset to the
+   title screen. Resetting to the title screen wouldn't load setup and reset all the variables. So
+   we check if lastGameMode is equal to the winning number and if so RESET it and set the gameMode to
+   zero, all within setup. That way loading setup from the winning screen does launch the title screen.
+   */
+  if (lastGameMode == 3) {
+    lastGameMode = 0;
+    gameMode = 0;
+  }
+
   // It's necessary to initialize the following variables within setup so that when we switch game
   // modes and reload setup, everything reverts properly:
-  currentLevel = 17;
-  msg = 1;
+  currentLevel = 0;
+  msg = 0;
   bounced = true;
   direction = true;
   next = true;
@@ -176,7 +189,7 @@ void draw() {
    }
    */
 
-  //println(finalBattle);
+  //println(lastGameMode);
 
   // Here's a title screen:
   if (gameMode == 0) {
@@ -203,18 +216,26 @@ void draw() {
     stroke(255); // Reset stroke.
     fill(255); // Reset fill.
   }
-  
-  // And here's a credits screen:
+
+  // And here's an end credits screen:
   if (gameMode == 3) {
+    lastGameMode = gameMode;
     background(0);
     fill(255);
     textAlign(CENTER);
     textFont(game);
-    text("How to Play", width/2, height/2 - ((height/2) / 5));
+    text("You won the game!", width/2, height/2 - ((height/2) / 3.75));
+    textFont(game, 36);
+    text("Niiiiiice.", width/2, height/2 - ((height/2) / 7));
     textFont(game, 24);
-    text("a game by J. Matthew Griffis", width/2, height/2 + ((height/2) / 5));
+    text("This is the legendary 'credits page.' My name's Matt.\nI make games, including this one. " +
+    "I also hang out\nwith cool people at Parsons the New School for\nDesign. Some of them helped me " +
+    "with this game.\nI thanked them in the code commentary. Check it.", width/2, height/2);
     textFont(game, 16);
-    text("© 2012 John Matthew Griffis", width/2, height);
+    textAlign(LEFT);
+    text("Hmm, not much of a credits page. Your eyes tell me you\nhunger. You hunger...for a reward. Yo," +
+    " don't even worry about it.\nDrop an email to grifj153(at)newschool.edu with the subject\nline 'nothing"+
+    " like kirby' (minus the quotes) and I'll hook you up.", width/2-385, height-(height/4.5));
     textAlign(LEFT);
     image(light, width/2 - (256/2), 0, 256, 192); // Light bulb.
     stroke(255);
@@ -228,9 +249,19 @@ void draw() {
     rect(width/2+270, height/2+140, 10, 50); // Pull handle for the light.
     stroke(255); // Reset stroke.
     fill(255); // Reset fill.
+
+    // Collision detection. We check to see if notKirby collides with the pull handle:
+    if (((notKirby.xPos+(notKirby.wide/2)) >= width/2+270 && (notKirby.xPos-(notKirby.wide/2)) <= 
+      width/2+280) && (notKirby.yPos+(notKirby.tall/2)) >= height/2+140 && 
+      (notKirby.yPos-(notKirby.tall/2)) <= height/2+190) {
+
+      // If so, we restart the game:
+      delay(1000);
+      setup();
+    }
   }
 
-  if (gameMode >= 1) {
+  if (gameMode >= 1 && gameMode < 3) {
 
     // Here's where things get awesome. We draw only the level in the array whose element label
     // matches the value of the variable indicating the current level. If the current level is
@@ -1527,7 +1558,7 @@ void draw() {
             else {
               ctrlDmg = false;
             }
-            
+
             // If notKirby runs out of health, go back to the previous level and reset things:
             if (notKirbyLife <= 0) {
               delay(1000);
@@ -1539,9 +1570,9 @@ void draw() {
               //noGoBack = false; // With this commented out the player cannot avoid taking on the
               // final battle again. I like that.
             }
-            
+
             // If the boss runs out of health, win the game!
-            if (bossLife <= 0)  {
+            if (bossLife <= 0) {
               delay(1000);
               gameMode = 3;
             }
